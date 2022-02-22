@@ -1,0 +1,7 @@
+{
+  "name": "DigiCard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
