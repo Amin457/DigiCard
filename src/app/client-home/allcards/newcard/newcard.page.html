@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true">
+  <br>
+  <br>
+  <br>
+  <ion-list>
+    <div class="ion-margin marginBottom" (ionChange)="segmentChanged($event)">
+      <ion-segment mode="ios" [value]="segmentValue">
+        <ion-segment-button value="1">
+          <ion-label>importer carte</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="2">
+          <ion-label>creer carte</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <app-add *ngIf="segmentValue === '1'"></app-add>
+    <app-create *ngIf="segmentValue === '2'"></app-create>
+
+  </ion-list>
+
+</ion-content>

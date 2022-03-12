@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <ion-item color="#1248EE">
+      <ion-icon name="log-out-outline" routerLink=""></ion-icon>
+    </ion-item>
+    <ion-item color="#1248EE">
+      <ion-label>bonjour Amin</ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="popover">
+    <ion-searchbar></ion-searchbar>
+  </div>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button routerLink="profil">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Profil</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="promo">
+        <ion-icon name="gift-outline"></ion-icon>
+        <ion-label>Promos</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button  routerLink="allcards" >
+        <router-outlet name="addcard"></router-outlet>
+        <ion-icon name="add-circle"></ion-icon>
+        <ion-label>importer carte</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
