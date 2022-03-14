@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
+import { users } from 'src/app/model/user';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-profil',
@@ -7,16 +11,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./profil.page.scss'],
 })
 export class ProfilPage implements OnInit {
-
-  back: boolean;
-
-  constructor(public router: Router) { }
+  id: number;
+  user: users = new users();
+  constructor(public route: ActivatedRoute , public httpClient: HttpClient, private userService: UserService) { }
 
   ngOnInit() {
-   /* const data = this.router.url.split('/');
-    console.log(data);
-    if(data[1] == 'home') this.back = true;
-    else this.back = false;*/
+    this.id = this.route.snapshot.params.id;
+    console.log(this.id);
+
+    this.userService.getUserById(this.id).subscribe(
+      (res)  => {
+      console.log(res);
+        this.user = res.data;
+        console.log(this.user);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+/*
+    this.httpClient.get<any>('http://localhost:3000/api/users/'+this.id).subscribe(
+      (res)  => {
+        if(res.success===1){
+        this.user=res.data;
+        console.log(this.user);
+        return false;
+      }else{
+        console.log(res.data);
+      }
+      }
+      ,
+      error => {
+        console.log(error);
+      });*/
   }
 
-}

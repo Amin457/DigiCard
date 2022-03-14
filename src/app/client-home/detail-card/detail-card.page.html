@@ -5,5 +5,16 @@
 </ion-header>
 
 <ion-content>
-
+  <div style="text-align:center">
+    <h1>
+      QR Code
+    </h1>
+  </div>
+<div *ngFor="let item of carte1">
+    <ngx-qrcode
+    value={{item.num_carte}}
+    class="qr"
+  >
+  </ngx-qrcode>
+</div>
 </ion-content>

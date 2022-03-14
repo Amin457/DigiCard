@@ -4,7 +4,7 @@
       <ion-icon name="log-out-outline" routerLink=""></ion-icon>
     </ion-item>
     <ion-item color="#1248EE">
-      <ion-label>bonjour Amin</ion-label>
+      <ion-label>bonjour  {{user.Nom}}</ion-label>
     </ion-item>
   </ion-list>
   <div class="popover">
@@ -13,8 +13,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let item of cartes">
 
-</ion-content>
+    <ion-card-header>
+     Carte fidélité
+    </ion-card-header>
+ <ion-item>
+    <ion-card-content>
+
+      <p>numero carte : {{item.num_carte}}</p>
+      <p>boutique : {{item.boutique}}</p>
+      <ion-button fill="outline" slot="end" routerLink="detail-card/{{item.id_carte}}">detail</ion-button>
+<!--(click)="onClick(item.id_carte)"-->
+    </ion-card-content>
+</ion-item>
+  </ion-card>
+
   <ion-tabs>
     <ion-tab-bar slot="bottom">
 
@@ -36,3 +50,4 @@
 
     </ion-tab-bar>
   </ion-tabs>
+</ion-content>

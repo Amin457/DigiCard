@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'client',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'client',
+    path: 'client/:id',
     loadChildren: () => import('./client-home/client-home.module').then( m => m.ClientHomePageModule)
   }
 ];

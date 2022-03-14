@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
   },
   {
-    path: 'detail-card',
+    path: 'detail-card/:id_carte',
     loadChildren: () => import('./detail-card/detail-card.module').then( m => m.DetailCardPageModule)
   },
   {

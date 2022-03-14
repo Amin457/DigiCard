@@ -41,7 +41,7 @@ export class HomePage {
         if(res.success===1){
         console.log(res.message);
         this.msg=res.message;
-        this.navCtrl.navigateRoot('/client');
+        this.navCtrl.navigateRoot('/client/'+res.data.id);
         return false;
       }else{
         this.msg=res.data;
