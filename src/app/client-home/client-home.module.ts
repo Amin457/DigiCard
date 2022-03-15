@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ClientHomePage } from './client-home.page';
 import { ClientHomePageRoutingModule } from './client-home-routing.module';
 import { CommonModule } from '@angular/common';
+import { ListCartePipe } from './pipes/list-carte.pipe';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { CommonModule } from '@angular/common';
     IonicModule,
     ClientHomePageRoutingModule
   ],
-  declarations: [ClientHomePage]
+  declarations: [ClientHomePage, ListCartePipe]
 })
 export class ClientHomePageModule {}

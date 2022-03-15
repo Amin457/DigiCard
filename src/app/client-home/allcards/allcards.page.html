@@ -3,14 +3,14 @@
       <p>   <strong>  AJOUTER</strong> votre carte de fidélité</p>
   </ion-list>
   <div class="popover">
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
   </div>
 </ion-header>
 <ion-content [fullscreen]="true">
   <p>vous pouvez rechercher les cartes de vos marques préférés et les ajouter a votre portfeuille électronique</p>
   <br>
   <br>
-  <ion-card *ngFor="let item of partenaires">
+  <ion-card *ngFor="let item of partenaires | listpartenaire:Search; ">
     <ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <!--<img src="../../../assets/image1.jpg" alt="">-->

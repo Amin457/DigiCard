@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AllcardsPageRoutingModule } from './allcards-routing.module';
 
 import { AllcardsPage } from './allcards.page';
+import { ListpartenairePipe } from './pipes/listpartenaire.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { AllcardsPage } from './allcards.page';
     IonicModule,
     AllcardsPageRoutingModule
   ],
-  declarations: [AllcardsPage]
+  declarations: [AllcardsPage, ListpartenairePipe]
 })
 export class AllcardsPageModule {}

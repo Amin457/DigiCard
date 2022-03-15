@@ -16,5 +16,12 @@
     class="qr"
   >
   </ngx-qrcode>
+
+  <ion-list>
+    <ion-item *ngFor="let item1 of localisation"  (click)="onClick1(item1.url)" >
+      <ion-label>{{item1.boutique}}</ion-label>
+    </ion-item>
+  </ion-list>
+
 </div>
 </ion-content>

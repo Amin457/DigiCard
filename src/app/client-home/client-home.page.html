@@ -8,12 +8,12 @@
     </ion-item>
   </ion-list>
   <div class="popover">
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
   </div>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let item of cartes">
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let item of cartes | listCarte:Search; ">
 
     <ion-card-header>
      Carte fidélité
@@ -23,11 +23,14 @@
 
       <p>numero carte : {{item.num_carte}}</p>
       <p>boutique : {{item.boutique}}</p>
-      <ion-button fill="outline" slot="end" routerLink="detail-card/{{item.id_carte}}">detail</ion-button>
-<!--(click)="onClick(item.id_carte)"-->
+      <ion-button fill="outline" slot="end" routerLink="detail-card/{{item.id_carte}}/{{item.id_part}}">detail</ion-button>
     </ion-card-content>
 </ion-item>
   </ion-card>
+</ion-content>
+
+
+<ion-content>
 
   <ion-tabs>
     <ion-tab-bar slot="bottom">
