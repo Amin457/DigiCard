@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+   <!--<ion-icon (click)="openCustom()" ion-icon name="list-outline"></ion-icon>--> <ion-title>detail-card</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="text-align:center">
+    <h1>
+      QR Code
+    </h1>
+  </div>
+  <div *ngFor="let item of carte1">
+    <ngx-qrcode
+    [width]="230"
+    value={{item.num_carte}}
+    class="qr"
+    cssClass="center"
+  >
+  </ngx-qrcode>
+
+  <ion-list>
+    <ion-item *ngFor="let item1 of localisation"  (click)="onClick1(item1.url)" >
+      <ion-label>{{item1.boutique}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  </div>
+
+  <!--
+  <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Custom Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+        <ion-item>Menu Item</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+-->

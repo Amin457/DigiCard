@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CapacitorGoogleMaps } from '@capacitor-community/capacitor-googlemaps-native';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +6,5 @@ import { CapacitorGoogleMaps } from '@capacitor-community/capacitor-googlemaps-n
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {
-
-  }
-
+  constructor() {}
 }

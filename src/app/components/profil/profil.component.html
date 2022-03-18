@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <!-- <ion-toolbar color="primary">
+     <ion-buttons slot="end">
+       <ion-button fill="clear">EDIT</ion-button>
+      </ion-buttons>
+   </ion-toolbar>-->
+   <ion-grid class="main-header">
+     <div align="center">
+     </div>
+   </ion-grid>
+
+   <ion-list lines="full">
+     <ion-item>
+       <ion-label>
+         <ion-text>Nom</ion-text>
+         <p><ion-text color="dark">{{user.Nom}}</ion-text></p>
+       </ion-label>
+     </ion-item>
+     <ion-item>
+       <ion-label>
+         <ion-text>Email</ion-text>
+         <p><ion-text color="dark">{{user.mail}}</ion-text></p>
+       </ion-label>
+     </ion-item>
+    <!-- <ion-item>
+       <ion-label>
+         <ion-text>Addresse</ion-text>
+         <p><ion-text color="dark">Ariana</ion-text></p>
+       </ion-label>
+     </ion-item> -->
+   </ion-list>
+ </ion-content>

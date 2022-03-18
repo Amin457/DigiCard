@@ -12,4 +12,11 @@ export class UserService {
  constructor(private httpClient: HttpClient) { }
 
   getUserById(id: number): Observable<any>{
-    return  this.httpClient.get<users>(`${this.baseURL}`+id);}  }
+    return  this.httpClient.get<users>(`${this.baseURL}`+id);}
+
+  login(user: users): Observable<any>{
+    return  this.httpClient.post<users>(`${this.baseURL}`+'login',user);}
+
+  register(user: users): Observable<any>{
+    return  this.httpClient.post<users>(`${this.baseURL}`,user);}
+}

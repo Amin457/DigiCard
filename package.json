@@ -37,6 +37,7 @@
     "core-js": "^3.21.1",
     "crypto-js": "^4.1.1",
     "events": "^3.3.0",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "ngx-qrcode2": "^9.0.0",
     "rxjs": "~6.6.0",

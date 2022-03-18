@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <ion-item color="#1248EE">
+      <ion-icon name="log-out-outline" (click)="logOut()"></ion-icon>
+    </ion-item>
+    <ion-item color="#1248EE">
+      <ion-label>bonjour  {{user.Nom}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="popover">
+    <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
+  </div>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-card *ngFor="let item of cartes | listCarte:Search; ">
+
+    <ion-card-header>
+     Carte fidélité
+    </ion-card-header>
+ <ion-item>
+    <ion-card-content>
+
+      <p>numero carte : {{item.num_carte}}</p>
+      <p>boutique : {{item.boutique}}</p>
+      <ion-button fill="outline" slot="end" (click)="goto(item.id_carte,item.id_part)">detail</ion-button>
+    </ion-card-content>
+  </ion-item>
+  </ion-card>
+</ion-content>
+
+
