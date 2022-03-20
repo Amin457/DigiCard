@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-main',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  @ViewChild('tabs', {static: false}) tabs: IonTabs;
+  selectedTab: any;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
+
+  setCurrentTab() {
+    this.selectedTab = this.tabs.getSelected();
+    console.log(this.selectedTab);
+  }
 }

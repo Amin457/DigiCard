@@ -32,6 +32,7 @@
     "@ionic/angular": "^6.0.0",
     "@ionic/storage": "^3.0.6",
     "@techiediaries/ngx-qrcode": "^9.1.0",
+    "angular-font-awesome": "^3.1.2",
     "buffer": "^6.0.3",
     "concat-stream": "^2.0.0",
     "core-js": "^3.21.1",

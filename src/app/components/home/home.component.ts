@@ -45,4 +45,11 @@ export class HomeComponent implements OnInit {
       /*this.router.navigate([`detailcard/${id}`]);*/
       this.router.navigate(['main/home/detailcard/'+id1+'/'+id2]);
     }
+
+    gotoadd(){
+      this.router.navigate(['main/newcard']);
+    }
+    gotoNotif(){
+      this.router.navigate(['main/notifications']);
+    }
 }

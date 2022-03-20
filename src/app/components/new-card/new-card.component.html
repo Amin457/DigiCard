@@ -1,33 +1,32 @@
 <ion-header class="ion-no-border">
   <ion-list lines="none">
-      <p>   <strong>  AJOUTER</strong> votre carte de fidélité</p>
+    <ion-row>
+      <ion-col>
+        <ion-label class="big-heading">
+          <p class="ion-text-start">Ajouter</p>
+          <p class="ion-text-start marginTop">une nouvelle carte !!</p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-list>
   <div class="popover">
     <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
   </div>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <p>vous pouvez rechercher les cartes de vos marques préférés et les ajouter a votre portfeuille électronique</p>
+
   <br>
   <br>
   <ion-card *ngFor="let item of partenaires | listpartenaire:Search; ">
     <ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <!--<img src="../../../assets/image1.jpg" alt="">-->
-      <ion-label>societé : {{item.societe}}</ion-label>
-      <ion-button fill="outline" slot="end" routerLink="newcard">ajouter</ion-button>
+      <ion-label style="font-weight: bold;font-size: 1.2rem;color: var(--ion-color-dark);">
+        boutique : <br> {{item.societe}}</ion-label>
+      <ion-button slot="end" size="small" shape="round" color="primary" (click)="goto()">ajouter</ion-button>
     </ion-item>
     </ion-card>
   <ion-list>
-
-
-    <!--
-    <div class="ion-margin marginBottom">
-          <ion-button routerLink="newcard">
-          <ion-label>creer carte</ion-label>
-        </ion-button>
-    </div>-->
-
   </ion-list>
 
 </ion-content>

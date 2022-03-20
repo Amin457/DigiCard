@@ -1,14 +1,29 @@
 <ion-header class="ion-no-border">
-  <ion-list lines="none">
-    <ion-item color="#1248EE">
-      <ion-icon name="log-out-outline" (click)="logOut()"></ion-icon>
-    </ion-item>
-    <ion-item color="#1248EE">
+<ion-list lines="none">
+
+  <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
+    <ion-badge color="danger" mode="ios">0</ion-badge>
+    <ion-fab-button size="small" color="white">
+      <ion-icon  name="notifications-outline" color="primary">
+      </ion-icon>
+    </ion-fab-button>
+  </ion-buttons>
+
+  <ion-buttons slot="start" style="position: fixed; left: 0%; top: 0%;" (click)="logOut()" >
+    <ion-fab-button size="small" color="white">
+      <ion-icon name="log-out-outline" color="primary" >
+      </ion-icon>
+    </ion-fab-button>
+  </ion-buttons> <br><br><br><br>
+
+    <ion-item color="#1248EE" >
       <ion-label>bonjour  {{user.Nom}}</ion-label>
     </ion-item>
   </ion-list>
+
+
   <div class="popover">
-    <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
+    <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une carte fidélité "></ion-searchbar>
   </div>
 </ion-header>
 
@@ -29,6 +44,14 @@
     </ion-card-content>
   </ion-item>
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+    <ion-fab-button (click)="gotoadd()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
 
 

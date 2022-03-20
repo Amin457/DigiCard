@@ -19,10 +19,18 @@ import { RegisterComponent } from './components/register/register.component';
 import { ListCartePipe } from './pipes/list-carte.pipe';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ListpartenairePipe } from './pipes/listpartenaire.pipe';
+import { AddCreateComponent } from './components/add-create/add-create.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { ReclamationComponent } from './components/reclamation/reclamation.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 @NgModule({
   declarations:
     [AppComponent,
     ListCartePipe,
+    ReclamationComponent,
+    NotificationsComponent,
+    FeedbackComponent,
+    AddCreateComponent,
     ListpartenairePipe,
     DetailcardComponent,
     HomeComponent,

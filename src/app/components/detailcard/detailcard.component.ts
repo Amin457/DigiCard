@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Carte } from 'src/app/model/carte';
 import { Localisation } from 'src/app/model/localisation';
 import { users } from 'src/app/model/user';
@@ -28,7 +28,16 @@ export class DetailcardComponent implements OnInit {
   value: string;
   // eslint-disable-next-line @typescript-eslint/member-ordering
   // eslint-disable-next-line max-len
-  constructor(private menu: MenuController , public route: ActivatedRoute , private carteService: CarteService, private localisationService: LocalisationService) { }
+  segmentValue = '1';
+
+  type = true;
+  // eslint-disable-next-line max-len
+  constructor(private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private localisationService: LocalisationService) { }
+
+  segmentChanged(event) {
+    console.log(event);
+    this.segmentValue = event.detail.value;
+  }
 
   ngOnInit() {
     const token=localStorage.getItem('token');
@@ -65,18 +74,10 @@ onClick1(url: string){
   window.open(url,'_system');
 }
 
-openFirst() {
-  this.menu.enable(true, 'first');
-  this.menu.open('first');
+rec(){
+  this.router.navigate(['main/home/detailcard/'+this.id_part+'/'+this.id_carte+'/reclamation']);
 }
-
-openEnd() {
-  this.menu.open('end');
+feed(){
+  this.router.navigate(['main/home/detailcard/'+this.id_part+'/'+this.id_carte+'/feedback']);
 }
-
-openCustom() {
-  this.menu.enable(true, 'custom');
-  this.menu.open('custom');
-}
-
 }

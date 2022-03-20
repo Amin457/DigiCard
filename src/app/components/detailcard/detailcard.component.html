@@ -1,50 +1,63 @@
-<ion-header>
-  <ion-toolbar>
-   <!--<ion-icon (click)="openCustom()" ion-icon name="list-outline"></ion-icon>--> <ion-title>detail-card</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+
+    <ion-label style="position: fixed; left:20px; top: 20px;color: aliceblue;">
+      reclamation
+    </ion-label>
+
+    <ion-icon (click)="rec()" color="white" style=" position: fixed; left: 0%; top: 45px;height: 40px; width: 40px;"
+    name="receipt-outline"></ion-icon>
+
+    <ion-label style="position: fixed; right:20px; top: 20px ; color: aliceblue;">
+      Feedback
+    </ion-label>
+    <ion-icon (click)="feed()" color="white" style=" position: fixed; right: 0%; top: 45px;height: 40px; width: 40px;"
+    name="chatbox-ellipses-outline"></ion-icon>
+  </ion-list>
 </ion-header>
 
-<ion-content>
-  <div style="text-align:center">
-    <h1>
-      QR Code
-    </h1>
-  </div>
-  <div *ngFor="let item of carte1">
-    <ngx-qrcode
-    [width]="230"
-    value={{item.num_carte}}
-    class="qr"
-    cssClass="center"
-  >
-  </ngx-qrcode>
+<ion-list style="position: fixed; top: 80px">
+    <div class="ion-margin marginBottom" (ionChange)="segmentChanged($event)">
+      <ion-segment mode="ios" [value]="segmentValue" style="background-color: rgb(120, 170, 245);">
+        <ion-segment-button value="1" >
+          <ion-label style="font-weight: bold;">details</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="2">
+          <ion-label style="font-weight: bold;">jeux</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="3">
+          <ion-label style="font-weight: bold;">promotion</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
 
-  <ion-list>
-    <ion-item *ngFor="let item1 of localisation"  (click)="onClick1(item1.url)" >
-      <ion-label>{{item1.boutique}}</ion-label>
-    </ion-item>
-  </ion-list>
+    <div *ngIf="segmentValue === '1'">
 
-  </div>
+      <div style="text-align:center">
+        <h1>
+          QR Code
+        </h1>
 
-  <!--
-  <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Custom Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
+      <div *ngFor="let item of carte1">
+        <ngx-qrcode
+        [width]="230"
+        value={{item.num_carte}}
+        class="qr"
+        cssClass="center"
+      >
+      </ngx-qrcode>
+    </div>
+
       <ion-list>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-item *ngFor="let item1 of localisation"  (click)="onClick1(item1.url)" >
+          <ion-label>{{item1.boutique}}</ion-label>
+        </ion-item>
       </ion-list>
-    </ion-content>
-  </ion-menu>
 
-
-  <ion-router-outlet id="main"></ion-router-outlet>
--->
+      </div>
+    </div>
+    <div *ngIf="segmentValue === '2'">jeux</div>
+    <div *ngIf="segmentValue === '3'">
+      promotion
+    </div>
+  </ion-list>

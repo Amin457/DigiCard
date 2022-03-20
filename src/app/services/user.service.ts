@@ -19,4 +19,7 @@ export class UserService {
 
   register(user: users): Observable<any>{
     return  this.httpClient.post<users>(`${this.baseURL}`,user);}
+
+  updateUser(user: users): Observable<any>{
+      return  this.httpClient.patch<users>(`${this.baseURL}`,user);}
 }

@@ -1,0 +1,90 @@
+
+<ion-list>
+  <div class="ion-margin marginBottom" (ionChange)="segmentChanged($event)">
+    <ion-segment mode="ios" [value]="segmentValue">
+      <ion-segment-button value="1">
+        <ion-label>importer carte</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>creer carte</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div *ngIf="segmentValue === '1'">
+    scanner votre carte
+  </div>
+  <div *ngIf="segmentValue === '2'">
+
+    <form [formGroup]="form" class="ion-margin">
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="Nom1" type="text" placeholder="Entrer votre Nom"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('Nom1').valid && form.get('Nom1').touched">
+        </ion-text>
+      </div>
+
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="email1" type="text" placeholder="Entrer votre email"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('email1').valid && form.get('email1').touched">
+          <ion-text
+            class="error"
+            *ngIf="form.get('email1').hasError('required')">
+            * enter votre email
+          </ion-text>
+        </ion-text>
+      </div>
+
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="adresse1" type="text" placeholder="Entrer votre adresse"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('adresse1').valid && form.get('adresse1').touched">
+        </ion-text>
+      </div>
+
+      <div class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-input formControlName="telephone1" type="text" placeholder="Entrer votre telephone"></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="!form.get('telephone1').valid && form.get('telephone1').touched">
+        </ion-text>
+      </div>
+    </form>
+
+
+    <div class="ion-margin-horizontal">
+      <ion-button
+       class="ion-margin-horizontal"
+        size="large"
+        expand="block"
+        shape="round"
+        color="primary"
+        (click)="onSubmit()">
+        <ion-text>creer carte</ion-text>
+      </ion-button>
+    </div>
+
+
+
+  </div>
+
+</ion-list>
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+  <ion-fab-button (click)="gotoAddCard()">
+    <ion-icon name="return-up-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
