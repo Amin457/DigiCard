@@ -19,7 +19,6 @@ export class NewCardComponent implements OnInit {
         (res)  => {
         console.log(res);
           this.partenaires = res.data;
-          console.log(this.partenaires);
         },
         error => {
           console.log(error);

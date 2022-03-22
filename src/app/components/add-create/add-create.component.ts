@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-add-create',
@@ -12,9 +13,19 @@ export class AddCreateComponent implements OnInit {
   type = true;
   form: FormGroup;
   segmentValue = '1';
-
-  constructor(private router: Router) {
+  data: any;
+  constructor(private router: Router , private barcodeScanner: BarcodeScanner) {
     this.initForm();
+  }
+
+  scan() {
+    this.data = null;
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.data = barcodeData;
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
 
   ngOnInit() {

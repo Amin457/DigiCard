@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
         (res)  => {
         console.log(res);
           this.cartes = res.data;
-          console.log(this.cartes);
         },
         error => {
           console.log(error);
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['']);
     }
     goto(id1: number,id2: number){
-      /*this.router.navigate([`detailcard/${id}`]);*/
       this.router.navigate(['main/home/detailcard/'+id1+'/'+id2]);
     }
 

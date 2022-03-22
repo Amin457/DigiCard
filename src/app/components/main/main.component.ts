@@ -19,6 +19,5 @@ export class MainComponent implements OnInit {
 
   setCurrentTab() {
     this.selectedTab = this.tabs.getSelected();
-    console.log(this.selectedTab);
   }
 }

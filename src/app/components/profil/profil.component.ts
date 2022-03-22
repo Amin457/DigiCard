@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import jwt_decode from 'jwt-decode';
 import { users } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
@@ -21,7 +22,7 @@ export class ProfilComponent implements OnInit {
   password: string;
 msg  ='';
 http: any;
-constructor(public httpClient: HttpClient, private userService: UserService) {
+constructor(public httpClient: HttpClient, private userService: UserService ,  public toastController: ToastController) {
 
  }
 
@@ -39,11 +40,55 @@ constructor(public httpClient: HttpClient, private userService: UserService) {
 this.user.Nom=this.Username;
 this.user.mdp=this.password;
 if(this.user.mdp.length<8 || this.user.Nom.length<2){
-  this.msg='mot de passe ou nom non valide';
+  this.toastController.create({
+    message: 'donnée non valide ressayer !!',
+    position: 'bottom',
+    cssClass: 'toast-custom-class',
+    buttons: [
+      {
+        side: 'end',
+        handler: () => {
+          console.log('');
+        }
+      }, {
+        side: 'end',
+        text: 'fermer',
+        role: 'cancel',
+        handler: () => {
+          console.log('');
+        }
+      }
+    ]
+  }).then((toast) => {
+    toast.present();
+  });
 }else{
   this.userService.updateUser(this.user).subscribe(
      (res)  => {
-       this.msg = 'modification avec succées';
+      {
+        this.toastController.create({
+          message: 'modification avec succées !!',
+          position: 'bottom',
+          cssClass: 'toast-custom-class',
+          buttons: [
+            {
+              side: 'end',
+              handler: () => {
+                console.log('');
+              }
+            }, {
+              side: 'end',
+              text: 'fermer',
+              role: 'cancel',
+              handler: () => {
+                console.log('');
+              }
+            }
+          ]
+        }).then((toast) => {
+          toast.present();
+        });
+      }
      },
      error => {
        this.msg = 'mot de passe ou nom non valide';

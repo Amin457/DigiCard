@@ -23,9 +23,13 @@ import { AddCreateComponent } from './components/add-create/add-create.component
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxBarcodeModule } from 'ngx-barcode';
+import { LocalisationComponent } from './components/localisation/localisation.component';
 @NgModule({
   declarations:
     [AppComponent,
+    LocalisationComponent,
     ListCartePipe,
     ReclamationComponent,
     NotificationsComponent,
@@ -45,6 +49,7 @@ import { NotificationsComponent } from './components/notifications/notifications
   entryComponents: [],
   imports: [
     NgxQRCodeModule,
+    NgxBarcodeModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -52,7 +57,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     FormsModule,
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},BarcodeScanner
   ],
   bootstrap: [AppComponent],
 })

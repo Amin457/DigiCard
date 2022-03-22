@@ -1,3 +1,175 @@
-<p>
-  feedback works!
-</p>
+<ion-header>
+<ion-list lines="none">
+
+  <ion-label style=" position: fixed; left: 15%; top: 45px;color: aliceblue;">
+    Introduire votre Feedback
+  </ion-label>
+</ion-list>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+<!--///////////Question 1-->
+
+<ion-list>
+  <ion-radio-group value="Q1" [(ngModel)]="Q1">
+    <ion-list-header>
+      <ion-label class="Q">Comment jugez-vous l'accueil ?</ion-label>
+    </ion-list-header>
+
+    <ion-item class="R">
+      <ion-label>Très satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q1R1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q1R2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Assez satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q1R3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Pas satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q1R4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<!--///////////Question 2-->
+
+<ion-list>
+  <ion-radio-group value="Q2" [(ngModel)]="Q2">
+    <ion-list-header>
+      <ion-label class="Q">Comment jugez-vous le délai d'attente à la caisse du magasin ?</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label class="R">Très satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q2R1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q2R2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Assez satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q2R3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Pas satisfaisant</ion-label>
+      <ion-radio slot="start" value="Q2R4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<!--///////////Question 3-->
+
+<ion-list>
+  <ion-radio-group value="Q3" [(ngModel)]="Q3">
+    <ion-list-header>
+      <ion-label class="Q">Que pensez-vous de la disponibilité du personnel ?</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label class="R">Très satisfaisante</ion-label>
+      <ion-radio slot="start" value="Q3R1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Satisfaisante</ion-label>
+      <ion-radio slot="start" value="Q3R2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Assez satisfaisante</ion-label>
+      <ion-radio slot="start" value="Q3R3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Pas satisfaisante</ion-label>
+      <ion-radio slot="start" value="Q3R4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<!--///////////Question 4-->
+
+<ion-list>
+  <ion-radio-group value="Q4" [(ngModel)]="Q4">
+    <ion-list-header>
+      <ion-label class="Q">Comment jugez-vous la qualité de nos produits ?</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label class="R">Excellente</ion-label>
+      <ion-radio slot="start" value="Q4R1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Bonne</ion-label>
+      <ion-radio slot="start" value="Q4R2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Moyenne</ion-label>
+      <ion-radio slot="start" value="Q4R3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Mauvaise</ion-label>
+      <ion-radio slot="start" value="Q4R4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<!--///////////Question 5-->
+<ion-list>
+  <ion-radio-group value="Q5" [(ngModel)]="Q5">
+    <ion-list-header>
+      <ion-label class="Q">Comment vous paraissent les prix ?</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label class="R">Très élevés</ion-label>
+      <ion-radio slot="start" value="Q5R1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Élevés</ion-label>
+      <ion-radio slot="start" value="Q5R2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Assez élevés</ion-label>
+      <ion-radio slot="start" value="Q5R3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="R">Pas élevés</ion-label>
+      <ion-radio slot="start" value="Q5R4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
+
+<ion-button
+      size="large"
+      expand="block"
+      shape="round"
+      color="secondary"
+      (click)="onSubmit()">
+      <ion-text color="white">envoyer</ion-text>
+</ion-button>
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+  <ion-fab-button (click)="gotoDetail()">
+    <ion-icon name="return-up-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

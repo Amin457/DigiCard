@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Component, OnInit ,ElementRef ,ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Carte } from 'src/app/model/carte';
-import { Localisation } from 'src/app/model/localisation';
 import { users } from 'src/app/model/user';
 import { CarteService } from 'src/app/services/carte.service';
-import { LocalisationService } from 'src/app/services/localisation.service';
 import jwt_decode from 'jwt-decode';
-import { MenuController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detailcard',
@@ -14,7 +14,10 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./detailcard.component.scss'],
 })
 export class DetailcardComponent implements OnInit {
+  [x: string]: any;
+   // eslint-disable-next-line @typescript-eslint/member-ordering
    decoded: any;
+   // eslint-disable-next-line @typescript-eslint/member-ordering
    user: users ;
    // eslint-disable-next-line @typescript-eslint/naming-convention
    id_carte: number;
@@ -23,7 +26,6 @@ export class DetailcardComponent implements OnInit {
    id_part: number;
    // eslint-disable-next-line @typescript-eslint/naming-convention
    carte1: Carte[] ;
-   localisation: Localisation[];
    // eslint-disable-next-line max-len
   value: string;
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -31,11 +33,15 @@ export class DetailcardComponent implements OnInit {
   segmentValue = '1';
 
   type = true;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  private _CANVAS: any;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  private _CONTEXT: any;
+  @ViewChild('canvas') canvasEl: ElementRef;
   // eslint-disable-next-line max-len
-  constructor(private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private localisationService: LocalisationService) { }
+  constructor(private router: Router ,public route: ActivatedRoute , private carteService: CarteService,private toastCtrl: ToastController) { }
 
   segmentChanged(event) {
-    console.log(event);
     this.segmentValue = event.detail.value;
   }
 
@@ -46,27 +52,14 @@ export class DetailcardComponent implements OnInit {
 
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
-    console.log('cart',this.id_carte);
 
     this.carteService.getCarteById(this.user.id,this.id_carte).subscribe(
     (res)  => {
-      console.log(res);
       this.carte1 = res.data;
-      console.log(this.carte1);
     },
     error => {
       console.log(error);
     });
-
-    this.localisationService.getLocalisations(this.id_part).subscribe(
-      (res)  => {
-        console.log(res);
-        this.localisation = res.data;
-        console.log(this.localisation);
-      },
-      error => {
-        console.log(error);
-      });
     // eslint-disable-next-line max-len
     }
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -75,9 +68,12 @@ onClick1(url: string){
 }
 
 rec(){
-  this.router.navigate(['main/home/detailcard/'+this.id_part+'/'+this.id_carte+'/reclamation']);
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/reclamation']);
 }
 feed(){
-  this.router.navigate(['main/home/detailcard/'+this.id_part+'/'+this.id_carte+'/feedback']);
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/feedback']);
+}
+localisations(){
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/localisation']);
 }
 }

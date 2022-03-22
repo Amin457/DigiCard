@@ -5,6 +5,7 @@ import { AddCreateComponent } from './components/add-create/add-create.component
 import { DetailcardComponent } from './components/detailcard/detailcard.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { HomeComponent } from './components/home/home.component';
+import { LocalisationComponent } from './components/localisation/localisation.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { NewCardComponent } from './components/new-card/new-card.component';
@@ -29,8 +30,9 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'profil', component: ProfilComponent},
       {path: 'home/detailcard/:id1/:id2', component: DetailcardComponent },
-      {path: 'home/detailcard/:id/:id1/reclamation', component: ReclamationComponent },
-      {path: 'home/detailcard/:id/:id1/feedback', component: FeedbackComponent },
+      {path: 'home/detailcard/:id1/:id2/reclamation', component: ReclamationComponent },
+      {path: 'home/detailcard/:id1/:id2/localisation', component: LocalisationComponent },
+      {path: 'home/detailcard/:id1/:id2/feedback', component: FeedbackComponent },
       {path: 'newcard',component: NewCardComponent},
       {path: 'notifications',component: NotificationsComponent},
       {path: 'promotion',component: PromotionComponent},
