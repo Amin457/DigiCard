@@ -7,6 +7,8 @@ import { CarteService } from 'src/app/services/carte.service';
 import jwt_decode from 'jwt-decode';
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { PromotionService } from 'src/app/services/promotion.service';
+import { Promo } from 'src/app/model/promo';
 
 @Component({
   selector: 'app-detailcard',
@@ -31,7 +33,7 @@ export class DetailcardComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   // eslint-disable-next-line max-len
   segmentValue = '1';
-
+  promos: Promo[]=[] ;
   type = true;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   private _CANVAS: any;
@@ -39,7 +41,7 @@ export class DetailcardComponent implements OnInit {
   private _CONTEXT: any;
   @ViewChild('canvas') canvasEl: ElementRef;
   // eslint-disable-next-line max-len
-  constructor(private router: Router ,public route: ActivatedRoute , private carteService: CarteService,private toastCtrl: ToastController) { }
+  constructor(private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService,private toastCtrl: ToastController) { }
 
   segmentChanged(event) {
     this.segmentValue = event.detail.value;
@@ -61,7 +63,21 @@ export class DetailcardComponent implements OnInit {
       console.log(error);
     });
     // eslint-disable-next-line max-len
-    }
+    this.promoService.getPromoByPart(this.id_part).subscribe(
+      (res)  => {
+        if(res.success===1){
+        this.promos=res.data;
+        console.log(this.promos);
+        return false;
+      }else{
+        console.log(res.data);
+      }
+      }
+      ,
+      error => {
+        console.log(error);
+      });
+  }
 // eslint-disable-next-line @typescript-eslint/naming-convention
 onClick1(url: string){
   window.open(url,'_system');
@@ -75,5 +91,8 @@ feed(){
 }
 localisations(){
   this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/localisation']);
+}
+promopart(){
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/promopart']);
 }
 }

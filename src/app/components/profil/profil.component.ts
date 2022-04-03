@@ -20,6 +20,7 @@ export class ProfilComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Email: string;
   password: string;
+  password1: string;
 msg  ='';
 http: any;
 constructor(public httpClient: HttpClient, private userService: UserService ,  public toastController: ToastController) {
@@ -33,13 +34,14 @@ constructor(public httpClient: HttpClient, private userService: UserService ,  p
   this.Username=this.user.Nom;
   this.Email=this.user.mail;
   this.password=this.user.mdp;
+  this.password1=this.user.mdp;
  }
 
 
  onSubmit() {
 this.user.Nom=this.Username;
 this.user.mdp=this.password;
-if(this.user.mdp.length<8 || this.user.Nom.length<2){
+if(this.user.mdp.length<8 || this.user.Nom.length<2 || this.user.mdp!==this.password1){
   this.toastController.create({
     message: 'donnée non valide ressayer !!',
     position: 'bottom',

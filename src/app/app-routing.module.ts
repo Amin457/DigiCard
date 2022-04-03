@@ -11,6 +11,7 @@ import { MainComponent } from './components/main/main.component';
 import { NewCardComponent } from './components/new-card/new-card.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { PromoPartComponent } from './components/promo-part/promo-part.component';
 import { PromotionComponent } from './components/promotion/promotion.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path: 'home/detailcard/:id1/:id2/reclamation', component: ReclamationComponent },
       {path: 'home/detailcard/:id1/:id2/localisation', component: LocalisationComponent },
       {path: 'home/detailcard/:id1/:id2/feedback', component: FeedbackComponent },
+      {path: 'home/detailcard/:id1/:id2/promopart', component: PromoPartComponent },
       {path: 'newcard',component: NewCardComponent},
       {path: 'notifications',component: NotificationsComponent},
       {path: 'promotion',component: PromotionComponent},

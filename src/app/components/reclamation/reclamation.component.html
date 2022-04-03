@@ -1,5 +1,74 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <ion-label class="text1" style="position: fixed; left: 13%; top: 7%px;color: aliceblue;">
+      Quel est le sujet de votre</ion-label>
+      <ion-label class="text1" style="color: aliceblue;position: fixed; left: 28%; top:35%;">
+      reclamation? </ion-label>
+  </ion-list>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+    <ion-radio-group value="Q1" [(ngModel)]="choix">
+     <!-- <ion-list-header>
+        <ion-label class="text1">Quel est le sujet de votre reclamation?</ion-label>
+      </ion-list-header> -->
+
+      <ion-item class="R">
+        <ion-label>prix</ion-label>
+        <ion-radio slot="start" value="prix"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="R">accueil</ion-label>
+        <ion-radio slot="start" value="accueil"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="R">personel</ion-label>
+        <ion-radio slot="start" value="personel"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="R">qualité</ion-label>
+        <ion-radio slot="start" value="qualité"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+
+  <form>
+ <div class="ion-margin-vertical">
+   <ion-item>
+     <ion-label class="text"  position="stacked">introduire votre reclamation :</ion-label><br><br>
+     <ion-input class="input" [(ngModel)]="Rec" type="text" name="Username">
+       <ion-icon style="height: 25px; width: 25px;" name="receipt-outline" slot="start" color="medium"></ion-icon>
+     </ion-input>
+
+
+   </ion-item>
+ </div>
+   <ion-button
+   size="large"
+   width="50%"
+   expand="block"
+   shape="round"
+   color="primary"
+   width="50%"
+   (click)="sendRec()">
+   <ion-text color="white">envoyer</ion-text>
+
+ </ion-button>
+</form>
+
 <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
   <ion-fab-button (click)="gotoDetail()">
     <ion-icon name="return-up-back-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+
+</ion-content>
+
+

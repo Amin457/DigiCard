@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -17,8 +17,8 @@ export class LoginComponent{
 
   form1: FormGroup;
   isTypePassword = true;
-  msg: string;
-  constructor(public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
+  // eslint-disable-next-line max-len
+  constructor(public toastController: ToastController,public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
     this.initForm();
   }
 
@@ -47,7 +47,7 @@ export class LoginComponent{
     this.userService.login(this.form1.value).subscribe(
       (res)  => {
         if(res.unauthorised===true){
-          this.msg='utilisateur non trouvé';
+          console.log(res);
         return false;
       }else{
         localStorage.setItem('token',res.token);
@@ -56,7 +56,28 @@ export class LoginComponent{
       }
       },
       error => {
-        console.log(error);
+        this.toastController.create({
+          message: 'email ou mot de passe non valide !!',
+          position: 'bottom',
+          cssClass: 'toast-custom-class',
+          buttons: [
+            {
+              side: 'end',
+              handler: () => {
+                console.log('');
+              }
+            }, {
+              side: 'end',
+              text: 'fermer',
+              role: 'cancel',
+              handler: () => {
+                console.log('');
+              }
+            }
+          ]
+        }).then((toast) => {
+          toast.present();
+        });
       });
   }
 

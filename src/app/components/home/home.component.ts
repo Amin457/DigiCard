@@ -14,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class HomeComponent implements OnInit {
   decoded: any;
+  imgUrl = 'http://localhost:3000/api/files/get/';
   id: number;
   user: users ;
   cartes: Carte[]=[] ;

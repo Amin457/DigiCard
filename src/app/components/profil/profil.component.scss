@@ -43,18 +43,28 @@ ion-content {
           }
       }
   }
+}
 
-  ion-list {
-      ion-item {
-          margin-top: 1vh;
-          ion-label {
-              font-size: 0.9rem;
-              p {
-                  margin-top: 5px;
-                  font-size: 1.2rem;
-                  font-weight: bold;
-              }
-          }
-      }
+div {
+  ion-item {
+      border: 1px solid var(--ion-color-light);
+      border-radius: 20px;
+      -webkit-box-shadow: 0 6px 4px -4px var(--ion-color-medium);
+      -moz-box-shadow: 0 6px 4px -4px var(--ion-color-medium);
+      box-shadow: 0 6px 4px -4px var(--ion-color-medium);
+    }
+  ion-label {
+      font-size: 1.4rem;
+      padding-left: 5vw;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      color:  rgb(120, 170, 245);
   }
+}
+
+ion-button{
+  width:50%;
+  position: fixed;
+  top: 85%;
+  right: 25%;
 }

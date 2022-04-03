@@ -26,9 +26,12 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { LocalisationComponent } from './components/localisation/localisation.component';
+import { PromoPartComponent } from './components/promo-part/promo-part.component';
+
 @NgModule({
   declarations:
     [AppComponent,
+    PromoPartComponent,
     LocalisationComponent,
     ListCartePipe,
     ReclamationComponent,

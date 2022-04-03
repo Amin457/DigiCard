@@ -9,4 +9,5 @@ export class Carte {
   id_part: number;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   id_client: number;
+  img: string;
 }

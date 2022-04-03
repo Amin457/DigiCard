@@ -10,23 +10,24 @@
     </ion-row>
   </ion-list>
   <div class="popover">
-    <ion-searchbar [(ngModel)] = "Search" name="Search"></ion-searchbar>
+    <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une marque"></ion-searchbar>
   </div>
 </ion-header>
 <ion-content [fullscreen]="true">
 
   <br>
   <br>
-  <ion-card *ngFor="let item of partenaires | listpartenaire:Search; ">
-    <ion-item>
+
+    <ion-card style="height: 120px;width:95%;" (click)="goto()" class="card" *ngFor="let item of partenaires | listpartenaire:Search">
+   <!--<ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
-      <!--<img src="../../../assets/image1.jpg" alt="">-->
       <ion-label style="font-weight: bold;font-size: 1.2rem;color: var(--ion-color-dark);">
         boutique : <br> {{item.societe}}</ion-label>
       <ion-button slot="end" size="small" shape="round" color="primary" (click)="goto()">ajouter</ion-button>
+    </ion-item>-->
+    <ion-item style="height: 120px;width:100%;">
+   <img style="height: 120px;width:100%;" src="http://localhost:3000/api/files/get/{{item.img}}"  alt="">
     </ion-item>
     </ion-card>
-  <ion-list>
-  </ion-list>
 
 </ion-content>

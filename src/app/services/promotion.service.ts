@@ -14,5 +14,8 @@ export class PromotionService {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       getAllPromo(): Observable<any>{
         return  this.httpClient.get<Promo>(`${this.baseURL}`);}
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      getPromoByPart(id_part: number): Observable<any>{
+        return  this.httpClient.get<Promo>(`${this.baseURL}`+`/`+`${id_part}`);}
 }
 

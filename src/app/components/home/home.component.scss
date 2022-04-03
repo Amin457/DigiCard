@@ -1,6 +1,6 @@
 ion-header {
   ion-list {
-      background-color: #1248EE;
+      background-color: rgb(120, 170, 245);
       border-radius: 0 0 20px 20px;
       padding-bottom: 7vh;
       ion-item {
@@ -36,7 +36,7 @@ ion-header {
 
 .ionadd{
   font-size: 64px;
-  color: blue;
+  color: rgb(120, 170, 245);;
   position: absolute;
   bottom: 70px;
   right: 20px;
@@ -46,4 +46,3 @@ ion-header {
   position:fixed;
   bottom:0;
 }
-

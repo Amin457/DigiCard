@@ -23,7 +23,7 @@
   </ion-list>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-list style="position: fixed; top: 80px">
+  <ion-list style="position: fixed; top: 80px;left: 14%;">
     <div class="ion-margin marginBottom" (ionChange)="segmentChanged($event)">
       <ion-segment mode="ios" [value]="segmentValue" style="background-color: rgb(120, 170, 245);">
         <ion-segment-button value="1" >
@@ -31,9 +31,6 @@
         </ion-segment-button>
         <ion-segment-button value="2">
           <ion-label style="font-weight: bold;">jeux</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="3">
-          <ion-label style="font-weight: bold;">promotion</ion-label>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -52,16 +49,23 @@
       <ngx-barcode bc-value={{item.num_carte}} [bc-display-value]="true"></ngx-barcode>
     </div>
     </div>
+    <h2 style="margin-left: 10%;">points de fidélité : <ion-badge color="primary" mode="ios" >42</ion-badge></h2>
     </div>
     <div *ngIf="segmentValue === '2'">
+
+
   <!--////////////////////////////////////////////////////////jeux/////////////////////////////-->
 
       jeux
 
   <!--////////////////////////////////////////////////////////jeux/////////////////////////////-->
     </div>
-    <div *ngIf="segmentValue === '3'">
-      promotion
-    </div>
   </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+    <ion-fab-button color="Secondary" (click)="promopart()">
+      <ion-icon class="icon" name="gift-sharp"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+

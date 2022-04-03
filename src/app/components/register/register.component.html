@@ -12,10 +12,10 @@
       <form [formGroup]="form">
         <div class="ion-margin-vertical">
           <ion-item>
-            <ion-label position="stacked">Username</ion-label>
+            <ion-label position="stacked">Nom et Prenom</ion-label>
 
 
-            <ion-input formControlName="Nom" type="text" placeholder="Username">
+            <ion-input formControlName="Nom" type="text" placeholder="Nom et Prenom">
               <ion-icon name="person" slot="start" color="medium"></ion-icon>
             </ion-input>
 
@@ -24,7 +24,7 @@
           <ion-text class="error" color="danger"
             *ngIf="!form.get('Nom').valid && form.get('Nom').touched">
             <ion-text *ngIf="form.get('Nom').hasError('required')">
-              * Please enter your Name
+              * Entrer votre Nom s'il vous plait !
             </ion-text>
           </ion-text>
         </div>
@@ -33,7 +33,7 @@
             <ion-label position="stacked">Email</ion-label>
 
 
-            <ion-input formControlName="mail" type="email" placeholder="Email Address">
+            <ion-input formControlName="mail" type="email" placeholder="Adresse email">
               <ion-icon name="mail" slot="start" color="medium"></ion-icon>
             </ion-input>
 
@@ -42,28 +42,28 @@
           <ion-text class="error" color="danger"
             *ngIf="!form.get('mail').valid && form.get('mail').touched">
             <ion-text *ngIf="form.get('mail').hasError('required')">
-              * Please enter your Email Address
+              * Entrer votre email s'il vous plait !
             </ion-text>
             <ion-text
               *ngIf="!form.get('mail').hasError('required') && form.get('mail').hasError('email')">
-              * Please enter proper Email Address
+              * Entrer valide email !
             </ion-text>
           </ion-text>
         </div>
 
         <div class="ion-margin-vertical">
           <ion-item>
-            <ion-label position="stacked">Password</ion-label>
-              <ion-input formControlName="mdp" type="password" placeholder="Password">
+            <ion-label position="stacked">Mot de passe</ion-label>
+              <ion-input formControlName="mdp" type="password" placeholder="Mot de passe">
                 <ion-icon name="key" slot="start" color="medium"></ion-icon>
               </ion-input>
           </ion-item>
           <ion-text class="error" color="danger" *ngIf="!form.get('mdp').valid && form.get('mdp').touched">
             <ion-text *ngIf="form.get('mdp').hasError('required')">
-              * Please enter your Password
+              * Entrer votre mot de passe s'il vous plait !
             </ion-text>
             <ion-text *ngIf="!form.get('mdp').hasError('required') && form.get('mdp').hasError('minlength')">
-              * Password must be of atleast 8 characters
+              * 8 caractére au minimum
             </ion-text>
           </ion-text>
         </div>
@@ -75,15 +75,12 @@
           shape="round"
           color="primary"
           (click)="onSubmit()">
-          <ion-text color="white">Sign up</ion-text>
+          <ion-text color="white">S'inscrire</ion-text>
 
         </ion-button>
-        <ion-text class="error1" color="danger">
-        {{msg}}
-      </ion-text>
         <p class="signup">
           <ion-note>
-            Alredy have account? <ion-text (click)="goto()" color="primary">login</ion-text>
+            avez-Vous un compte? <ion-text style="font-size: 1.2rem;" (click)="goto()" color="primary">se connecter</ion-text>
           </ion-note>
         </p>
       </form>

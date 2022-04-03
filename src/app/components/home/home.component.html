@@ -31,18 +31,13 @@
 <ion-content [fullscreen]="true" class="content">
 
   <ion-card *ngFor="let item of cartes | listCarte:Search; ">
-    <!--<img src="../../../assets/exemple.gif" style="width: 100%;">-->
-    <ion-card-header>
-     Carte fidélité
-    </ion-card-header>
- <ion-item>
-    <ion-card-content >
-      <p>points de fidélité : <ion-badge color="primary" mode="ios" >42</ion-badge></p>
+    <ion-card-content style="height: 180px;" (click)="goto(item.id_carte,item.id_part)">
+      <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img}}" alt="">
+     <!-- <p>points de fidélité : <ion-badge color="primary" mode="ios" >42</ion-badge></p>
       <p>numero carte : {{item.num_carte}}</p>
       <p>boutique : {{item.boutique}}</p>
-      <ion-button fill="outline" slot="end" (click)="goto(item.id_carte,item.id_part)">detail</ion-button>
+      <ion-button fill="outline" slot="end" (click)="goto(item.id_carte,item.id_part)">detail</ion-button>-->
     </ion-card-content>
-  </ion-item>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

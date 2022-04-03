@@ -14,4 +14,6 @@ export class PartenaireService {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       getAllpartenaire(): Observable<any>{
         return  this.httpClient.get<Partenaire>(`${this.baseURL}`);}
+      getPartImg(name: string): Observable<any>{
+        return  this.httpClient.get<any>(`http://localhost:3000/api/files/get/${name}`);}
 }
