@@ -18,7 +18,7 @@
   <br>
   <br>
 
-    <ion-card style="height: 120px;width:95%;" (click)="goto()" class="card" *ngFor="let item of partenaires | listpartenaire:Search">
+    <ion-card style="height: 120px;width:95%;" (click)="goto(item.id_part)" class="card" *ngFor="let item of partenaires | listpartenaire:Search">
    <!--<ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label style="font-weight: bold;font-size: 1.2rem;color: var(--ion-color-dark);">

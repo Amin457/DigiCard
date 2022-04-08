@@ -9,13 +9,86 @@
 <ion-footer>
   <ion-list lines="full">
        <ion-item-group class="ion-margin-horizontal">
+
+
+
+
+
+       <!-- <form>
+          <div class="ion-margin-vertical">
+            <ion-item>
+              <ion-label position="stacked">Nom:</ion-label>
+
+              <ion-input [(ngModel)]="Nom" type="text" name="Nom">
+                <ion-icon name="person" slot="start" color="medium"></ion-icon>
+              </ion-input>
+      
+      
+            </ion-item>
+          </div>
+
+
+          <div class="ion-margin-vertical">
+            <ion-item>
+              <ion-label position="stacked">Prenom :</ion-label>
+      
+      
+              <ion-input [(ngModel)]="Prenom" type="text" name="Prenom">
+                <ion-icon name="person" slot="start" color="medium"></ion-icon>
+              </ion-input>
+              
+      
+            </ion-item>
+          </div>
+
+
+
+
+          <div class="ion-margin-vertical">
+            <ion-item>
+              <ion-label position="stacked">Email :</ion-label>
+      
+      
+              <ion-input [(ngModel)]="Email" type="Email" name="Email">
+                <ion-icon name="mail" slot="start" color="medium"></ion-icon>
+              </ion-input>
+      
+      
+            </ion-item>
+          </div>
+      
+          <div class="ion-margin-vertical">
+            <ion-item>
+              <ion-label position="stacked">Mot de passse :</ion-label>
+                <ion-input [(ngModel)]="password" type="password" name="password">
+                  <ion-icon name="key" slot="start" color="medium"></ion-icon>
+                </ion-input>
+            </ion-item>
+          </div>
+
+        <ion-button
+          size="large"
+          expand="block"
+          shape="round"
+          color="primary"
+          (click)="onSubmit()">
+          <ion-text color="white">S'inscrire</ion-text>
+
+        </ion-button>
+        <p class="signup">
+          <ion-note>
+            avez-Vous un compte? <ion-text style="font-size: 1.2rem;" (click)="goto()" color="primary">se connecter</ion-text>
+          </ion-note>
+        </p>
+      </form>-->
+
       <form [formGroup]="form">
         <div class="ion-margin-vertical">
           <ion-item>
-            <ion-label position="stacked">Nom et Prenom</ion-label>
+            <ion-label position="stacked">Nom</ion-label>
 
 
-            <ion-input formControlName="Nom" type="text" placeholder="Nom et Prenom">
+            <ion-input formControlName="Nom" type="text" placeholder="Nom">
               <ion-icon name="person" slot="start" color="medium"></ion-icon>
             </ion-input>
 
@@ -28,6 +101,26 @@
             </ion-text>
           </ion-text>
         </div>
+
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Prenom</ion-label>
+
+
+            <ion-input formControlName="Prenom" type="text" placeholder="Prenom">
+              <ion-icon name="person" slot="start" color="medium"></ion-icon>
+            </ion-input>
+
+
+          </ion-item>
+          <ion-text class="error" color="danger"
+            *ngIf="!form.get('Prenom').valid && form.get('Prenom').touched">
+            <ion-text *ngIf="form.get('Prenom').hasError('required')">
+              * Entrer votre Prenom s'il vous plait !
+            </ion-text>
+          </ion-text>
+        </div>
+
         <div class="ion-margin-vertical">
           <ion-item>
             <ion-label position="stacked">Email</ion-label>

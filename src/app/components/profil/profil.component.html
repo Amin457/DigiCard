@@ -17,7 +17,7 @@
    <form>
     <div class="ion-margin-vertical">
       <ion-item>
-        <ion-label position="stacked">Nom et prenom :</ion-label>
+        <ion-label position="stacked">Nom :</ion-label>
 
 
         <ion-input [(ngModel)]="Username" type="text" name="Username">
@@ -27,6 +27,20 @@
 
       </ion-item>
     </div>
+
+    <div class="ion-margin-vertical">
+      <ion-item>
+        <ion-label position="stacked">prenom :</ion-label>
+
+
+        <ion-input [(ngModel)]="lastName" type="text" name="lastName">
+          <ion-icon name="person" slot="start" color="medium"></ion-icon>
+        </ion-input>
+
+
+      </ion-item>
+    </div>
+
     <div class="ion-margin-vertical">
       <ion-item>
         <ion-label position="stacked">Email :</ion-label>
@@ -45,15 +59,6 @@
         <ion-label position="stacked">Mot de passse :</ion-label>
           <ion-input [(ngModel)]="password" type="password" name="password">
             <ion-icon name="key" slot="start" color="medium"></ion-icon>
-          </ion-input>
-      </ion-item>
-    </div>
-
-    <div class="ion-margin-vertical">
-      <ion-item>
-        <ion-label position="stacked"> Confirmer mot de passse :</ion-label>
-          <ion-input [(ngModel)]="password1" type="password" name="password1">
-            <ion-icon name="shield-checkmark-outline" slot="start" color="medium"></ion-icon>
           </ion-input>
       </ion-item>
     </div>

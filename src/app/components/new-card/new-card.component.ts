@@ -11,7 +11,6 @@ import { PartenaireService } from 'src/app/services/partenaire.service';
 })
 export class NewCardComponent implements OnInit {
   partenaires: Partenaire[];
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Search ='';
     constructor(public httpClient: HttpClient, private partenaireService: PartenaireService, private router: Router) {
 
@@ -28,7 +27,7 @@ export class NewCardComponent implements OnInit {
     ngOnInit() {
     }
 
-    goto(){
-      this.router.navigate(['main/newcard/add-create']);
+    goto(id_part: number){
+      this.router.navigate(['main/newcard/'+id_part+'/add-create']);
     }
 }

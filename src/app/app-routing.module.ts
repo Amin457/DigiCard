@@ -38,7 +38,7 @@ const routes: Routes = [
       {path: 'newcard',component: NewCardComponent},
       {path: 'notifications',component: NotificationsComponent},
       {path: 'promotion',component: PromotionComponent},
-      {path: 'newcard/add-create',component: AddCreateComponent}
+      {path: 'newcard/:id_part/add-create',component: AddCreateComponent}
     ],canActivate:[AuthGuard]
   }
 ];
