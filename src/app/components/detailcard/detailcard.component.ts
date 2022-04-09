@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit ,ElementRef ,ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Carte } from 'src/app/model/carte';
@@ -9,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
+import { getPoint } from 'src/app/model/getPoint';
 
 @Component({
   selector: 'app-detailcard',
@@ -17,35 +17,17 @@ import { Promo } from 'src/app/model/promo';
 })
 export class DetailcardComponent implements OnInit {
   [x: string]: any;
-   // eslint-disable-next-line @typescript-eslint/member-ordering
    decoded: any;
-   // eslint-disable-next-line @typescript-eslint/member-ordering
    user: users ;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    id_carte: number;
-
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    id_part: number;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
-   carte1: Carte[] ;
-   // eslint-disable-next-line max-len
-  value: string;
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  // eslint-disable-next-line max-len
-  segmentValue = '1';
+   carte1: Carte[];
+   value: string; 
   promos: Promo[]=[] ;
   type = true;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  private _CANVAS: any;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  private _CONTEXT: any;
-  @ViewChild('canvas') canvasEl: ElementRef;
-  // eslint-disable-next-line max-len
+  points : string;
+  getPoint : getPoint= new getPoint();
   constructor(private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService,private toastCtrl: ToastController) { }
-
-  segmentChanged(event) {
-    this.segmentValue = event.detail.value;
-  }
 
   ngOnInit() {
     const token=localStorage.getItem('token');
@@ -62,7 +44,20 @@ export class DetailcardComponent implements OnInit {
     error => {
       console.log(error);
     });
-    // eslint-disable-next-line max-len
+
+
+    this.getPoint.cardId="10400000000000044";
+    this.getPoint.dbId="RETAIL_TS";
+
+    this.carteService.getPoints(this.getPoint).subscribe(
+      (res)  => {
+        this.points = res.data;
+      },
+      error => {
+        console.log(error);
+      });
+
+
     this.promoService.getPromoByPart(this.id_part).subscribe(
       (res)  => {
         if(res.success===1){
@@ -78,7 +73,6 @@ export class DetailcardComponent implements OnInit {
         console.log(error);
       });
   }
-// eslint-disable-next-line @typescript-eslint/naming-convention
 onClick1(url: string){
   window.open(url,'_system');
 }

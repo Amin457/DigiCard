@@ -14,25 +14,17 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_part: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_carte: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Q1: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Q2: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Q3: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Q4: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   Q5: string;
   selectedRadioGroup: any;
   feed: Feedback=new Feedback();
   decoded: any;
   user: users ;
-  // eslint-disable-next-line max-len
   constructor(private router: Router,public route: ActivatedRoute, public toastController: ToastController , private feedbackService: FeedbackService) { }
 
   ngOnInit() {

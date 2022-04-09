@@ -7,8 +7,11 @@ import jwt_decode from 'jwt-decode';
 import { users } from 'src/app/model/user';
 import { getCard } from 'src/app/model/getCard';
 import { CarteService } from 'src/app/services/carte.service';
-import { ToastController } from '@ionic/angular';
-
+import { LoadingController, ToastController } from '@ionic/angular';
+import { data } from 'src/app/model/data';
+import { UserService } from 'src/app/services/user.service';
+import { createCard } from 'src/app/model/createCard';
+import { IonLoaderService } from 'src/app/ion-loader.service';
 @Component({
   selector: 'app-add-create',
   templateUrl: './add-create.component.html',
@@ -22,11 +25,24 @@ export class AddCreateComponent implements OnInit {
   id_part : number ;
   user: users ;
   getCard : getCard= new getCard();
-
-  constructor(  public toastController: ToastController,private carteService: CarteService,public route: ActivatedRoute,private router: Router, private partenaireService: PartenaireService) {
+  createCard : createCard= new createCard();
+  data: data=new data();
+  constructor(private ionLoaderService: IonLoaderService, public toastController: ToastController,private carteService: CarteService,public route: ActivatedRoute,private router: Router, private partenaireService: PartenaireService,private userService: UserService) {
     this.initForm();
   }
-
+ /* displayAutoLoader() {
+    this.ionLoaderService.autoLoader();
+  }
+ showLoader() {
+    this.ionLoaderService.simpleLoader();
+  }
+  hideLoader() {
+    this.ionLoaderService.dismissLoader();
+  }
+  customizeLoader() {
+    this.ionLoaderService.customLoader();
+  }*/
+    
   ngOnInit() {
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
@@ -42,6 +58,14 @@ export class AddCreateComponent implements OnInit {
       error => {
         console.log(error);
       });
+
+
+
+     this.data.firstName=this.user.Nom;
+     this.data.lastName=this.user.Prenom
+     this.data.id_client=this.user.id;
+     this.data.id_part=this.id_part;
+    
    }
   
 
@@ -57,7 +81,8 @@ export class AddCreateComponent implements OnInit {
   }
 
      ajouter() {
-    if(!this.form.valid) return;
+      this.ionLoaderService.autoLoader();
+      if(!this.form.valid) return;
     this.getCard.cardId=this.form.value.cardId;
     this.getCard.id=this.user.id;
     this.getCard.dbId=this.config.dbId;
@@ -91,7 +116,7 @@ export class AddCreateComponent implements OnInit {
           toast.present();
         });
       },
-      error => {
+      (error) => {
          this.toastController.create({
           message: "impossible de trouver la carte "+this.getCard.cardId,
           position: 'bottom',
@@ -119,7 +144,50 @@ export class AddCreateComponent implements OnInit {
 
 
     creer() {
-      
+      this.ionLoaderService.autoLoader();
+      this.data.dbId=this.config.dbId;
+    this.userService.createClient(this.data).subscribe(
+            (res)  => {console.log(res.message)
+                       console.log(res.data)
+              this.createCard.storeId=this.config.storeID;
+              this.createCard.clientId=this.user.id;
+              this.createCard.id_part=this.id_part;
+              this.createCard.dbId=this.config.dbId;
+              this.createCard.client_ref=res.data;
+              console.log(this.createCard);
+              this.carteService.createLoyaltyCard(this.createCard).subscribe(
+                (res)  => {console.log(res.message);
+
+
+                  this.toastController.create({
+                    message: res.message,
+                    position: 'bottom',
+                    cssClass: 'toast-custom-class',
+                    buttons: [
+                      {
+                        side: 'end',
+                        handler: () => {
+                          console.log('');
+                        }
+                      }, {
+                        side: 'end',
+                        text: 'fermer',
+                        role: 'cancel',
+                        handler: () => {
+                          console.log('');
+                        }
+                      }
+                    ]
+                  }).then((toast) => {
+                    toast.present();
+                  });
+
+                },
+                (error)=> {console.log(error);}
+                );
+
+            }
+            );
     }
 
   gotoAddCard(){
