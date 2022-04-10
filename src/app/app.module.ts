@@ -27,6 +27,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { LocalisationComponent } from './components/localisation/localisation.component';
 import { PromoPartComponent } from './components/promo-part/promo-part.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations:
@@ -51,6 +52,7 @@ import { PromoPartComponent } from './components/promo-part/promo-part.component
   ],
   entryComponents: [],
   imports: [
+    SwiperModule,
     NgxQRCodeModule,
     NgxBarcodeModule,
     BrowserModule,

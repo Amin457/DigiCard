@@ -6,7 +6,10 @@ import { users } from 'src/app/model/user';
 import { CarteService } from 'src/app/services/carte.service';
 import { UserService } from 'src/app/services/user.service';
 import jwt_decode from 'jwt-decode';
-
+import SwiperCore, { SwiperOptions, Autoplay, Pagination } from 'swiper';
+import { PromotionService } from 'src/app/services/promotion.service';
+import { Promo } from 'src/app/model/promo';
+SwiperCore.use([Autoplay, Pagination]);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,10 +21,11 @@ export class HomeComponent implements OnInit {
   id: number;
   user: users ;
   cartes: Carte[]=[] ;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  promos: Promo[]=[] ;
   Search ='';
-  // eslint-disable-next-line max-len
-  constructor( private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
+  bannerConfig: SwiperOptions;
+
+  constructor(private promoService: PromotionService , private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
 
   ngOnInit() {
     const token=localStorage.getItem('token');
@@ -36,6 +40,34 @@ export class HomeComponent implements OnInit {
         error => {
           console.log(error);
         });
+
+        
+
+
+        this.promoService.getAllPromo().subscribe(
+          (res)  => {
+            if(res.success===1){
+            this.promos=res.data;
+            console.log(this.promos);
+            return false;
+          }else{
+            console.log(res.data);
+          }
+          }
+          ,
+          error => {
+            console.log(error);
+          });
+
+            this.bannerConfig = {
+              slidesPerView: 1.2,
+              spaceBetween: 10,
+              centeredSlides: true,
+              autoplay: {
+                delay: 3000
+              }
+            };
+          
     }
     logOut(){
       localStorage.removeItem('token');
@@ -51,4 +83,6 @@ export class HomeComponent implements OnInit {
     gotoNotif(){
       this.router.navigate(['main/notifications']);
     }
+
+    
 }

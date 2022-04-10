@@ -14,11 +14,22 @@
       <ion-icon name="log-out-outline" color="primary" >
       </ion-icon>
     </ion-fab-button>
-  </ion-buttons> <br><br><br><br>
+  </ion-buttons><br><br><br>
+ 
+  <ion-item color="#1248EE" >
+    <ion-label>bonjour  {{user.Nom}}</ion-label>
+  </ion-item>
+  <!--
+<ion-row>
+  <swiper [config]="bannerConfig" >
+    <ng-template  *ngFor="let item of promos"  swiperSlide>
+      <img src="http://localhost:3000/api/files/get/{{item.img_dir}}" alt="">
+    </ng-template>
+  </swiper>
+</ion-row>-->
 
-    <ion-item color="#1248EE" >
-      <ion-label>bonjour  {{user.Nom}}</ion-label>
-    </ion-item>
+
+
   </ion-list>
 
 

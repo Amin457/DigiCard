@@ -92,6 +92,7 @@ export class AddCreateComponent implements OnInit {
 
     this.carteService.GetLoyaltyCard(this.getCard).subscribe(
       (res)  => {
+        this.ionLoaderService.dismissLoader();
         console.log(res.message);
         this.toastController.create({
           message: res.message,
@@ -158,6 +159,7 @@ export class AddCreateComponent implements OnInit {
               this.carteService.createLoyaltyCard(this.createCard).subscribe(
                 (res)  => {console.log(res.message);
 
+                  this.ionLoaderService.dismissLoader();
 
                   this.toastController.create({
                     message: res.message,

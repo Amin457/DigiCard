@@ -9,6 +9,8 @@ import { NavController } from '@ionic/angular';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
 import { getPoint } from 'src/app/model/getPoint';
+import { Config } from 'src/app/model/config';
+import { PartenaireService } from 'src/app/services/partenaire.service';
 
 @Component({
   selector: 'app-detailcard',
@@ -21,13 +23,14 @@ export class DetailcardComponent implements OnInit {
    user: users ;
    id_carte: number;
    id_part: number;
-   carte1: Carte[];
+   config : Config=new Config();
+   carte1: Carte;
    value: string; 
   promos: Promo[]=[] ;
   type = true;
   points : string;
-  getPoint : getPoint= new getPoint();
-  constructor(private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService,private toastCtrl: ToastController) { }
+  getPoint : getPoint=new getPoint;
+  constructor(private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private partenaireService: PartenaireService,private toastCtrl: ToastController) { }
 
   ngOnInit() {
     const token=localStorage.getItem('token');
@@ -40,29 +43,39 @@ export class DetailcardComponent implements OnInit {
     this.carteService.getCarteById(this.user.id,this.id_carte).subscribe(
     (res)  => {
       this.carte1 = res.data;
+      console.log("caaaartee",this.carte1[0].num_carte);
+      this.getPoint.cardId=this.carte1[0].num_carte;
+
+
+      this.partenaireService.getConfig(this.id_part).subscribe(
+        (res)  => {
+          this.config = res.results[0];
+         this.getPoint.dbId=this.config.dbId;
+
+         this.carteService.getPoints(this.getPoint).subscribe(
+          (res)  => {
+            this.points = res.data;
+          },
+          error => {
+            console.log(error);
+          });
+        },
+        error => {
+          console.log(error);
+        });
+
+
+
+
     },
     error => {
       console.log(error);
     });
-
-
-    this.getPoint.cardId="10400000000000044";
-    this.getPoint.dbId="RETAIL_TS";
-
-    this.carteService.getPoints(this.getPoint).subscribe(
-      (res)  => {
-        this.points = res.data;
-      },
-      error => {
-        console.log(error);
-      });
-
-
+      
     this.promoService.getPromoByPart(this.id_part).subscribe(
       (res)  => {
         if(res.success===1){
         this.promos=res.data;
-        console.log(this.promos);
         return false;
       }else{
         console.log(res.data);
@@ -72,7 +85,11 @@ export class DetailcardComponent implements OnInit {
       error => {
         console.log(error);
       });
-  }
+  
+     
+     
+    
+    }
 onClick1(url: string){
   window.open(url,'_system');
 }
@@ -88,5 +105,9 @@ localisations(){
 }
 promopart(){
   this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/promopart']);
+}
+
+game(){
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/game']);
 }
 }

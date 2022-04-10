@@ -39,6 +39,14 @@
     <h2>points de fidélité : <ion-badge color="primary" mode="ios" >{{points}}</ion-badge></h2>
   
   </div>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+
+    <ion-fab-button color="Secondary" (click)="game()">
+      <ion-icon class="icon" name="game-controller"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 
     <ion-fab-button color="Secondary" (click)="promopart()">
@@ -46,4 +54,3 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
-
