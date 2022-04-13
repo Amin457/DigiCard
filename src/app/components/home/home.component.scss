@@ -1,24 +1,17 @@
-ion-header {
   ion-list {
-      background-color: rgb(120, 170, 245);
-      border-radius: 0 0 20px 20px;
-      padding-bottom: 7vh;
-      ion-item {
-          ion-label {
-              font-weight: bold;
-              font-size: 1.2rem;
-              letter-spacing: 0.5px;
-          }
-      }
+    margin-top: -7px;
+
+    height: 200px;
+    border-radius: 0 0 15px 20px;
   }
   .popover {
       margin: 0 8px;
       ion-searchbar {
           --border-radius: 20px;
-          margin-top: -30px;
+          margin-top: -17px;
       }
   }
-}
+
 
 
 .bottom {
@@ -49,23 +42,9 @@ ion-header {
 
 .banners {
     height: 22vh;
-    margin-top: 10px;
+    margin-top: 0px;
     img {
         width: 100%;
         height: 18vh;
-        border-radius: 5px;
-        box-shadow: -1px 11px 13px -6px rgb(87, 86, 86);
     }
 }  
-
-ion-row {
-    ion-label {
-        font-weight: bold;
-    }
-    ion-label.heading {
-        font-size: 1rem;
-    }
-    ion-col {
-        align-self: center;
-    }
-}

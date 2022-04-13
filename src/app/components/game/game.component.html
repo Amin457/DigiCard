@@ -1,6 +1,17 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <div style="text-align: center; margin-top: 45px;">
+    <ion-label class="text1" style="color: aliceblue;">
+        jouer et gagner
+    </ion-label>
+  </div>
+  </ion-list>
+</ion-header>
+<ion-content>
+
 <div style="text-align: center;" class="wheel">
   <canvas #myCanvas width="auto" height="300"></canvas>
-  <div class="icon-center"><ion-fab vertical="center" horizontal="center" slot="fixed">
+  <div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
     <ion-fab-button (click)="spin()" color="primary">
       <ion-icon class="icon" name="game-controller"></ion-icon>
     </ion-fab-button>
@@ -8,3 +19,13 @@
 </div>     
 </div>
 
+<ion-input [(ngModel)]="text" type="text" name="text">
+</ion-input>
+
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+  <ion-fab-button (click)="gotoDetail()">
+    <ion-icon name="return-up-back"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

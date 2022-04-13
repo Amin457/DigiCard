@@ -1,43 +1,69 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { users } from 'src/app/model/user';
+import jwt_decode from 'jwt-decode';
+import { CadeauService } from 'src/app/services/cadeau.service';
+import { cadeau } from 'src/app/model/cadeau';
+import { recompense } from 'src/app/model/recompense';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent {
 
   @ViewChild('myCanvas', { static: false }) myCanvas: ElementRef;
-  restaraunts = ["10dt","25 points","80 points","50dt","10dt","100 points"];
-
+  cadeau :any[]=[];
+  user: users ;
+  id_part: number;
+  id_carte: number;
+  decoded: any;
   startAngle = 0;
-  arc = 2 * Math.PI / this.restaraunts.length;
-  spinTimeout = null;
-
-  spinArcStart = this.restaraunts.length;
   spinTime = 0;
   spinTimeTotal = 0;
 
   ctx;
+  spinTimeout = null;
 
   spinAngleStart;
+  arc: number;
+  spinArcStart: number;
+  cad : recompense=new recompense();
+ constructor(public toastController: ToastController,private cadeauService:CadeauService,private router: Router,public route: ActivatedRoute) {
 
-  constructor() {
+}
 
-  }
+ngAfterViewInit(): void {  
+  this.id_carte = this.route.snapshot.params.id1;
+  this.id_part = this.route.snapshot.params.id2;
+  console.log(this.id_part);
+  const token=localStorage.getItem('token');
+  this.decoded = jwt_decode(token);
+  this.user=this.decoded.result;
 
-  ngOnInit() {
+this.cadeauService.getCadeau(this.id_part).subscribe(
+(res)  => {
+  console.log(res);
+  this.cadeau = res.data;
+  this.arc = 2 * Math.PI / this.cadeau.length;
+  this.spinArcStart = this.cadeau.length;
+  this.draw();
 
-  }
+},
+error => {
+  console.log(error);
+});
+  
 
-  ngAfterViewInit(): void {
-    this.draw();
   }
 
 
 
   draw() {
     this.drawRouletteWheel();
+
   }
 
    byte2Hex(n) {
@@ -77,9 +103,9 @@ export class GameComponent implements OnInit {
 
     this.ctx.font = 'bold 12px sans-serif';
 
-    for (var i = 0; i < this.restaraunts.length; i++) {
+    for (var i = 0; i < this.cadeau.length; i++) {
       var angle = this.startAngle + i * this.arc;
-      this.ctx.fillStyle = this.getColor(i, this.restaraunts.length);
+      this.ctx.fillStyle = this.getColor(i, this.cadeau.length);
 
       this.ctx.beginPath();
       this.ctx.arc(150, 150, outsideRadius, angle, angle + this.arc, false);
@@ -95,7 +121,7 @@ export class GameComponent implements OnInit {
       this.ctx.fillStyle = "white";
       this.ctx.translate(150 + Math.cos(angle + this.arc / 2) * textRadius, 150 + Math.sin(angle + this.arc / 2) * textRadius);
       this.ctx.rotate(angle + this.arc / 2 + Math.PI / 2);
-      var text = this.restaraunts[i];
+      var text = this.cadeau[i].description;
       this.ctx.fillText(text, -this.ctx.measureText(text).width / 2, 0);
       this.ctx.restore();
     }
@@ -115,14 +141,14 @@ export class GameComponent implements OnInit {
   }
 
   spin() {
-    this.spinAngleStart = Math.random() * this.restaraunts.length + this.restaraunts.length;
+    this.spinAngleStart = Math.random() * this.cadeau.length + this.cadeau.length;
     this.spinTime = 0;
     this.spinTimeTotal = Math.random() * 3 + 4 * 1000;
     this.rotateWheel();
   }
 
   rotateWheel() {
-    this.spinTime += 20;
+    this.spinTime += 15;
     if (this.spinTime >= this.spinTimeTotal) {
       this.stopRotateWheel();
       return;
@@ -142,9 +168,50 @@ export class GameComponent implements OnInit {
     var index = Math.floor((360 - degrees % 360) / arcd);
     this.ctx.save();
     this.ctx.font = 'bold 30px sans-serif';
-    var text = this.restaraunts[index]
-    //this.ctx.fillText(text, 150 - this.ctx.measureText(text).width / 2, 150 + 10);
-    console.log(text)
+    var text = this.cadeau[index].description;
+    var id_cad=this.cadeau[index].id_cadeau;
+ 
+
+    //inserer le cadeau gagner dans la base
+    const token=localStorage.getItem('token');
+    this.decoded = jwt_decode(token);
+    this.user=this.decoded.result;
+    this.id_part = this.route.snapshot.params.id2;
+    this.cad.id_client=this.user.id;
+    this.cad.id_cadeau=id_cad;
+    this.cad.id_part=this.id_part;
+
+    this.cadeauService.insertRecompense(this.cad).subscribe(
+      (res)  => {
+        console.log(res);
+        this.toastController.create({
+          message: res.message ,
+          position: 'bottom',
+          cssClass: 'toast-custom-class',
+          buttons: [
+            {
+              side: 'end',
+              handler: () => {
+                console.log('');
+              }
+            }, {
+              side: 'end',
+              text: 'fermer',
+              role: 'cancel',
+              handler: () => {
+                console.log('');
+              }
+            }
+          ]
+        }).then((toast) => {
+          toast.present();
+        });
+      },
+      error => {
+        console.log(error);
+      });
+
+    console.log(text);
     this.ctx.restore();
   }
 
@@ -157,4 +224,9 @@ export class GameComponent implements OnInit {
     return c * Math.sin(t/d * (Math.PI/2)) + b;
 }
 
+
+
+gotoDetail(){
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
+}
 }

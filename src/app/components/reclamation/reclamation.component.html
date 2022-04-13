@@ -1,9 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-list lines="none">
-    <ion-label class="text1" style="position: fixed; left: 13%; top: 7%;color: aliceblue;">
-      Quel est le sujet de votre</ion-label>
-      <ion-label class="text1" style="color: aliceblue;position: fixed; left: 28%; top:35%;">
-      reclamation? </ion-label>
+    <div style="text-align: center; margin-top: 45px;">
+      <ion-label class="text1" style="color: aliceblue ;">
+        Introduire votre reclamation
+          </ion-label>
+    </div>
   </ion-list>
 </ion-header>
 
@@ -11,12 +12,10 @@
 <ion-content [fullscreen]="true">
 
   <ion-list>
+    <ion-label class="text1" style="color: rgb(4, 52, 95);">
+      Quel est le sujet de votre reclamation ? :</ion-label>
     <ion-radio-group value="Q1" [(ngModel)]="choix">
-     <!-- <ion-list-header>
-        <ion-label class="text1">Quel est le sujet de votre reclamation?</ion-label>
-      </ion-list-header> -->
-
-      <ion-item class="R">
+          <ion-item class="R">
         <ion-label>prix</ion-label>
         <ion-radio slot="start" value="prix"></ion-radio>
       </ion-item>

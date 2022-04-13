@@ -6,10 +6,9 @@ import { users } from 'src/app/model/user';
 import { CarteService } from 'src/app/services/carte.service';
 import { UserService } from 'src/app/services/user.service';
 import jwt_decode from 'jwt-decode';
-import SwiperCore, { SwiperOptions, Autoplay, Pagination } from 'swiper';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
-SwiperCore.use([Autoplay, Pagination]);
+import { IonSlides } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,10 +22,14 @@ export class HomeComponent implements OnInit {
   cartes: Carte[]=[] ;
   promos: Promo[]=[] ;
   Search ='';
-  bannerConfig: SwiperOptions;
-
+  slideOpts = {
+    initialSlide: 1,
+    speed: 300
+  };
   constructor(private promoService: PromotionService , private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
-
+  slidesDidLoad(slides: IonSlides): void {
+    slides.startAutoplay();
+  }
   ngOnInit() {
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
@@ -58,15 +61,6 @@ export class HomeComponent implements OnInit {
           error => {
             console.log(error);
           });
-
-            this.bannerConfig = {
-              slidesPerView: 1.2,
-              spaceBetween: 10,
-              centeredSlides: true,
-              autoplay: {
-                delay: 3000
-              }
-            };
           
     }
     logOut(){

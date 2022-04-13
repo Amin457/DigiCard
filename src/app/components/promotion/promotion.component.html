@@ -1,5 +1,18 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <div style="text-align: center; margin-top: 30px;">
+    <ion-label class="text1" style="color: aliceblue;">
+      Tous les promotion
+    </ion-label>
+  </div>
+  </ion-list>
+  <div class="popover">
+    <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une promotion "></ion-searchbar>
+  </div>
+</ion-header>
+
 <ion-content>
-  <ion-card *ngFor="let item of promos">
+  <ion-card *ngFor="let item of promos| promo:Search">
     <ion-card-content style="height: 180px;">
       <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img_dir}}" alt="">
     </ion-card-content>

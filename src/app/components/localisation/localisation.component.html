@@ -1,3 +1,14 @@
+<ion-header class="ion-no-border">
+  <ion-list lines="none">
+    <div style="text-align: center; margin-top: 45px;">
+    <ion-label class="text1" style="color: aliceblue;">
+        localisation
+    </ion-label>
+  </div>
+  </ion-list>
+</ion-header>
+
+<ion-content>
 <ion-list>
   <ion-item *ngFor="let item1 of localisation"  (click)="onClick1(item1.url)" >
     <ion-label>{{item1.boutique}}</ion-label>
@@ -9,3 +20,4 @@
     <ion-icon name="return-up-back-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+</ion-content>

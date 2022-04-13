@@ -1,8 +1,12 @@
 <ion-header class="ion-no-border">
 <ion-list lines="none">
-
-  <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
-    <ion-badge color="danger" mode="ios">0</ion-badge>
+  <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
+    <ion-slide *ngFor="let item of promos"  style="height: 100%; width:100%" >
+      <img style=" height: 100%; width:100%" src="http://localhost:3000/api/files/get/{{item.img_dir}}" />
+    </ion-slide>
+  </ion-slides>
+   <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
+   <!--<ion-badge color="danger" mode="ios">0</ion-badge>-->
     <ion-fab-button size="small" color="white">
       <ion-icon  name="notifications-outline" color="primary">
       </ion-icon>
@@ -14,25 +18,9 @@
       <ion-icon name="log-out-outline" color="primary" >
       </ion-icon>
     </ion-fab-button>
-  </ion-buttons><br><br><br>
- 
-  <ion-item color="#1248EE" >
-    <ion-label>bonjour  {{user.Nom}}</ion-label>
-  </ion-item>
-  <!--
-<ion-row>
-  <swiper [config]="bannerConfig" >
-    <ng-template  *ngFor="let item of promos"  swiperSlide>
-      <img src="http://localhost:3000/api/files/get/{{item.img_dir}}" alt="">
-    </ng-template>
-  </swiper>
-</ion-row>-->
-
-
+  </ion-buttons>
 
   </ion-list>
-
-
   <div class="popover">
     <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une carte fidélité "></ion-searchbar>
   </div>
@@ -44,10 +32,6 @@
   <ion-card *ngFor="let item of cartes | listCarte:Search; ">
     <ion-card-content style="height: 180px;" (click)="goto(item.id_carte,item.id_part)">
       <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img}}" alt="">
-     <!-- <p>points de fidélité : <ion-badge color="primary" mode="ios" >42</ion-badge></p>
-      <p>numero carte : {{item.num_carte}}</p>
-      <p>boutique : {{item.boutique}}</p>
-      <ion-button fill="outline" slot="end" (click)="goto(item.id_carte,item.id_part)">detail</ion-button>-->
     </ion-card-content>
   </ion-card>
 

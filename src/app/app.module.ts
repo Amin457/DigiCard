@@ -28,6 +28,7 @@ import { NgxBarcodeModule } from 'ngx-barcode';
 import { LocalisationComponent } from './components/localisation/localisation.component';
 import { PromoPartComponent } from './components/promo-part/promo-part.component';
 import { SwiperModule } from 'swiper/angular';
+import { PromoPipe } from './pipes/promo.pipe';
 
 @NgModule({
   declarations:
@@ -48,7 +49,8 @@ import { SwiperModule } from 'swiper/angular';
     NewCardComponent,
     ProfilComponent,
     PromotionComponent,
-    RegisterComponent
+    RegisterComponent,
+    PromoPipe
   ],
   entryComponents: [],
   imports: [

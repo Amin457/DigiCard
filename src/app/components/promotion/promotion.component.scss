@@ -1,0 +1,19 @@
+ion-header {
+    ion-list{
+        height: 100px;
+        background-color: rgb(120, 170, 245);
+        border-radius: 0 0 20px 20px;
+        padding-bottom: 7vh;
+        font-weight: bold;
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+        font-style: italic;
+            }
+            .popover {
+                margin: 0 8px;
+                ion-searchbar {
+                    --border-radius: 20px;
+                    margin-top: -30px;
+                }
+            }
+    }

@@ -39,6 +39,7 @@ constructor(public httpClient: HttpClient, private userService: UserService ,  p
  onSubmit() {
 this.user.Nom=this.Username;
 this.user.mdp=this.password;
+this.user.Prenom=this.lastName;
 if(this.user.mdp.length<8 || this.user.Nom.length<2){
   this.toastController.create({
     message: 'donnée non valide ressayer !!',

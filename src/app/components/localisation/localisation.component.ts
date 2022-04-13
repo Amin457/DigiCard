@@ -9,9 +9,7 @@ import { LocalisationService } from 'src/app/services/localisation.service';
   styleUrls: ['./localisation.component.scss'],
 })
 export class LocalisationComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_part: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_carte: number;
   localisation: Localisation[];
   constructor(private router: Router ,public route: ActivatedRoute , private localisationService: LocalisationService) { }
