@@ -37,6 +37,12 @@
     </ion-radio-group>
   </ion-list>
 
+  <ion-item>
+    <ion-label>boutique</ion-label>
+    <ion-select class="myCustomSelect" [(ngModel)]='id' name="id" placeholder="Selectionner un boutique" (ionChange)="onSelectChange($event)">
+      <ion-select-option *ngFor="let Localisation of Localisation" [value]="Localisation['id']">{{Localisation.boutique}}</ion-select-option>
+    </ion-select>
+  </ion-item>
 
   <form>
  <div class="ion-margin-vertical">
@@ -45,9 +51,8 @@
      <ion-input class="input" [(ngModel)]="Rec" type="text" name="Username">
        <ion-icon style="height: 25px; width: 25px;" name="receipt-outline" slot="start" color="medium"></ion-icon>
      </ion-input>
-
-
    </ion-item>
+   
  </div>
    <ion-button
    size="large"

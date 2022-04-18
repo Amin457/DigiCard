@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
 
   form1: FormGroup;
   isTypePassword = true;
@@ -21,10 +21,12 @@ export class LoginComponent{
   constructor(public toastController: ToastController,public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
     this.initForm();
   }
+  ngOnInit() {
 
+    localStorage.removeItem('token');
+  }
   goto(){
     this.router.navigate(['signup']);
-    localStorage.removeItem('token');
   }
   initForm() {
     this.form1 = new FormGroup({

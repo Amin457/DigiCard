@@ -7,22 +7,34 @@
   </div>
   </ion-list>
 </ion-header>
-<ion-content>
 
 <div style="text-align: center;" class="wheel">
-  <canvas #myCanvas width="auto" height="300"></canvas>
-  <div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
+  <canvas (click)="spin()" #myCanvas width="auto" height="300"></canvas>
+  <!--<div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
     <ion-fab-button (click)="spin()" color="primary">
       <ion-icon class="icon" name="game-controller"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</div>     
+</div>   -->  
 </div>
+<ion-content>
 
-<ion-input [(ngModel)]="text" type="text" name="text">
-</ion-input>
+<ion-card *ngFor="let item of recom">
+  <ion-item>
+    <ion-icon name="gift-outline" slot="start"></ion-icon>
+    <ion-label>cadeau : {{item.description}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="calendar-number-outline"></ion-icon>
+    <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;date : {{item.date}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="cart-outline"></ion-icon>
+    <ion-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boutique : {{item.societe}}</ion-label>
+  </ion-item>
+</ion-card>
 
-
+<br><br><br>
 <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
   <ion-fab-button (click)="gotoDetail()">
     <ion-icon name="return-up-back"></ion-icon>

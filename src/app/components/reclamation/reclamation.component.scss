@@ -26,6 +26,18 @@ ion-header {
   ion-button{
   width:50%;
   position: fixed;
-  top: 70%;
+  top: 80%;
   right: 25%;
+}
+.myCustomSelect{
+  max-width: 100% !important;
+  width: 100%;
+}
+ion-fab-button {
+  --ion-color-primary: #428cff;
+
+}
+ion-button {
+  --ion-color-primary: #428cff;
+
 }

@@ -1,7 +1,7 @@
   ion-list {
-    margin-top: -7px;
+    margin-top: -9px;
 
-    height: 200px;
+    height: 250px;
     border-radius: 0 0 15px 20px;
   }
   .popover {
@@ -48,3 +48,8 @@
         height: 18vh;
     }
 }  
+
+ion-fab-button {
+  --ion-color-primary: #428cff;
+
+}

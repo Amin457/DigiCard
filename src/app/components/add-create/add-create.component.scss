@@ -3,6 +3,8 @@
     overflow: hidden;
   }
   
+  
+
   ion-content {
     overflow: hidden;
     --overflow: hidden;
@@ -49,4 +51,13 @@
       top: 190px;
       left: 15px;
       font-size: 2rem;
+  }
+  ion-fab-button {
+    --ion-color-primary: #428cff;
+  
+  }
+
+  ion-button{
+    --ion-color-primary: #428cff;
+  
   }

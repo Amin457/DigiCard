@@ -29,10 +29,12 @@ import { LocalisationComponent } from './components/localisation/localisation.co
 import { PromoPartComponent } from './components/promo-part/promo-part.component';
 import { SwiperModule } from 'swiper/angular';
 import { PromoPipe } from './pipes/promo.pipe';
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations:
     [AppComponent,
+      GameComponent,
     PromoPartComponent,
     LocalisationComponent,
     ListCartePipe,

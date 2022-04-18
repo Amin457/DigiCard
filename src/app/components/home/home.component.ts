@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   cartes: Carte[]=[] ;
   promos: Promo[]=[] ;
   Search ='';
+  message : string;
   slideOpts = {
     initialSlide: 1,
     speed: 300
@@ -37,8 +38,9 @@ export class HomeComponent implements OnInit {
 
       this.carteService.getAllCartes(this.user.id).subscribe(
         (res)  => {
-        console.log(res);
-          this.cartes = res.data;
+          console.log(res.message);
+          this.message=res.message;
+          this.cartes = res.data;        
         },
         error => {
           console.log(error);

@@ -6,16 +6,15 @@
     </ion-slide>
   </ion-slides>
    <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
-   <!--<ion-badge color="danger" mode="ios">0</ion-badge>-->
     <ion-fab-button size="small" color="white">
-      <ion-icon  name="notifications-outline" color="primary">
+      <ion-icon  name="notifications" color="primary">
       </ion-icon>
     </ion-fab-button>
   </ion-buttons>
 
   <ion-buttons slot="start" style="position: fixed; left: 0%; top: 0%;" (click)="logOut()" >
     <ion-fab-button size="small" color="white">
-      <ion-icon name="log-out-outline" color="primary" >
+      <ion-icon name="log-out" color="primary" >
       </ion-icon>
     </ion-fab-button>
   </ion-buttons>
@@ -34,6 +33,9 @@
       <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img}}" alt="">
     </ion-card-content>
   </ion-card>
+  <br><br><br>
+<div style="text-align: center;">{{message}}</div>
+  
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 

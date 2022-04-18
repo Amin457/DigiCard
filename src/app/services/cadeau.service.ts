@@ -14,4 +14,6 @@ export class CadeauService {
      return  this.httpClient.get<cadeau>(`${this.baseURL}`+id_part);}
    insertRecompense(cad: recompense): Observable<any>{
       return  this.httpClient.post<recompense>(`${this.baseURL}`,cad);}
+   getRecompense(id: number): Observable<any>{
+      return  this.httpClient.get<any>(`${this.baseURL}`+'getRecompense/'+id);}
 }

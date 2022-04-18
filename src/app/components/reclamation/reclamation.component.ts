@@ -6,6 +6,9 @@ import { ReclamationService } from 'src/app/services/reclamation.service';
 import { Reclamation } from 'src/app/model/reclamation';
 import { users } from 'src/app/model/user';
 import jwt_decode from 'jwt-decode';
+import { LocalisationService } from 'src/app/services/localisation.service';
+import { Localisation } from 'src/app/model/localisation';
+import { posix } from 'path';
 
 @Component({
   selector: 'app-reclamation',
@@ -13,33 +16,45 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./reclamation.component.scss'],
 })
 export class ReclamationComponent implements OnInit {
- // eslint-disable-next-line @typescript-eslint/naming-convention
+ id : number;
  id_part: number;
- // eslint-disable-next-line @typescript-eslint/naming-convention
  id_carte: number;
  form: FormGroup;
- // eslint-disable-next-line @typescript-eslint/naming-convention
  Rec: string;
  choix: string;
  rec: Reclamation=new Reclamation();
  user: users ;
   decoded: any;
-  // eslint-disable-next-line max-len
-  constructor(private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService ) { }
-
+  Localisation: Localisation[]=[] ;
+  constructor(private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService , private LocalisationService:LocalisationService) { }
   ngOnInit() {
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
-  }
 
+    this.LocalisationService.getLocalisations(this.id_part).subscribe(
+      (res)  => {
+        this.Localisation=res.data;
+        console.log(this.Localisation);
+
+      },
+      error => {
+        console.log(error);
+      });
+
+  }
   gotoDetail(){
     this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
 }
+
+onSelectChange(selectedValue: any) {
+  var item = this.Localisation.find(item => item['id'] === selectedValue);
+  var postion = this.Localisation.findIndex(item => item['id'] === selectedValue);
+}
 sendRec(){
-  if(this.choix===undefined || this.Rec===undefined ){
+  if(this.choix===undefined || this.Rec===undefined || this.id===undefined ){
     this.toastController.create({
       message: 'il faut que vous remplir tous le formuliare !',
       position: 'bottom',
@@ -63,11 +78,12 @@ sendRec(){
       toast.present();
     });
   }else{
+
   this.rec.id_client=this.user.id;
-  this.rec.id_part=this.id_part;
+  this.rec.id_boutique=this.id;
   this.rec.sujet_rec=this.choix;
   this.rec.description=this.Rec;
-
+  console.log('hhhhhhhhhhhhh',this.rec)
   this.reclamationService.createRec(this.rec).subscribe(
     (res)  => {
       this.toastController.create({

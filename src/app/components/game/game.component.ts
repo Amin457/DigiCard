@@ -31,9 +31,12 @@ export class GameComponent {
   arc: number;
   spinArcStart: number;
   cad : recompense=new recompense();
+  recom : any [];
  constructor(public toastController: ToastController,private cadeauService:CadeauService,private router: Router,public route: ActivatedRoute) {
 
 }
+
+
 
 ngAfterViewInit(): void {  
   this.id_carte = this.route.snapshot.params.id1;
@@ -42,6 +45,16 @@ ngAfterViewInit(): void {
   const token=localStorage.getItem('token');
   this.decoded = jwt_decode(token);
   this.user=this.decoded.result;
+
+  this.cadeauService.getRecompense(this.user.id).subscribe(
+    (res)  => {
+      this.recom = res.results;
+      console.log('hhhhhhhhhhh',this.recom)
+
+    },
+    error => {
+      console.log(error);
+    });
 
 this.cadeauService.getCadeau(this.id_part).subscribe(
 (res)  => {
@@ -183,9 +196,32 @@ error => {
 
     this.cadeauService.insertRecompense(this.cad).subscribe(
       (res)  => {
-        console.log(res);
+        if(res.success==1){
+          this.toastController.create({
+            message: res.message,
+            position: 'bottom',
+            cssClass: 'toast-custom-class',
+            buttons: [
+              {
+                side: 'end',
+                handler: () => {
+                  console.log('');
+                }
+              }, {
+                side: 'end',
+                text: 'fermer',
+                role: 'cancel',
+                handler: () => {
+                  console.log('');
+                }
+              }
+            ]
+          }).then((toast) => {
+            toast.present();
+          });
+        }else if(res.success==0){
         this.toastController.create({
-          message: res.message ,
+          message: res.message + (7-(res.results1[0].a)) + " jour(s)" ,
           position: 'bottom',
           cssClass: 'toast-custom-class',
           buttons: [
@@ -206,7 +242,7 @@ error => {
         }).then((toast) => {
           toast.present();
         });
-      },
+      }},
       error => {
         console.log(error);
       });
