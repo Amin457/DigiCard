@@ -5,6 +5,7 @@ import { users } from 'src/app/model/user';
 import jwt_decode from 'jwt-decode';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-promo-part',
@@ -12,6 +13,7 @@ import { Promo } from 'src/app/model/promo';
   styleUrls: ['./promo-part.component.scss'],
 })
 export class PromoPartComponent implements OnInit {
+  imgUrl = environment.Api + 'api/files/get/';
 
   decoded: any;
   // eslint-disable-next-line @typescript-eslint/member-ordering

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Partenaire } from 'src/app/model/partenaire';
 import { PartenaireService } from 'src/app/services/partenaire.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-card',
@@ -12,6 +13,8 @@ import { PartenaireService } from 'src/app/services/partenaire.service';
 export class NewCardComponent implements OnInit {
   partenaires: Partenaire[];
   Search ='';
+  imgUrl = environment.Api + 'api/files/get/';
+
     constructor(public httpClient: HttpClient, private partenaireService: PartenaireService, private router: Router) {
 
       this.partenaireService.getAllpartenaire().subscribe(

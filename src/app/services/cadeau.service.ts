@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { cadeau } from '../model/cadeau';
 import { recompense } from '../model/recompense';
 
@@ -8,12 +9,12 @@ import { recompense } from '../model/recompense';
   providedIn: 'root'
 })
 export class CadeauService {
-  private baseURL = 'http://localhost:3000/api/cadeau/';
+  private baseURL = environment.Api + 'api/cadeau/';
   constructor(private httpClient: HttpClient) { }
    getCadeau(id_part: number): Observable<any>{
      return  this.httpClient.get<cadeau>(`${this.baseURL}`+id_part);}
    insertRecompense(cad: recompense): Observable<any>{
       return  this.httpClient.post<recompense>(`${this.baseURL}`,cad);}
-   getRecompense(id: number): Observable<any>{
-      return  this.httpClient.get<any>(`${this.baseURL}`+'getRecompense/'+id);}
+   getRecompense(id: number,id_part:number): Observable<any>{
+      return  this.httpClient.get<any>(`${this.baseURL}`+'getRecompense/'+id+'/'+id_part);}
 }

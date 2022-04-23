@@ -5,14 +5,15 @@ import { Carte } from '../model/carte';
 import { getCard } from '../model/getCard';
 import { createCard } from '../model/createCard';
 import { getPoint } from '../model/getPoint';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarteService {
-      private url ='http://localhost:3000/api/soap/GetLoyaltyCard';
-      private baseURL = 'http://localhost:3000/api/cartes/';
+      private url =environment.Api + 'api/soap/';
+      private baseURL = environment.Api + 'api/cartes/';
      constructor(private httpClient: HttpClient) { }
 
       getAllCartes(id: number): Observable<any>{
@@ -20,10 +21,10 @@ export class CarteService {
       getCarteById(id_client: number,id_carte: number): Observable<any>{
           return  this.httpClient.get<Carte>(`${this.baseURL}`+id_client+'/'+id_carte);}
       GetLoyaltyCard(getCard : getCard): Observable<any>{
-          return  this.httpClient.post<getCard>(`http://localhost:3000/api/soap/GetLoyaltyCard`,getCard);}
+          return  this.httpClient.post<getCard>(`${this.url}`+`GetLoyaltyCard`,getCard);}
       createLoyaltyCard(createCard : createCard): Observable<any>{
-          return  this.httpClient.post<getCard>(`http://localhost:3000/api/soap/createCard`,createCard);}
+          return  this.httpClient.post<getCard>(`${this.url}`+`createCard`,createCard);}
       getPoints(getPoint : getPoint): Observable<any>{
-          return  this.httpClient.post<getPoint>(`http://localhost:3000/api/soap/getPoints`,getPoint);}
+          return  this.httpClient.post<getPoint>(`${this.url}`+`getPoints`,getPoint);}
   }
 

@@ -5,8 +5,6 @@ import { Carte } from 'src/app/model/carte';
   name: 'listCarte'
 })
 export class ListCartePipe implements PipeTransform {
-
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   transform(value: Carte[], Search: string): any {
     if (Search === '' || Search === null || Search === undefined) {
       return value;

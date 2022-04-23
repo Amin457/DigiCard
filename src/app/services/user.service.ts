@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { users } from '../model/user';
 import {data} from '../model/data';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private baseURL = 'http://localhost:3000/api/users/';
-  private soapurl = 'http://localhost:3000/api/soap/createClient';
+  private baseURL = environment.Api + 'api/users/';
+  private soapurl = environment.Api + 'api/soap/createClient';
 
 // eslint-disable-next-line @typescript-eslint/member-ordering
  constructor(private httpClient: HttpClient) { }

@@ -11,7 +11,7 @@
 <ion-content [fullscreen]="true">
 <ion-card *ngFor="let item of promos">
   <ion-card-content style="height: 180px;">
-    <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img_dir}}" alt="">
+    <img style="height: 100%; width: 100%;" src="{{imgUrl+item.img_dir}}" alt="">
   </ion-card-content>
 </ion-card>
 </ion-content>

@@ -2,7 +2,7 @@
 <ion-list lines="none">
   <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
     <ion-slide *ngFor="let item of promos"  style="height: 100%; width:100%" >
-      <img style=" height: 100%; width:100%" src="http://localhost:3000/api/files/get/{{item.img_dir}}" />
+      <img style=" height: 100%; width:100%" src="{{imgUrl+item.img_dir}}" />
     </ion-slide>
   </ion-slides>
    <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
@@ -30,7 +30,7 @@
 
   <ion-card *ngFor="let item of cartes | listCarte:Search; ">
     <ion-card-content style="height: 180px;" (click)="goto(item.id_carte,item.id_part)">
-      <img style="height: 100%; width: 100%;" src="http://localhost:3000/api/files/get/{{item.img}}" alt="">
+      <img style="height: 100%; width: 100%;" src="{{imgUrl+item.img}}" alt="">
     </ion-card-content>
   </ion-card>
   <br><br><br>

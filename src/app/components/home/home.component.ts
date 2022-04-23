@@ -9,6 +9,7 @@ import jwt_decode from 'jwt-decode';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
 import { IonSlides } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,12 +17,12 @@ import { IonSlides } from '@ionic/angular';
 })
 export class HomeComponent implements OnInit {
   decoded: any;
-  imgUrl = 'http://localhost:3000/api/files/get/';
+  imgUrl = environment.Api + 'api/files/get/';
+  Search ='';
   id: number;
   user: users ;
   cartes: Carte[]=[] ;
   promos: Promo[]=[] ;
-  Search ='';
   message : string;
   slideOpts = {
     initialSlide: 1,

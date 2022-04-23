@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Promo } from 'src/app/model/promo';
 import { PromotionService } from 'src/app/services/promotion.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-promotion',
@@ -9,6 +10,8 @@ import { PromotionService } from 'src/app/services/promotion.service';
 })
 export class PromotionComponent implements OnInit {
   promos: Promo[]=[] ;
+  imgUrl = environment.Api + 'api/files/get/';
+  Search ='';
   constructor(private promoService: PromotionService) { }
 
   ngOnInit() {

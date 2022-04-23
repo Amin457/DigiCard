@@ -46,7 +46,7 @@ ngAfterViewInit(): void {
   this.decoded = jwt_decode(token);
   this.user=this.decoded.result;
 
-  this.cadeauService.getRecompense(this.user.id).subscribe(
+  this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
     (res)  => {
       this.recom = res.results;
       console.log('hhhhhhhhhhh',this.recom)
