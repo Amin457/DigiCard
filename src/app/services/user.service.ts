@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { users } from '../model/user';
 import {data} from '../model/data';
 import { environment } from 'src/environments/environment';
+import { notif } from 'src/app/model/notif';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class UserService {
   private baseURL = environment.Api + 'api/users/';
   private soapurl = environment.Api + 'api/soap/createClient';
 
-// eslint-disable-next-line @typescript-eslint/member-ordering
  constructor(private httpClient: HttpClient) { }
 
   getUserById(id: number): Observable<any>{
@@ -29,4 +29,7 @@ export class UserService {
 
   updateUser(user: users): Observable<any>{
       return  this.httpClient.patch<users>(`${this.baseURL}`,user);}
+
+  registerNotif(notif: notif): Observable<any>{
+        return  this.httpClient.post<notif>(`${this.baseURL}`+'registerNotif',notif);}
 }

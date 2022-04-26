@@ -45,53 +45,11 @@ this.user.mdp=this.form.value.mdp;
     this.userService.register(this.user).subscribe(
         (res)  => {
          
-            
-            this.toastController.create({
-            message: 'inscription avec succée',
-            position: 'bottom',
-            cssClass: 'toast-custom-class',
-            buttons: [
-              {
-                side: 'end',
-                handler: () => {
-                  console.log('');
-                }
-              }, {
-                side: 'end',
-                text: 'fermer',
-                role: 'cancel',
-                handler: () => {
-                  console.log('');
-                }
-              }
-            ]
-          }).then((toast) => {
-            toast.present();
-          });
+          alert('inscription avec succée');
         },
         error => {
-          this.toastController.create({
-            message: 'email déja utilisé',
-            position: 'bottom',
-            cssClass: 'toast-custom-class',
-            buttons: [
-              {
-                side: 'end',
-                handler: () => {
-                  console.log('');
-                }
-              }, {
-                side: 'end',
-                text: 'fermer',
-                role: 'cancel',
-                handler: () => {
-                  console.log('');
-                }
-              }
-            ]
-          }).then((toast) => {
-            toast.present();
-          });
+          alert('email déja utilisé');
+      
         });
       }
 

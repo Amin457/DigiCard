@@ -197,51 +197,11 @@ error => {
     this.cadeauService.insertRecompense(this.cad).subscribe(
       (res)  => {
         if(res.success==1){
-          this.toastController.create({
-            message: res.message,
-            position: 'bottom',
-            cssClass: 'toast-custom-class',
-            buttons: [
-              {
-                side: 'end',
-                handler: () => {
-                  console.log('');
-                }
-              }, {
-                side: 'end',
-                text: 'fermer',
-                role: 'cancel',
-                handler: () => {
-                  console.log('');
-                }
-              }
-            ]
-          }).then((toast) => {
-            toast.present();
-          });
+           alert(res.message);
+           
         }else if(res.success==0){
-        this.toastController.create({
-          message: res.message + (7-(res.results1[0].a)) + " jour(s)" ,
-          position: 'bottom',
-          cssClass: 'toast-custom-class',
-          buttons: [
-            {
-              side: 'end',
-              handler: () => {
-                console.log('');
-              }
-            }, {
-              side: 'end',
-              text: 'fermer',
-              role: 'cancel',
-              handler: () => {
-                console.log('');
-              }
-            }
-          ]
-        }).then((toast) => {
-          toast.present();
-        });
+
+          alert(res.message + (7-(res.results1[0].a)) + " jour(s)");
       }},
       error => {
         console.log(error);

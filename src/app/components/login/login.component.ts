@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit{
 
   form1: FormGroup;
   isTypePassword = true;
-  // eslint-disable-next-line max-len
   constructor(public toastController: ToastController,public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
     this.initForm();
   }
@@ -58,28 +57,7 @@ export class LoginComponent implements OnInit{
       }
       },
       error => {
-        this.toastController.create({
-          message: 'email ou mot de passe non valide !!',
-          position: 'bottom',
-          cssClass: 'toast-custom-class',
-          buttons: [
-            {
-              side: 'end',
-              handler: () => {
-                console.log('');
-              }
-            }, {
-              side: 'end',
-              text: 'fermer',
-              role: 'cancel',
-              handler: () => {
-                console.log('');
-              }
-            }
-          ]
-        }).then((toast) => {
-          toast.present();
-        });
+        alert('email ou mot de passe non valide !!');
       });
   }
 

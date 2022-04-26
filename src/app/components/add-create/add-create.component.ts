@@ -27,9 +27,14 @@ export class AddCreateComponent implements OnInit {
   getCard : getCard= new getCard();
   createCard : createCard= new createCard();
   data: data=new data();
+  data1: any;
   constructor(private ionLoaderService: IonLoaderService, public toastController: ToastController,private carteService: CarteService,public route: ActivatedRoute,private router: Router, private partenaireService: PartenaireService,private userService: UserService) {
     this.initForm();
   }
+
+
+
+
  /* displayAutoLoader() {
     this.ionLoaderService.autoLoader();
   }
@@ -71,7 +76,7 @@ export class AddCreateComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      cardId: new FormControl('', 
+      cardId: new FormControl(this.data1, 
       {validators: [Validators.required, Validators.minLength(8)]}
       )
     });
@@ -93,53 +98,10 @@ export class AddCreateComponent implements OnInit {
     this.carteService.GetLoyaltyCard(this.getCard).subscribe(
       (res)  => {
         this.ionLoaderService.dismissLoader();
-        console.log(res.message);
-        this.toastController.create({
-          message: res.message,
-          position: 'bottom',
-          cssClass: 'toast-custom-class',
-          buttons: [
-            {
-              side: 'end',
-              handler: () => {
-                console.log('');
-              }
-            }, {
-              side: 'end',
-              text: 'fermer',
-              role: 'cancel',
-              handler: () => {
-                console.log('');
-              }
-            }
-          ]
-        }).then((toast) => {
-          toast.present();
-        });
+        alert(res.message);
       },
       (error) => {
-         this.toastController.create({
-          message: "impossible de trouver la carte "+this.getCard.cardId,
-          position: 'bottom',
-          cssClass: 'toast-custom-class',
-          buttons: [
-            {
-              side: 'end',
-              handler: () => {
-                console.log('');
-              }
-            }, {
-              side: 'end',
-              text: 'fermer',
-              role: 'cancel',
-              handler: () => {
-                console.log('');
-              }
-            }
-          ]
-        }).then((toast) => {
-          toast.present();
-        });
+        alert("impossible de trouver la carte "+this.getCard.cardId);
       });
   }
 
@@ -160,29 +122,7 @@ export class AddCreateComponent implements OnInit {
                 (res)  => {console.log(res.message);
 
                   this.ionLoaderService.dismissLoader();
-
-                  this.toastController.create({
-                    message: res.message,
-                    position: 'bottom',
-                    cssClass: 'toast-custom-class',
-                    buttons: [
-                      {
-                        side: 'end',
-                        handler: () => {
-                          console.log('');
-                        }
-                      }, {
-                        side: 'end',
-                        text: 'fermer',
-                        role: 'cancel',
-                        handler: () => {
-                          console.log('');
-                        }
-                      }
-                    ]
-                  }).then((toast) => {
-                    toast.present();
-                  });
+                  alert(res.message);              
 
                 },
                 (error)=> {console.log(error);}

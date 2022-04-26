@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "424767905860",
+    "project_id": "digicard-84300",
+    "storage_bucket": "digicard-84300.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424767905860:android:2eb6b3a7611ddd41285c11",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424767905860-b6ig9icgah18r159c6at7281fkh99b23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKCm84t6GyaVXiWIpFGtXvFQxGWXTRa4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424767905860-b6ig9icgah18r159c6at7281fkh99b23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

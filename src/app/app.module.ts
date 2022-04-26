@@ -23,7 +23,6 @@ import { AddCreateComponent } from './components/add-create/add-create.component
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { LocalisationComponent } from './components/localisation/localisation.component';
 import { PromoPartComponent } from './components/promo-part/promo-part.component';
@@ -66,7 +65,7 @@ import { GameComponent } from './components/game/game.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy},BarcodeScanner
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent],
 })
