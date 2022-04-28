@@ -46,15 +46,7 @@ ngAfterViewInit(): void {
   this.decoded = jwt_decode(token);
   this.user=this.decoded.result;
 
-  this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
-    (res)  => {
-      this.recom = res.results;
-      console.log('hhhhhhhhhhh',this.recom)
-
-    },
-    error => {
-      console.log(error);
-    });
+  
 
 this.cadeauService.getCadeau(this.id_part).subscribe(
 (res)  => {
@@ -69,10 +61,19 @@ error => {
   console.log(error);
 });
   
-
   }
 
-
+  ionViewWillEnter() {
+    this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
+      (res)  => {
+        this.recom = res.results;
+        console.log('hhhhhhhhhhh',this.recom)
+  
+      },
+      error => {
+        console.log(error);
+      });
+}
 
   draw() {
     this.drawRouletteWheel();
@@ -154,10 +155,26 @@ error => {
   }
 
   spin() {
+    //test permission au jeux
+    const token=localStorage.getItem('token');
+    this.decoded = jwt_decode(token);
+    this.user=this.decoded.result;
+    this.id_part = this.route.snapshot.params.id2;
+    this.cadeauService.getPermissionJeux(this.user.id,this.id_part).subscribe(
+      (res)  => {
+        if(res.success==0){
+          alert(res.message + (7-(res.results1[0].a)) + " jour(s)");
+   
+        }else if(res.success==1){
+
     this.spinAngleStart = Math.random() * this.cadeau.length + this.cadeau.length;
     this.spinTime = 0;
     this.spinTimeTotal = Math.random() * 3 + 4 * 1000;
     this.rotateWheel();
+      }},
+      error => {
+        console.log(error);
+      });
   }
 
   rotateWheel() {
@@ -186,6 +203,9 @@ error => {
  
 
     //inserer le cadeau gagner dans la base
+    if(text=="perdu"){
+      alert("vous avez perdu");
+    }else{
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
@@ -206,7 +226,7 @@ error => {
       error => {
         console.log(error);
       });
-
+    }
     console.log(text);
     this.ctx.restore();
   }

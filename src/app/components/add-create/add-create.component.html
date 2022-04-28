@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
 
-
-  <h2 style="position:fixed; right: 12%;top:10%;">Ajouter une carte existante</h2>
-
-    <form [formGroup]="form">
+  <form [formGroup]="form">
     <ion-list lines="none" class="ion-margin ion-padding ion-text-center">
+  <h2 style="top:10%;">Ajouter une carte existante</h2>
+
+    
       <ion-item class="ion-margin-vertical">
         <ion-icon 
           name="card-outline" slot="end" color="medium">
@@ -29,12 +29,12 @@
 
       <ion-button color="primary" shape="round" (click)="ajouter()">ajouter</ion-button>
   
-    </ion-list>
-  </form>
-  <h4 style="position:fixed; right: 50%;top:42%;">ou</h4>
-  <h2 style="position:fixed; right: 15%;top:46%;">Créer une nouvelle carte</h2>
-  <ion-button style="position:fixed; right: 37%;top:55%;" color="primary" shape="round" (click)="creer()">créer</ion-button>
+  <h4 style="top:42%;">ou</h4>
+  <h2 style="top:46%;">Créer une nouvelle carte</h2>
+  <ion-button  color="primary" shape="round" (click)="creer()">créer</ion-button>
+</ion-list>
 
+</form>
 
 
 </ion-content>

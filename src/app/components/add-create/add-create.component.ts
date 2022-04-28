@@ -86,8 +86,8 @@ export class AddCreateComponent implements OnInit {
   }
 
      ajouter() {
-      this.ionLoaderService.autoLoader();
       if(!this.form.valid) return;
+      this.ionLoaderService.autoLoader();
     this.getCard.cardId=this.form.value.cardId;
     this.getCard.id=this.user.id;
     this.getCard.dbId=this.config.dbId;

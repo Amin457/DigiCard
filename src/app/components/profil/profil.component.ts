@@ -27,6 +27,7 @@ constructor(public httpClient: HttpClient, private userService: UserService ,  p
  ngOnInit() {
  
  }
+ 
 
  initForm() {
   const token=localStorage.getItem('token');
@@ -51,28 +52,8 @@ this.user=this.form.value;
      (res)  => {
       {
         console.log(res);
-        this.toastController.create({
-          message: res.message,
-          position: 'bottom',
-          cssClass: 'toast-custom-class',
-          buttons: [
-            {
-              side: 'end',
-              handler: () => {
-                console.log('');
-              }
-            }, {
-              side: 'end',
-              text: 'fermer',
-              role: 'cancel',
-              handler: () => {
-                console.log('');
-              }
-            }
-          ]
-        }).then((toast) => {
-          toast.present();
-        });
+  alert(res.message);
+       
       }
      },
      error => {

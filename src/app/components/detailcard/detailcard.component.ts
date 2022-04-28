@@ -11,6 +11,7 @@ import { Promo } from 'src/app/model/promo';
 import { getPoint } from 'src/app/model/getPoint';
 import { Config } from 'src/app/model/config';
 import { PartenaireService } from 'src/app/services/partenaire.service';
+import { CadeauService } from 'src/app/services/cadeau.service';
 
 @Component({
   selector: 'app-detailcard',
@@ -24,13 +25,13 @@ export class DetailcardComponent implements OnInit {
    id_carte: number;
    id_part: number;
    config : Config=new Config();
-   carte1: Carte;
+   carte1: Carte[];
    value: string; 
   promos: Promo[]=[] ;
   type = true;
   points : string;
   getPoint : getPoint=new getPoint;
-  constructor(private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private partenaireService: PartenaireService,private toastCtrl: ToastController) { }
+  constructor(private cadeauService:CadeauService,private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private partenaireService: PartenaireService,private toastCtrl: ToastController) { }
 
   ngOnInit() {
     const token=localStorage.getItem('token');
@@ -108,6 +109,18 @@ promopart(){
 }
 
 game(){
+  this.cadeauService.getEtatJeux(this.id_part).subscribe(
+    (res)  => {
+      console.log(res.data)
+    if(res.data.etat_jeu==1){
   this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part+'/game']);
+
+    }else{
+      alert("cette jeux est desactivé pour le moment");
+    }
+    },
+    error => {
+      console.log(error);
+    });
 }
 }

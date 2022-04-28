@@ -16,12 +16,8 @@ export class PromoPartComponent implements OnInit {
   imgUrl = environment.Api + 'api/files/get/';
 
   decoded: any;
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   user: users ;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_carte: number;
-
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id_part: number;
  promos: Promo[]=[] ;
   nom: string;
@@ -35,21 +31,26 @@ export class PromoPartComponent implements OnInit {
 
    this.id_carte = this.route.snapshot.params.id1;
    this.id_part = this.route.snapshot.params.id2;
-   this.promoService.getPromoByPart(this.id_part).subscribe(
-     (res)  => {
-       if(res.success===1){
-       this.promos=res.data;
-       this.nom=this.promos[0].nom;
-       console.log(this.promos);
-       return false;
-     }else{
-       console.log(res.data);
-     }
-     }
-     ,
-     error => {
-       console.log(error);
-     });
+  
+ }
+
+ ionViewWillEnter() {
+  this.promoService.getPromoByPart(this.id_part).subscribe(
+    (res)  => {
+      if(res.success===1){
+      this.promos=res.data;
+      this.nom=this.promos[0].nom;
+      console.log(this.promos);
+      return false;
+    }else{
+      console.log(res.data);
+    }
+    }
+    ,
+    error => {
+      console.log(error);
+    });
+
  }
 
 }

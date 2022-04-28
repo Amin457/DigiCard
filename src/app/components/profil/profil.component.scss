@@ -1,124 +1,60 @@
-
-    /*  background: linear-gradient(90deg, var(--ion-color-tertiary) 0%, var(--ion-color-primary) 100%);*/
-/*ion-content {
-  * {
-      font-family: lato;
-  }
-  .main-header {
-      height: 28vh;
-      width: 120%;
-
-      --ion-color-primary: #428cff;
-      box-shadow: 0 1px 10px var(--ion-color-light);
-      border-radius: 0 0 50% 50%;
-      margin-left: -4.5vh;
-      margin-top: -5px;
-      div {
-          transform: translateY(2vh);
-          ion-avatar {
-              width: 15vh;
-              height: 15vh;
-              background: var(--ion-color-white);
-              margin-bottom: 5px;
-              border: 7px solid var(--ion-color-primary);
-          }
-      }
-  }
-  ion-row {
-      margin-top: -60px;
-      ion-col {
-          ion-item {
-              width: 94%;
-              margin: auto;
-              border: 1px solid var(--ion-color-light);
-              box-shadow: 1px var(--ion-color-dark);
-              border-radius: 5px;
-              ion-label {
-                  font-size: 1.8rem;
-                  font-weight: bold;
-                  p {
-                      font-size: 0.7rem;
-                  }
-              }
-              ion-icon {
-                  font-size: 3rem;
-              }
-          }
-      }
-  }
-}
-
-div {
-  ion-item {
-      border: 1px solid var(--ion-color-light);
-      border-radius: 20px;
-      -webkit-box-shadow: 0 6px 4px -4px var(--ion-color-medium);
-      -moz-box-shadow: 0 6px 4px -4px var(--ion-color-medium);
-      box-shadow: 0 6px 4px -4px var(--ion-color-medium);
-    }
-  ion-label {
-      font-size: 1.4rem;
-      padding-left: 5vw;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: bold;
-      color:  rgb(120, 170, 245);
-  }
-}
-
-ion-button{
-  width:50%;
-  position: fixed;
-  top: 85%;
-  right: 25%;
-
-    --ion-color-primary: #428cff;
-  
-  }*/
-
-  
-  
-      
-            ion-label, p {
-                font-weight: bold;
-                font-size: 1.5rem;
-                letter-spacing: 0.5px;
-            }
-        
-        ion-item {
-            ion-input, ion-label {
-                font-size: 0.9em;
-            }
-            ion-input {
-                ion-icon {
-                    margin-right: 1vh;
-                }
-            }
-        }
-        .error {
-            font-size: 0.75em !important;
-        }
-        .error1 {
-          font-size:  1em !important;
-      }
-        p {
-            ion-text {
-                font-size: 0.8em !important;
-            }
-            ion-icon {
-                margin: 0 1vh;
-                font-size: 1.6em;
-            }
-        }
-  
-        ion-button {
-            --ion-color-primary: #428cff;
-            margin: 5vh 0 2vh 0;
-            ion-text {
-                font-size: 0.9em;
-                text-transform: none;
-            }
-        }
     
+      ion-content {
+        overflow: hidden;
+        --overflow: hidden;
+      }
+      
+      .scroll-content {
+        overflow: hidden;
+      }
+      
+      ion-list {
+        background: transparent;
+        transform: translateY(15vh);
+        ion-item {
+          border: 1px solid var(--ion-color-medium);
+          border-radius: 10px;
+        }
+        ion-row {
+          margin-bottom: 5vh;
+        }
+        ion-button {
+          width: 30vh;
+          margin: auto;
+        }
+        .alignItems {
+          ion-checkbox, ion-note {
+            display: inline-block;
+            vertical-align: middle;
+          }
+          ion-checkbox {
+            margin-right: 3vw;
+            --size: 1.1rem;
+          }
+        }
+        
+        ion-col {
+          ion-note {
+            font-size: 0.85rem;
+          }
+        }
+      }
+    
+      .backButton {
+          position: absolute;
+          top: 190px;
+          left: 15px;
+          font-size: 2rem;
+      }
+      ion-fab-button {
+        --ion-color-primary: #428cff;
+      
+      }
+    
+      ion-button{
+        --ion-color-primary: #428cff;
+      
+      }
     
 
   

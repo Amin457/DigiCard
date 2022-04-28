@@ -15,6 +15,10 @@ export class PromotionComponent implements OnInit {
   constructor(private promoService: PromotionService) { }
 
   ngOnInit() {
+   
+  }
+  ionViewWillEnter() {
+
     this.promoService.getAllPromo().subscribe(
       (res)  => {
         if(res.success===1){
@@ -30,5 +34,4 @@ export class PromotionComponent implements OnInit {
         console.log(error);
       });
   }
-
 }

@@ -27,14 +27,7 @@
 
 
 <ion-content [fullscreen]="true" class="content">
-  <ngx-qrcode
-  [width]="230"
-  value={{tok}}
-  class="qr"
-  cssClass="center">
-</ngx-qrcode>
-
-
+  
   <ion-card *ngFor="let item of cartes | listCarte:Search; ">
     <ion-card-content style="height: 180px;" (click)="goto(item.id_carte,item.id_part)">
       <img style="height: 100%; width: 100%;" src="{{imgUrl+item.img}}" alt="">

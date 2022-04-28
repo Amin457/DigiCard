@@ -17,4 +17,8 @@ export class CadeauService {
       return  this.httpClient.post<recompense>(`${this.baseURL}`,cad);}
    getRecompense(id: number,id_part:number): Observable<any>{
       return  this.httpClient.get<any>(`${this.baseURL}`+'getRecompense/'+id+'/'+id_part);}
+   getEtatJeux(id_part:number): Observable<any>{
+        return  this.httpClient.get<any>(`${this.baseURL}`+'etat/'+id_part);}
+   getPermissionJeux(id : number , id_part:number): Observable<any>{
+          return  this.httpClient.get<any>(`${this.baseURL}`+'getPermissionJeux/'+id+'/'+id_part);}
 }

@@ -35,44 +35,22 @@ export class HomeComponent implements OnInit {
     initialSlide: 1,
     speed: 300
   };
- tok : string;
  notif : notif= new notif ();
   constructor(private promoService: PromotionService , private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
   slidesDidLoad(slides: IonSlides): void {
     slides.startAutoplay();
   }
+
+
   ngOnInit() {
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
 
-      this.carteService.getAllCartes(this.user.id).subscribe(
-        (res)  => {
-          console.log(res.message);
-          this.message=res.message;
-          this.cartes = res.data;        
-        },
-        error => {
-          console.log(error);
-        });
-
-        
+          
 
 
-        this.promoService.getAllPromo().subscribe(
-          (res)  => {
-            if(res.success===1){
-            this.promos=res.data;
-            console.log(this.promos);
-            return false;
-          }else{
-            console.log(res.data);
-          }
-          }
-          ,
-          error => {
-            console.log(error);
-          });
+       
       /////////////////////////////////////
       console.log('Initializing HomePage');
 
@@ -92,8 +70,6 @@ export class HomeComponent implements OnInit {
       PushNotifications.addListener('registration',
         (token: Token) => {
           //alert('Push registration success, token: ' + token.value);
-          this.tok=token.value;
-
           this.notif.token=token.value;
           this.notif.id_client=this.user.id;
           this.userService.registerNotif(this.notif).subscribe(
@@ -116,23 +92,51 @@ export class HomeComponent implements OnInit {
       // Show us the notification payload if the app is open on our device
       PushNotifications.addListener('pushNotificationReceived',
         (notification: PushNotificationSchema) => {
-          alert('Push received: ' + JSON.stringify(notification));
+          //alert('notification: '  + JSON.stringify(notification.title) + JSON.stringify(notification.body));
         }
       );
   
       // Method called when tapping on a notification
       PushNotifications.addListener('pushNotificationActionPerformed',
         (notification: ActionPerformed) => {
-          alert('Push action performed: ' + JSON.stringify(notification));
+          //alert('Push action performed: ' + JSON.stringify(notification));
         }
       );    
     }
 
+    ionViewWillEnter() {
+      this.carteService.getAllCartes(this.user.id).subscribe(
+        (res)  => {
+          this.message=res.message;
+          this.cartes = res.data; 
+          console.log(this.cartes);       
+        },
+        error => {
+          console.log(error);
+        });
 
+        this.promoService.getAllPromo().subscribe(
+          (res)  => {
+            if(res.success===1){
+            this.promos=res.data;
+            console.log(this.promos);
+            return false;
+          }else{
+            console.log(res.data);
+          }
+          }
+          ,
+          error => {
+            console.log(error);
+          });
+
+  }
 
     logOut(){
       localStorage.removeItem('token');
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
+      window.location.reload();
+
     }
     goto(id1: number,id2: number){
       this.router.navigate(['main/home/detailcard/'+id1+'/'+id2]);

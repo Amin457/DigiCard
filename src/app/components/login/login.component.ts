@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit{
     this.initForm();
   }
   ngOnInit() {
-
-    localStorage.removeItem('token');
   }
   goto(){
     this.router.navigate(['signup']);
@@ -42,6 +40,7 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
+
     if(this.form1.valid) {
       this.form1.markAllAsTouched();
     }
@@ -53,12 +52,15 @@ export class LoginComponent implements OnInit{
       }else{
         localStorage.setItem('token',res.token);
         this.router.navigate(['main/home']);
+
         return false;
       }
       },
       error => {
         alert('email ou mot de passe non valide !!');
       });
+
+
   }
 
 
