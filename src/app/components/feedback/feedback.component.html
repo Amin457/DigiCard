@@ -1,12 +1,3 @@
-<!--<ion-header>
-<ion-list lines="none">
-
-  <ion-label style=" position: fixed; left: 15%; top: 45px;color: aliceblue;">
-    Introduire votre Feedback
-  </ion-label>
-</ion-list>
-</ion-header>
--->
 <ion-header class="ion-no-border">
   <ion-list lines="none">
     <div style="text-align: center; margin-top: 45px;">
@@ -16,169 +7,100 @@
         </div>
   </ion-list>
 </ion-header>
-
+<!--
 <ion-content [fullscreen]="true">
-<!--///////////Question 1-->
 
-<ion-list>
-  <ion-radio-group value="Q1" [(ngModel)]="Q1">
-    <ion-list-header>
-      <ion-label class="Q">Comment jugez-vous l'accueil ?</ion-label>
-    </ion-list-header>
+ <ion-slides style="height:100% ; top: 0 px" pager="true"  pager="false" #mySlider>
+   <ion-slide *ngFor="let item of Quest;index as i" style="top :10px;height:100%" >
 
-    <ion-item class="R">
-      <ion-label>Très satisfaisant</ion-label>
-      <ion-radio slot="start" value="Très satisfaisant"></ion-radio>
-    </ion-item>
 
-    <ion-item>
-      <ion-label class="R">Satisfaisant</ion-label>
-      <ion-radio slot="start" value="Satisfaisant"></ion-radio>
-    </ion-item>
+    <ion-list style="height:max-content">
+    <ion-radio-group style="height:max-content" value="Q1" [(ngModel)]="Q1">
+      
+      <ion-list-header>
+        <ion-label class="Q">{{item.description}}</ion-label>
+      </ion-list-header>
+  <div style="height:max-content" *ngFor="let item1 of Rep" >
+      <ion-item  *ngIf="item1.id_question==item.id_question">
+        <ion-label>{{item1.reponse}}</ion-label>
+        <ion-radio slot="start" value="{{item1.id_rep}}"></ion-radio>
+      </ion-item>
+    </div>
+    </ion-radio-group>
+  </ion-list>
 
-    <ion-item>
-      <ion-label class="R">Assez satisfaisant</ion-label>
-      <ion-radio slot="start" value="Assez satisfaisant"></ion-radio>
-    </ion-item>
 
-    <ion-item>
-      <ion-label class="R">Pas satisfaisant</ion-label>
-      <ion-radio slot="start" value="Pas satisfaisant"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
 
-<!--///////////Question 2-->
+  <ion-fab style="position:fixed ; top :10%" vertical="center" slot="fixed" >
+    <ion-fab-button  (click)="onSubmit(item.id_question)">
+      <ion-icon name="send-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <h2 style="position:fixed ; top :90%;color:#7a6cfc;">{{i+1}}/{{p}}</h2>
+  <ion-progress-bar style="position:fixed ; top :85%;color:#7a6cfc;" value="{{(i+1)/p}}"></ion-progress-bar>
+</ion-slide>
 
-<ion-list>
-  <ion-radio-group value="Q2" [(ngModel)]="Q2">
-    <ion-list-header>
-      <ion-label class="Q">Comment jugez-vous le délai d'attente à la caisse du magasin ?</ion-label>
-    </ion-list-header>
 
-    <ion-item>
-      <ion-label class="R">Très satisfaisant</ion-label>
-      <ion-radio slot="start" value="Très satisfaisant"></ion-radio>
-    </ion-item>
+<ion-fab style="position:fixed" vertical="center" horizontal="end" slot="fixed" >
+  <ion-fab-button (click)="swipeNext()">
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
-    <ion-item>
-      <ion-label class="R">Satisfaisant</ion-label>
-      <ion-radio slot="start" value="Satisfaisant"></ion-radio>
-    </ion-item>
 
-    <ion-item>
-      <ion-label class="R">Assez satisfaisant</ion-label>
-      <ion-radio slot="start" value="Assez satisfaisant"></ion-radio>
-    </ion-item>
+ </ion-slides>
 
-    <ion-item>
-      <ion-label class="R">Pas satisfaisant</ion-label>
-      <ion-radio slot="start" value="Pas satisfaisant"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<!--///////////Question 3-->
-
-<ion-list>
-  <ion-radio-group value="Q3" [(ngModel)]="Q3">
-    <ion-list-header>
-      <ion-label class="Q">Que pensez-vous de la disponibilité du personnel ?</ion-label>
-    </ion-list-header>
-
-    <ion-item>
-      <ion-label class="R">Très satisfaisante</ion-label>
-      <ion-radio slot="start" value="Très satisfaisante"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Satisfaisante</ion-label>
-      <ion-radio slot="start" value="Satisfaisante"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Assez satisfaisante</ion-label>
-      <ion-radio slot="start" value="Assez satisfaisante"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Pas satisfaisante</ion-label>
-      <ion-radio slot="start" value="Pas satisfaisante"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<!--///////////Question 4-->
-
-<ion-list>
-  <ion-radio-group value="Q4" [(ngModel)]="Q4">
-    <ion-list-header>
-      <ion-label class="Q">Comment jugez-vous la qualité de nos produits ?</ion-label>
-    </ion-list-header>
-
-    <ion-item>
-      <ion-label class="R">Excellente</ion-label>
-      <ion-radio slot="start" value="Excellente"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Bonne</ion-label>
-      <ion-radio slot="start" value="Bonne"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Moyenne</ion-label>
-      <ion-radio slot="start" value="Moyenne"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Mauvaise</ion-label>
-      <ion-radio slot="start" value="Mauvaise"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<!--///////////Question 5-->
-<ion-list>
-  <ion-radio-group value="Q5" [(ngModel)]="Q5">
-    <ion-list-header>
-      <ion-label class="Q">Comment vous paraissent les prix ?</ion-label>
-    </ion-list-header>
-
-    <ion-item>
-      <ion-label class="R">Très élevés</ion-label>
-      <ion-radio slot="start" value="Très élevés"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Élevés</ion-label>
-      <ion-radio slot="start" value="Élevés"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Assez élevés</ion-label>
-      <ion-radio slot="start" value="Assez élevés"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label class="R">Pas élevés</ion-label>
-      <ion-radio slot="start" value="Pas élevés"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<ion-button
-      size="large"
-      expand="block"
-      shape="round"
-      color="secondary"
-      (click)="onSubmit()">
-      <ion-text color="white">envoyer</ion-text>
-</ion-button>
-
+ 
 <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
   <ion-fab-button (click)="gotoDetail()">
     <ion-icon name="return-up-back-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 </ion-content>
+-->
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-slides pager="false" #mySlider>
+    <ion-slide *ngFor="let item of Quest;index as i">
+     <ion-list>
+     <ion-radio-group value="Q1" [(ngModel)]="Q1">
+       
+       <ion-list-header>
+         <ion-label class="Q">{{item.description}}</ion-label>
+       </ion-list-header>
+   <div *ngFor="let item1 of Rep" >
+       <ion-item  *ngIf="item1.id_question==item.id_question">
+         <ion-label>{{item1.reponse}}</ion-label>
+         <ion-radio slot="start" value="{{item1.id_rep}}"></ion-radio>
+       </ion-item>
+     </div>
+     </ion-radio-group>
+   
+    
+   <div style="width: 300px;height: 300px;">
+   <h2 style="color:#7a6cfc;">{{i+1}}/{{p}}</h2>
+   <ion-progress-bar style="color:#7a6cfc;width: 100%;" value="{{(i+1)/p}}"></ion-progress-bar>
+   <ion-fab>
+    <ion-fab-button horizontal="center" style="margin-top: 40px"  (click)="onSubmit(item.id_question,i)">
+      <ion-icon name="send-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  </div>
+  </ion-list>
+ </ion-slide>
+ <!--<ion-fab style="position:fixed" vertical="center" horizontal="end" slot="fixed" >
+   <ion-fab-button (click)="swipeNext()">
+     <ion-icon name="chevron-forward-outline"></ion-icon>
+   </ion-fab-button>
+ </ion-fab>-->
+  </ion-slides>
+ 
+  
+ <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+   <ion-fab-button (click)="gotoDetail()">
+     <ion-icon name="return-up-back-outline"></ion-icon>
+   </ion-fab-button>
+ </ion-fab>
+ </ion-content>

@@ -15,18 +15,37 @@
 </ion-header>
 <ion-content [fullscreen]="true">
 
-  <br>
-  <br>
-    <ion-card style="height: 120px;width:95%;" (click)="goto(item.id_part)" class="card" *ngFor="let item of partenaires | listpartenaire:Search">
-   <!--<ion-item>
+
+
+  <ion-row class="ion-margin-horizontal">
+    <ion-col (click)="goto(item.id_part)" *ngFor="let item of partenaires | listpartenaire:Search" size="6">
+      <ion-card  class="ion-text-center">
+        <ion-card-header>
+          <div align="center">
+            <ion-thumbnail [style.background]="'rgba(27,150,181, 0.1)'">
+              <img src="{{imgUrl+item.img}}"  alt="">
+            </ion-thumbnail>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label color="dark">{{ item?.societe }}</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  
+
+  <!--  <ion-card style="height: 120px;width:95%;" (click)="goto(item.id_part)" class="card" *ngFor="let item of partenaires | listpartenaire:Search">
+   <ion-item>
       <ion-icon name="pin" slot="start"></ion-icon>
       <ion-label style="font-weight: bold;font-size: 1.2rem;color: var(--ion-color-dark);">
         boutique : <br> {{item.societe}}</ion-label>
       <ion-button slot="end" size="small" shape="round" color="primary" (click)="goto()">ajouter</ion-button>
-    </ion-item>-->
+    </ion-item>
     <ion-item style="height: 120px;width:100%;">
    <img style="height: 120px;width:100%;" src="{{imgUrl+item.img}}"  alt="">
     </ion-item>
-    </ion-card>
+    </ion-card>-->
 
 </ion-content>

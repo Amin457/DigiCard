@@ -31,4 +31,53 @@ ion-header {
     }
   }
 
-
+  ion-content {
+    * {
+      font-family: lato;
+    }
+    ion-row {
+      ion-col {
+        ion-label {
+          ion-note {
+            font-size: 0.7rem;
+          }
+          ion-chip {
+            ion-label {
+              font-size: 1.4rem;
+              font-weight: bold;
+              letter-spacing: 0.5px;
+              text-shadow: 1px 1px 1px var(--ion-color-medium);
+            }
+          }
+          b {
+            font-size: 1.2rem;
+          }
+        }
+        
+        ion-card {
+          box-shadow: -1px 11px 13px -6px rgb(87, 86, 86);
+          border-radius: 10px !important;
+          margin: 10px 0;
+          ion-thumbnail {
+            width: 15vh;
+            height: 8vh;
+            border-radius: 20px;
+            img {
+              width: 100%;
+              height: 100%;
+             // transform: translateY(50%);
+            }
+          }
+          ion-card-content {
+            ion-label {
+              font-weight: bold;
+              //text-shadow: 1px 1px 1px var(--ion-color-medium);
+              letter-spacing: 0.5px;
+            }
+          }
+        }
+      }
+    }
+   
+  }
+  

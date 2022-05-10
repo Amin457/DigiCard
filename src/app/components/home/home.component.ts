@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ElementRef, Renderer2, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Carte } from 'src/app/model/carte';
@@ -17,16 +17,19 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { notif } from 'src/app/model/notif';
+import { NotificationService } from 'src/app/services/notification.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild("header") header: HTMLElement;
   decoded: any;
   imgUrl = environment.Api + 'api/files/get/';
   Search ='';
   id: number;
+  nbr: number;
   user: users ;
   cartes: Carte[]=[] ;
   promos: Promo[]=[] ;
@@ -36,7 +39,10 @@ export class HomeComponent implements OnInit {
     speed: 300
   };
  notif : notif= new notif ();
-  constructor(private promoService: PromotionService , private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
+  constructor( public element: ElementRef, 
+    public renderer: Renderer2,
+    private notificationService: NotificationService,
+    private promoService: PromotionService , private userService: UserService, private router: Router , public route: ActivatedRoute , private carteService: CarteService, public navCtrl: NavController) { }
   slidesDidLoad(slides: IonSlides): void {
     slides.startAutoplay();
   }
@@ -96,6 +102,7 @@ export class HomeComponent implements OnInit {
         }
       );
   
+      
       // Method called when tapping on a notification
       PushNotifications.addListener('pushNotificationActionPerformed',
         (notification: ActionPerformed) => {
@@ -105,6 +112,7 @@ export class HomeComponent implements OnInit {
     }
 
     ionViewWillEnter() {
+      this.renderer.setStyle(this.header['el'], 'webkitTransition', 'top 700ms');
       this.carteService.getAllCartes(this.user.id).subscribe(
         (res)  => {
           this.message=res.message;
@@ -130,6 +138,18 @@ export class HomeComponent implements OnInit {
             console.log(error);
           });
 
+    const token=localStorage.getItem('token');
+    this.decoded = jwt_decode(token);
+    this.user=this.decoded.result;
+    this.notificationService.nbrNotif(this.user.id).subscribe(
+      (res)  => {
+        this.nbr=res.data.nbr;
+      }
+      ,
+      error => {
+        console.log(error);
+      });
+
   }
 
     logOut(){
@@ -149,5 +169,11 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['main/notifications']);
     }
 
-    
+    onContentScroll(event) {
+      if (event.detail.scrollTop >= 50) {
+        this.renderer.setStyle(this.header['el'], 'top', '-30%');
+      } else {
+        this.renderer.setStyle(this.header['el'], 'top', '0px');
+      }
+    }
 }

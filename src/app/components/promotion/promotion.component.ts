@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Partenaire } from 'src/app/model/partenaire';
 import { Promo } from 'src/app/model/promo';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { environment } from 'src/environments/environment';
@@ -12,6 +13,7 @@ export class PromotionComponent implements OnInit {
   promos: Promo[]=[] ;
   imgUrl = environment.Api + 'api/files/get/';
   Search ='';
+  part : Partenaire[]=[];
   constructor(private promoService: PromotionService) { }
 
   ngOnInit() {
@@ -23,7 +25,8 @@ export class PromotionComponent implements OnInit {
       (res)  => {
         if(res.success===1){
         this.promos=res.data;
-        console.log(this.promos);
+        this.part=res.data1;
+        console.log(res);
         return false;
       }else{
         console.log(res.data);

@@ -18,4 +18,6 @@ export class PartenaireService {
         return  this.httpClient.get<any>(`${this.fileUrl}`+`${name}`);}
       getConfig(id_part: number): Observable<any>{
         return  this.httpClient.get<Config>(`${this.baseURL}`+`getConfig/${id_part}`);}
+      getNamePartById(id_part: number): Observable<any>{
+        return  this.httpClient.get<any>(`${this.baseURL}`+`${id_part}`);}
 }

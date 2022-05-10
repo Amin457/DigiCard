@@ -29,7 +29,7 @@ export class DetailcardComponent implements OnInit {
    value: string; 
   promos: Promo[]=[] ;
   type = true;
-  points : string;
+  points : number;
   getPoint : getPoint=new getPoint;
   constructor(private cadeauService:CadeauService,private promoService: PromotionService,private router: Router ,public route: ActivatedRoute , private carteService: CarteService, private partenaireService: PartenaireService,private toastCtrl: ToastController) { }
 
@@ -55,7 +55,7 @@ export class DetailcardComponent implements OnInit {
 
          this.carteService.getPoints(this.getPoint).subscribe(
           (res)  => {
-            this.points = res.data;
+            this.points = parseInt(res.data);
           },
           error => {
             console.log(error);

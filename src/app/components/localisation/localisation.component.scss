@@ -1,4 +1,4 @@
-ion-header {
+/*ion-header {
     ion-list{
         height: 100px;
         background-color: rgb(120, 170, 245);
@@ -9,8 +9,13 @@ ion-header {
         letter-spacing: 0.5px;
         font-style: italic;
             }
-    }
+    }*/
     ion-fab-button {
-        --ion-color-primary: #428cff;
+      --ion-color-primary: #7a6cfc;
       
       }
+
+      #map {
+        height: calc(100% - 0px);
+        width: 100vw;
+        }

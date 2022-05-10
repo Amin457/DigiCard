@@ -9,6 +9,6 @@ export class ListCartePipe implements PipeTransform {
     if (Search === '' || Search === null || Search === undefined) {
       return value;
     }
-    return  value.filter(p =>(p.boutique.toLowerCase().includes(Search)));
+    return  value.filter(p =>(p.societe.toLowerCase().includes(Search)));
   }
 }

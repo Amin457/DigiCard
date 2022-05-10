@@ -205,6 +205,20 @@ error => {
     //inserer le cadeau gagner dans la base
     if(text=="perdu"){
       alert("vous avez perdu");
+      const token=localStorage.getItem('token');
+      this.decoded = jwt_decode(token);
+      this.user=this.decoded.result;
+      this.id_part = this.route.snapshot.params.id2;
+      this.cad.id_client=this.user.id;
+      this.cad.id_cadeau=id_cad;
+      this.cad.id_part=this.id_part;
+  
+      this.cadeauService.insertRecompense(this.cad).subscribe(
+        (res)  => {
+        },
+        error => {
+          console.log(error);
+        });
     }else{
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
@@ -216,13 +230,17 @@ error => {
 
     this.cadeauService.insertRecompense(this.cad).subscribe(
       (res)  => {
-        if(res.success==1){
-           alert(res.message);
-           
-        }else if(res.success==0){
-
-          alert(res.message + (7-(res.results1[0].a)) + " jour(s)");
-      }},
+        alert(res.message);
+        this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
+          (res)  => {
+            this.recom = res.results;
+            console.log('hhhhhhhhhhh',this.recom)
+      
+          },
+          error => {
+            console.log(error);
+          });
+      },
       error => {
         console.log(error);
       });

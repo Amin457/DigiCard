@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonRadioGroup } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
@@ -6,7 +6,9 @@ import { Feedback } from 'src/app/model/feedback';
 import { users } from 'src/app/model/user';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import jwt_decode from 'jwt-decode';
-
+import { Quest } from 'src/app/model/question';
+import { Rep } from 'src/app/model/reponse';
+import { IonSlides} from '@ionic/angular';
 
 @Component({
   selector: 'app-feedback',
@@ -14,17 +16,22 @@ import jwt_decode from 'jwt-decode';
   styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
+  @ViewChild('mySlider')  slides: IonSlides;
+
+  swipeNext(){
+    this.slides.slideNext();
+  }
+  p:number;
+  Quest : Quest[];
+  Rep : Rep[] ;
   id_part: number;
   id_carte: number;
-  Q1: string;
-  Q2: string;
-  Q3: string;
-  Q4: string;
-  Q5: string;
+ 
   selectedRadioGroup: any;
   feed: Feedback=new Feedback();
   decoded: any;
   user: users ;
+  Q1: number;
   constructor(private router: Router,public route: ActivatedRoute, public toastController: ToastController , private feedbackService: FeedbackService) { }
 
   ngOnInit() {
@@ -34,73 +41,50 @@ export class FeedbackComponent implements OnInit {
     const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
+
+
+       this.feedbackService.getAllQuestion(this.id_part).subscribe(
+      (res)  => {
+        console.log("qqqqqqqqq",res.question);
+        this.Quest=res.question;
+        this.p=this.Quest.length;
+        console.log("p",this.p)
+        console.log("rrrrrrr",res.reponse);
+        this.Rep=res.reponse;
+           
+        
+        console.log('rrrrrrrrrrrrrrrr',this.Quest);    
+
+      },
+      error => {
+        console.log(error);
+      }); 
   }
 
   gotoDetail(){
     this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
 }
 
-  onSubmit(){
-   if(this.Q1===undefined || this.Q2===undefined || this.Q3===undefined || this.Q4===undefined || this.Q5===undefined){
-      this.toastController.create({
-        message: 'il faut que vous remplir tous le formuliare !',
-        position: 'bottom',
-        cssClass: 'toast-custom-class',
-        buttons: [
-          {
-            side: 'end',
-            handler: () => {
-              console.log('');
-            }
-          }, {
-            side: 'end',
-            text: 'fermer',
-            role: 'cancel',
-            handler: () => {
-              console.log('');
-            }
-          }
-        ]
-      }).then((toast) => {
-        toast.present();
-      });
+  onSubmit(id_question : number,i : number){
+   if(this.Q1===undefined){
+     alert("definr votre reponse");
     }else{
+      console.log(this.Q1.toString(),id_question);
+      this.swipeNext();
       this.feed.id_part=this.id_part;
       this.feed.id_client=this.user.id;
-      this.feed.Q1=this.Q1.toString();
-      this.feed.Q2=this.Q2.toString();
-      this.feed.Q3=this.Q3.toString();
-      this.feed.Q4=this.Q4.toString();
-      this.feed.Q5=this.Q5.toString();
+      this.feed.id_question=id_question;
+      this.feed.id_rep=this.Q1;
 
       this.feedbackService.createFeed(this.feed).subscribe(
         (res)  => {
-          this.toastController.create({
-            message: 'merci pour votre feedback',
-            position: 'bottom',
-            cssClass: 'toast-custom-class',
-            buttons: [
-              {
-                side: 'end',
-                handler: () => {
-                  console.log('');
-                }
-              }, {
-                side: 'end',
-                text: 'fermer',
-                role: 'cancel',
-                handler: () => {
-                  console.log('');
-                }
-              }
-            ]
-          }).then((toast) => {
-            toast.present();
-          });
         },
         error => {
           console.log(error);
         });
+    }
+    if(((i+1)/this.p==1)){
+      alert("merci pour votre feedback");
     }
   }
 }

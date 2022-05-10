@@ -11,11 +11,10 @@
   </div>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let item of promos| promo:Search">
+<ion-content  style="width:100% ;">
+ <ion-card *ngFor="let item of promos| promo:Search">
     <ion-card-content style="height: 180px;">
       <img style="height: 100%; width: 100%;" src="{{imgUrl+item.img_dir}}" alt="">
     </ion-card-content>
   </ion-card>
-
 </ion-content>

@@ -10,9 +10,9 @@ import { Feedback } from '../model/feedback';
 export class FeedbackService {
 
   private baseURL =environment.Api + 'api/feedback';
-  // eslint-disable-next-line @typescript-eslint/member-ordering
      constructor(private httpClient: HttpClient) { }
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       createFeed(feed: Feedback): Observable<any>{
         return  this.httpClient.put<Feedback>(`${this.baseURL}`,feed);}
+      getAllQuestion(id_part: number): Observable<any>{
+         return  this.httpClient.get<Feedback>(`${this.baseURL}`+`/question/`+id_part);}
 }
