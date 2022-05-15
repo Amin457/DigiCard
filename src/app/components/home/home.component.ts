@@ -176,4 +176,8 @@ export class HomeComponent implements OnInit {
         this.renderer.setStyle(this.header['el'], 'top', '0px');
       }
     }
+
+    desactiver(){
+      console.log("mrigl");
+    }
 }

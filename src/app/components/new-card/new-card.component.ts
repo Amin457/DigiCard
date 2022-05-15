@@ -16,7 +16,16 @@ export class NewCardComponent implements OnInit {
   imgUrl = environment.Api + 'api/files/get/';
 
     constructor(public httpClient: HttpClient, private partenaireService: PartenaireService, private router: Router) {
+     }
 
+    ngOnInit() {
+    }
+
+    goto(id_part: number){
+      this.router.navigate(['main/newcard/'+id_part+'/add-create']);
+    }
+
+    ionViewWillEnter() {
       this.partenaireService.getAllpartenaire().subscribe(
         (res)  => {
         console.log(res);
@@ -25,12 +34,5 @@ export class NewCardComponent implements OnInit {
         error => {
           console.log(error);
         });
-     }
-
-    ngOnInit() {
-    }
-
-    goto(id_part: number){
-      this.router.navigate(['main/newcard/'+id_part+'/add-create']);
     }
 }

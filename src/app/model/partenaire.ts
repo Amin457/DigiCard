@@ -5,4 +5,5 @@ export class Partenaire {
   Fax: string;
   tel: string;
   codePostal: number;
+  //etat:number;
 }

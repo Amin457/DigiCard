@@ -29,6 +29,7 @@ export class LocalisationComponent implements OnInit {
   currentLocationAvailable: boolean = false;
   searchResultsAvailable: boolean = false;
   searchResultMarker: any;
+  marker2: any ;
   ionViewDidEnter() {
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
@@ -54,13 +55,15 @@ export class LocalisationComponent implements OnInit {
       zoom: 11,
     });
     //let marker = new tt.Marker().setLngLat(this.center).addTo(this.map);
-    this.getLocation();
     this.search();
+    this.getLocation();
+
   }
 
   async getLocation() {
     const coordinates: Position = await Geolocation.getCurrentPosition();
-    let marker2 = new tt.Marker({ color: 'green' }).setLngLat([coordinates.coords.longitude, coordinates.coords.latitude]).addTo(this.map);
+    this.marker2 = new tt.Marker({ color: 'green' }).setLngLat([coordinates.coords.longitude, coordinates.coords.latitude]).addTo(this.map);
+    this.map.setCenter({ lng:coordinates.coords.longitude, lat: coordinates.coords.latitude });
     this.getAddress(coordinates.coords);
   }
 
@@ -83,7 +86,7 @@ export class LocalisationComponent implements OnInit {
   
   locateResult(place) {
     this.searchResultMarker = new tt.Marker({ color: 'orange' }).setLngLat([place.position.lon, place.position.lat]).addTo(this.map);
-    this.map.setCenter({ lng: place.position.lon, lat: place.position.lat });
+    //this.map.setCenter({ lng: place.position.lon, lat: place.position.lat });
     this.map.setZoom(15);
   
   }
