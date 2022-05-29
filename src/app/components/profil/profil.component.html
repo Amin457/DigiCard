@@ -1,102 +1,137 @@
-<ion-content [fullscreen]="true">
-  
-   <ion-grid class="main-header">
-     <div align="center">
-       <ion-avatar>
-         <img src="../../../assets/profil.png" alt="">
-       </ion-avatar>
-     </div>
-   </ion-grid>
+<ion-content [scrollEvents]="true" [fullscreen]="true">
+  <ion-slides #mySlider pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-card style="width:100%;">
+        <img class="img" *ngIf="user.img" src="{{imgUrl+user.img}}" alt="">
+        <img class="img" *ngIf="!user.img" src="../../../assets/profil.png" alt="">
+        <ion-card-header>
+          <ion-card-title>{{user.Nom}} {{user.Prenom}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{user.mail}}
+        </ion-card-content>
+        <ion-footer>
+          <ion-button expand="block" shape="round" width="50%" (click)="swipeNext()">
+            <ion-text color="white">modifier</ion-text>
+          </ion-button>
+        </ion-footer>
+      </ion-card>
 
-   <form [formGroup]="form" class="ion-margin ion-padding ion-text-center">
-    <div class="ion-margin-vertical">
-      <ion-item>
-        <ion-label position="stacked">Nom</ion-label>
+    </ion-slide>
 
-
-        <ion-input formControlName="Nom" type="text" placeholder="Nom">
-          <ion-icon name="person" slot="start" color="medium"></ion-icon>
-        </ion-input>
-
-
-      </ion-item>
-      <ion-text class="error" color="danger"
-        *ngIf="!form.get('Nom').valid && form.get('Nom').touched">
-        <ion-text *ngIf="form.get('Nom').hasError('required')">
-          * Entrer votre Nom s'il vous plait !
-        </ion-text>
-      </ion-text>
-    </div>
-
-    <div class="ion-margin-vertical">
-      <ion-item>
-        <ion-label position="stacked">Prenom</ion-label>
+    <ion-slide>
+      <form [formGroup]="form" class="ion-margin ion-padding ion-text-center">
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Nom</ion-label>
 
 
-        <ion-input formControlName="Prenom" type="text" placeholder="Prenom">
-          <ion-icon name="person" slot="start" color="medium"></ion-icon>
-        </ion-input>
+            <ion-input formControlName="Nom" type="text" placeholder="Nom">
+              <ion-icon name="person" slot="start" color="medium"></ion-icon>
+            </ion-input>
 
 
-      </ion-item>
-      <ion-text class="error" color="danger"
-        *ngIf="!form.get('Prenom').valid && form.get('Prenom').touched">
-        <ion-text *ngIf="form.get('Prenom').hasError('required')">
-          * Entrer votre Prenom s'il vous plait !
-        </ion-text>
-      </ion-text>
-    </div>
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('Nom').valid && form.get('Nom').touched">
+            <ion-text *ngIf="form.get('Nom').hasError('required')">
+              * Entrer votre Nom s'il vous plait !
+            </ion-text>
+          </ion-text>
+        </div>
 
-    <div class="ion-margin-vertical">
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-
-
-        <ion-input formControlName="mail" type="email" placeholder="Adresse email">
-          <ion-icon name="mail" slot="start" color="medium"></ion-icon>
-        </ion-input>
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Prenom</ion-label>
 
 
-      </ion-item>
-      <ion-text class="error" color="danger"
-        *ngIf="!form.get('mail').valid && form.get('mail').touched">
-        <ion-text *ngIf="form.get('mail').hasError('required')">
-          * Entrer votre email s'il vous plait !
-        </ion-text>
-        <ion-text
-          *ngIf="!form.get('mail').hasError('required') && form.get('mail').hasError('email')">
-          * Entrer valide email !
-        </ion-text>
-      </ion-text>
-    </div>
+            <ion-input formControlName="Prenom" type="text" placeholder="Prenom">
+              <ion-icon name="person" slot="start" color="medium"></ion-icon>
+            </ion-input>
 
-    <div class="ion-margin-vertical">
-      <ion-item>
-        <ion-label position="stacked">Mot de passe</ion-label>
-          <ion-input formControlName="mdp" type="password" placeholder="Mot de passe">
-            <ion-icon name="key" slot="start" color="medium"></ion-icon>
-          </ion-input>
-      </ion-item>
-      <ion-text class="error" color="danger" *ngIf="!form.get('mdp').valid && form.get('mdp').touched">
-        <ion-text *ngIf="form.get('mdp').hasError('required')">
-          * Entrer votre mot de passe s'il vous plait !
-        </ion-text>
-        <ion-text *ngIf="!form.get('mdp').hasError('required') && form.get('mdp').hasError('minlength')">
-          * 8 caractére au minimum
-        </ion-text>
-      </ion-text>
-    </div>
 
-    <ion-button
-    size="large"
-    expand="block"
-    shape="round"
-    width="50%"
-    (click)="onSubmit()">
-    <ion-text color="white">modifier</ion-text>
-    </ion-button>
-    
-  </form>
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('Prenom').valid && form.get('Prenom').touched">
+            <ion-text *ngIf="form.get('Prenom').hasError('required')">
+              * Entrer votre Prenom s'il vous plait !
+            </ion-text>
+          </ion-text>
+        </div>
 
-   
- </ion-content>
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+
+
+            <ion-input formControlName="mail" type="email" placeholder="Adresse email">
+              <ion-icon name="mail" slot="start" color="medium"></ion-icon>
+            </ion-input>
+
+
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('mail').valid && form.get('mail').touched">
+            <ion-text *ngIf="form.get('mail').hasError('required')">
+              * Entrer votre email s'il vous plait !
+            </ion-text>
+            <ion-text *ngIf="!form.get('mail').hasError('required') && form.get('mail').hasError('email')">
+              * Entrer valide email !
+            </ion-text>
+          </ion-text>
+        </div>
+
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Date de naissance</ion-label>
+
+
+            <ion-input formControlName="dateNaissance" type="date">
+              <ion-icon name="mail" slot="start" color="medium"></ion-icon>
+            </ion-input>
+
+
+          </ion-item>
+          <ion-text class="error" color="danger"
+            *ngIf="!form.get('dateNaissance').valid && form.get('dateNaissance').touched">
+            <ion-text *ngIf="form.get('dateNaissance').hasError('required')">
+              * Entrer votre date de naissance s'il vous plait !
+            </ion-text>
+          </ion-text>
+        </div>
+
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Mot de passe</ion-label>
+            <ion-input formControlName="mdp" type="password" placeholder="Mot de passe">
+              <ion-icon name="key" slot="start" color="medium"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('mdp').valid && form.get('mdp').touched">
+            <ion-text *ngIf="form.get('mdp').hasError('required')">
+              * Entrer votre mot de passe s'il vous plait !
+            </ion-text>
+            <ion-text *ngIf="!form.get('mdp').hasError('required') && form.get('mdp').hasError('minlength')">
+              * 8 caractére au minimum
+            </ion-text>
+          </ion-text>
+        </div>
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">image</ion-label>
+            <ion-input type="file" name="file" (change)="onFileSelected($event)">
+            </ion-input>
+          </ion-item>
+        </div>
+        <ion-button slot="fixed" size="large" expand="block" shape="round" width="50%" (click)="onSubmit()">
+          <ion-text color="white">modifier</ion-text>
+        </ion-button>
+
+      </form>
+
+
+
+
+    </ion-slide>
+
+
+  </ion-slides>
+
+</ion-content>

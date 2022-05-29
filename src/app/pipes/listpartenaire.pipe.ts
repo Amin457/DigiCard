@@ -11,7 +11,9 @@ export class ListpartenairePipe implements PipeTransform {
     if (Search === '' || Search === null || Search === undefined) {
       return value;
     }
-    return  value.filter(p =>(p.societe.toLowerCase().includes(Search)));
+    return  value.filter(p =>(p.societe.toLowerCase().indexOf(Search.toLowerCase()) > -1));
   }
 
 }
+
+//.toLowerCase().includes(Search)))

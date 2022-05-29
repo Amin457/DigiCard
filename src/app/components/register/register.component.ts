@@ -31,18 +31,19 @@ goto(){
         Nom: new FormControl(null, {validators: [Validators.required]}),
         Prenom: new FormControl(null, {validators: [Validators.required]}),
         mail: new FormControl(null, {validators: [Validators.required, Validators.email]}),
+        dateNaissance: new FormControl(null, {validators: [Validators.required]}),
         mdp: new FormControl(null, {validators: [Validators.required, Validators.minLength(8)]}),
       });
     }
     onSubmit() {
-    
-console.log(this.form.value);
+    if(this.form.valid){
 this.user.Nom=this.form.value.Nom;
 this.user.Prenom=this.form.value.Prenom;
 this.user.mail=this.form.value.mail;
 this.user.mdp=this.form.value.mdp;
+this.user.dateNaissance=this.form.value.dateNaissance;
 
-    this.userService.register(this.user).subscribe(
+   this.userService.register(this.user).subscribe(
         (res)  => {
          
           alert('inscription avec succée');
@@ -51,6 +52,9 @@ this.user.mdp=this.form.value.mdp;
           alert('email déja utilisé');
       
         });
+      }else{
+        alert("verifier les champs")
+      }
       }
 
 }

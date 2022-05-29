@@ -9,7 +9,8 @@ export class PromoPipe implements PipeTransform {
     if (Search === '' || Search === null || Search === undefined) {
       return value;
     }
-    return  value.filter(p =>(p.nom.toLowerCase().includes(Search)));
+    return  value.filter(p =>(p.nom.toLowerCase().indexOf(Search.toLowerCase()) > -1));
   }
 
 }
+//p =>(p.nom.toLowerCase().includes(Search))

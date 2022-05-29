@@ -1,6 +1,7 @@
 export class Promo {
   id_promo: number;
-  img_dir: string;
+  image: string;
   nom: string;
   id_part: number;
+  description: string;
 }

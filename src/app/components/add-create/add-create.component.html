@@ -1,47 +1,49 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [style.--background]="scanActive?'#00000000':'#ffffff'">
+  <ion-button shape="round" *ngIf="show" expand="full" (click)="startScanner()">
+    scanner votre carte
+  </ion-button>
+  <!--<ion-row class="scan-button" [hidden]="!scanActive">
+    <ion-col class="ion-no-padding">
+        <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
+      </ion-col>
+    </ion-row>-->
+  <div class="scan-box" [hidden]="!scanActive" [style.--background]="scanActive?'#00000000':'#ffffff'"></div>
 
-  <form [formGroup]="form">
+  <form *ngIf="show" [formGroup]="form">
+  
     <ion-list lines="none" class="ion-margin ion-padding ion-text-center">
-  <h2 style="top:10%;">Ajouter une carte existante</h2>
+      
+      <h2 style="top:10%;">Ajouter une carte existante</h2>
 
-    
+
       <ion-item class="ion-margin-vertical">
-        <ion-icon 
-          name="card-outline" slot="end" color="medium">
+        <ion-icon name="card-outline" slot="end" color="medium">
         </ion-icon>
-        <ion-input 
-          formControlName="cardId" 
-          placeholder="Enter le numero de la carte">
+        <ion-input formControlName="cardId" placeholder="Enter le numero de la carte">
         </ion-input>
-      </ion-item>
-      <ion-text 
-        class="ion-text-left"
-        color="danger"
-        *ngIf="!form.get('cardId').valid && form.get('cardId').touched">
-        <p class="error">entrer le numero de la carte</p>
-      </ion-text>
-      <ion-text 
-      class="ion-text-left"
-      color="danger"
-      *ngIf="!form.get('cardId').hasError('required') && form.get('cardId').hasError('minlength')">
-      <p class="error"> 8 chiffre au minimum</p>
-      </ion-text>
+      </ion-item>    
 
       <ion-button color="primary" shape="round" (click)="ajouter()">ajouter</ion-button>
-  
-  <h4 style="top:42%;">ou</h4>
-  <h2 style="top:46%;">Créer une nouvelle carte</h2>
-  <ion-button  color="primary" shape="round" (click)="creer()">créer</ion-button>
-</ion-list>
 
-</form>
+      <h4 style="top:42%;">ou</h4>
+      <h2 style="top:46%;">Créer une nouvelle carte</h2>
+      <ion-item class="ion-margin-vertical">
+        <ion-icon name="card-outline" slot="end" color="medium">
+        </ion-icon>
+        <ion-input formControlName="CustomerId" placeholder="Enter le numero de la carte">
+        </ion-input>
+        <!--<ion-input type="date" formControlName="CustomerId" placeholder="Enter le numero de la carte">
+        </ion-input>-->
+      </ion-item>
+      <ion-button color="primary" shape="round" (click)="creer()">créer</ion-button>
+    </ion-list>
 
+  </form>
 
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
   <ion-fab-button (click)="gotoAddCard()">
     <ion-icon name="return-up-back-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-

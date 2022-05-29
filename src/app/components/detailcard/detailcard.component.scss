@@ -1,7 +1,7 @@
 ion-header {
   ion-list{
       height: 100px;
-      background-color: rgb(120, 170, 245);
+      background-color: rgb(31, 47, 152);
       border-radius: 0 0 20px 20px;
       padding-bottom: 7vh;
       font-weight: bold;
@@ -13,4 +13,28 @@ ion-header {
 .icon{
   color: rgb(136, 52, 247) !important;
 
+}
+
+
+ion-fab-button[data-desc] {
+  --ion-color-primary: #7a6cfc;
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  --ion-color-primary: #7a6cfc;
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: 50px;
+  bottom: 7px;
+  color: var(--ion-color-contrast, #fff);
+  background-color: var(--ion-color-base, #fff);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.class-fab {
+  --ion-color-primary: #7a6cfc;
 }

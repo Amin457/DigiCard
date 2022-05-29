@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-list lines="none">
-
+    <!--
     <ion-label style="position: fixed; left:20px; top: 20px;color: aliceblue;">
       reclamation
     </ion-label>
@@ -8,9 +8,9 @@
     <ion-icon (click)="rec()" color="white" style=" position: fixed; left: 0%; top: 45px;height: 40px; width: 40px;"
     name="receipt-outline"></ion-icon>
 
-    <!--<ion-label style="position: fixed; left:20px; top: 20px;color: aliceblue;">
+    <ion-label style="position: fixed; left:20px; top: 20px;color: aliceblue;">
       localisation
-    </ion-label>-->
+    </ion-label>
 
     <ion-icon (click)="localisations()" color="white" style=" position: fixed; left: 45%; top: 45px;height: 40px; width: 40px;"
     name="location-outline"></ion-icon>
@@ -20,26 +20,29 @@
     </ion-label>
     <ion-icon (click)="feed()" color="white" style=" position: fixed; right: 0%; top: 45px;height: 40px; width: 40px;"
     name="chatbox-ellipses-outline"></ion-icon>
+    -->
+    <div style="text-align: center; margin-top: 45px;">
+      <ion-label class="text1" style="color: aliceblue;">
+        details de carte
+      </ion-label>
+    </div>
   </ion-list>
 </ion-header>
 <ion-content [fullscreen]="true">
   <div style="text-align: center;">
-      <div style="text-align:center">
+    <div style="text-align:center">
       <div *ngFor="let item of carte1">
-        <ngx-qrcode
-        [width]="230"
-        value={{item.num_carte}}
-        class="qr"
-        cssClass="center">
-      </ngx-qrcode>
+        <ngx-qrcode [width]="230" value={{item.num_carte}} class="qr" cssClass="center">
+        </ngx-qrcode>
 
-      <ngx-barcode bc-value={{item.num_carte}} [bc-display-value]="true"></ngx-barcode>
+        <ngx-barcode bc-value={{item.num_carte}} [bc-display-value]="true"></ngx-barcode>
+      </div>
     </div>
-    </div>
-    <h2>points de fidélité : <ion-badge color="primary" mode="ios" >{{points}}</ion-badge></h2>
-  
+    <h2>points de fidélité : <ion-badge color="primary" mode="ios">{{points}}</ion-badge>
+    </h2>
+
   </div>
-
+  <!--
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
 
     <ion-fab-button color="Secondary" (click)="game()">
@@ -53,4 +56,28 @@
       <ion-icon class="icon" name="gift-sharp"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  -->  
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button class="class-fab">
+    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button color="primary" (click)="game()" data-desc="jeux">
+      <ion-icon name="game-controller"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="primary" (click)="promopart()" data-desc="promotions">
+      <ion-icon name="gift-sharp"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="primary" (click)="localisations()" data-desc="localisation">
+      <ion-icon name="location-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="primary" (click)="rec()" data-desc="reclamation">
+      <ion-icon name="receipt-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="primary" (click)="feed()" data-desc="Feedback">
+      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

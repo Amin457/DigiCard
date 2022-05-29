@@ -54,9 +54,7 @@ export class LocalisationComponent implements OnInit {
       center: this.center,
       zoom: 11,
     });
-    //let marker = new tt.Marker().setLngLat(this.center).addTo(this.map);
     this.search();
-    this.getLocation();
 
   }
 
@@ -77,18 +75,18 @@ export class LocalisationComponent implements OnInit {
     const res: any = await this.http.get(`https://api.tomtom.com/search/2/search/${this.query}.json?lat=${coordinates.coords.latitude}&lon=${coordinates.coords.longitude}&key=EdNdRPxF4UVs0Ad5EnAaKSKeqGvK1dEn`).toPromise();
     this.searchResults = res.results;
      for (var i = 0; i < this.searchResults.length ; i++) {
-      if(this.searchResults[i].position.lon<15 && this.searchResults[i].position.lon>8 && this.searchResults[i].position.lat<40 && this.searchResults[i].position.lat>29 ){
+     // if(this.searchResults[i].position.lon<15 && this.searchResults[i].position.lon>8 && this.searchResults[i].position.lat<40 && this.searchResults[i].position.lat>29 ){
       this.locateResult(this.searchResults[i]);
-      }
+      
     }
   }
 
   
   locateResult(place) {
     this.searchResultMarker = new tt.Marker({ color: 'orange' }).setLngLat([place.position.lon, place.position.lat]).addTo(this.map);
-    //this.map.setCenter({ lng: place.position.lon, lat: place.position.lat });
     this.map.setZoom(15);
-  
+    this.getLocation();
+
   }
 
 

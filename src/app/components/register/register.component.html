@@ -71,6 +71,29 @@
           </ion-text>
         </div>
 
+
+
+
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">Date de naissance</ion-label>
+
+
+            <ion-input formControlName="dateNaissance" type="date">
+              <ion-icon name="mail" slot="start" color="medium"></ion-icon>
+            </ion-input>
+
+
+          </ion-item>
+          <ion-text class="error" color="danger"
+            *ngIf="!form.get('dateNaissance').valid && form.get('dateNaissance').touched">
+            <ion-text *ngIf="form.get('dateNaissance').hasError('required')">
+              * Entrer votre date de naissance s'il vous plait !
+            </ion-text>
+          </ion-text>
+        </div>
+        
+
         <div class="ion-margin-vertical">
           <ion-item>
             <ion-label position="stacked">Mot de passe</ion-label>

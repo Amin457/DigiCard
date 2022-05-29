@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    const token=localStorage.getItem('token');
+   /* const token=localStorage.getItem('token');
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
 
@@ -108,10 +108,13 @@ export class HomeComponent implements OnInit {
         (notification: ActionPerformed) => {
           //alert('Push action performed: ' + JSON.stringify(notification));
         }
-      );    
+      );   */ 
     }
 
     ionViewWillEnter() {
+      const token1=localStorage.getItem('token');
+      this.decoded = jwt_decode(token1);
+      this.user=this.decoded.result;
       this.renderer.setStyle(this.header['el'], 'webkitTransition', 'top 700ms');
       this.carteService.getAllCartes(this.user.id).subscribe(
         (res)  => {
@@ -153,7 +156,19 @@ export class HomeComponent implements OnInit {
   }
 
     logOut(){
+    const token=localStorage.getItem('token');
+    this.decoded = jwt_decode(token);
+    this.user=this.decoded.result;
       localStorage.removeItem('token');
+      this.userService.deleteToken(this.user.id).subscribe(
+        (res)  => {
+          console.log("deleted");
+        }
+        ,
+        error => {
+          console.log(error);
+        });
+  
       this.router.navigate(['/login']);
       window.location.reload();
 
@@ -171,13 +186,12 @@ export class HomeComponent implements OnInit {
 
     onContentScroll(event) {
       if (event.detail.scrollTop >= 50) {
+        ////-30
         this.renderer.setStyle(this.header['el'], 'top', '-30%');
       } else {
         this.renderer.setStyle(this.header['el'], 'top', '0px');
       }
     }
 
-    desactiver(){
-      console.log("mrigl");
-    }
+   
 }

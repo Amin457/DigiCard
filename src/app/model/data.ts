@@ -4,5 +4,11 @@ export class data {
     dbId: string
     id_part:number;
     id_client:number;
+    mail:string;
+    storeId:string;
+    CustomerId:string;
+    BirthDateDay:string;
+    BirthDateMonth:string;
+    BirthDateYear:string;
   }
  

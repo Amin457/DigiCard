@@ -15,8 +15,9 @@ import { ToastController } from '@ionic/angular';
 export class GameComponent {
 
   @ViewChild('myCanvas', { static: false }) myCanvas: ElementRef;
-  cadeau :any[]=[];
-  user: users ;
+  blocked: boolean;
+  cadeau: any[] = [];
+  user: users;
   id_part: number;
   id_carte: number;
   decoded: any;
@@ -30,76 +31,90 @@ export class GameComponent {
   spinAngleStart;
   arc: number;
   spinArcStart: number;
-  cad : recompense=new recompense();
-  recom : any [];
- constructor(public toastController: ToastController,private cadeauService:CadeauService,private router: Router,public route: ActivatedRoute) {
+  cad: recompense = new recompense();
+  recom: any[];
+  constructor(public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
 
-}
-
-
-
-ngAfterViewInit(): void {  
-  this.id_carte = this.route.snapshot.params.id1;
-  this.id_part = this.route.snapshot.params.id2;
-  console.log(this.id_part);
-  const token=localStorage.getItem('token');
-  this.decoded = jwt_decode(token);
-  this.user=this.decoded.result;
-
-  
-
-this.cadeauService.getCadeau(this.id_part).subscribe(
-(res)  => {
-  console.log(res);
-  this.cadeau = res.data;
-  this.arc = 2 * Math.PI / this.cadeau.length;
-  this.spinArcStart = this.cadeau.length;
-  this.draw();
-
-},
-error => {
-  console.log(error);
-});
-  
   }
 
-  ionViewWillEnter() {
-    this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
-      (res)  => {
-        this.recom = res.results;
-        console.log('hhhhhhhhhhh',this.recom)
-  
+
+
+  ngAfterViewInit(): void {
+    this.id_carte = this.route.snapshot.params.id1;
+    this.id_part = this.route.snapshot.params.id2;
+    console.log(this.id_part);
+    const token = localStorage.getItem('token');
+    this.decoded = jwt_decode(token);
+    this.user = this.decoded.result;
+
+
+
+    this.cadeauService.getCadeau(this.id_part).subscribe(
+      (res) => {
+        console.log(res);
+        this.cadeau = res.data;
+        this.arc = 2 * Math.PI / this.cadeau.length;
+        this.spinArcStart = this.cadeau.length;
+        this.draw();
+
       },
       error => {
         console.log(error);
       });
-}
+
+  }
+
+  ionViewWillEnter() {
+    this.cadeauService.getRecompense(this.user.id, this.id_part).subscribe(
+      (res) => {
+        this.recom = res.results;
+
+      },
+      error => {
+        console.log(error);
+      });
+
+    this.cadeauService.getEtatJeux(this.id_part).subscribe(
+      (res) => {
+        console.log(res.data)
+        if (res.data.etat_jeu == 1) {
+          console.log("jeux activé");
+          this.blocked = false;
+
+        } else {
+          this.blocked = true;
+        }
+      },
+      error => {
+        console.log(error);
+      });
+  }
 
   draw() {
     this.drawRouletteWheel();
 
   }
 
-   byte2Hex(n) {
+  byte2Hex(n) {
     var nybHexString = "0123456789ABCDEF";
-    return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+    return String(nybHexString.substr((n >> 4) & 0x0F, 1)) + nybHexString.substr(n & 0x0F, 1);
   }
 
-   RGB2Color(r,g,b) {
+  RGB2Color(r, g, b) {
     return '#' + this.byte2Hex(r) + this.byte2Hex(g) + this.byte2Hex(b);
   }
 
-   getColor(item, maxitem) {
+  getColor(item, maxitem) {
     var phase = 0;
     var center = 128;
     var width = 127;
-    var frequency = Math.PI*2/maxitem;
-    
-    let red   = Math.sin(frequency*item+2+phase) * width + center;
-    let green = Math.sin(frequency*item+0+phase) * width + center;
-    let blue  = Math.sin(frequency*item+4+phase) * width + center;
-    
-    return this.RGB2Color(red,green,blue);
+    var frequency = Math.PI * 2 / maxitem;
+
+    let red = Math.sin(frequency * item + 2 + phase) * width + center;
+    let green = Math.sin(frequency * item + 0 + phase) * width + center;
+    let blue = Math.sin(frequency * item + 4 + phase) * width + center;
+
+    return this.RGB2Color(red, green, blue);
   }
   drawRouletteWheel() {
     var canvas = document.getElementById("wheelcanvas");
@@ -156,25 +171,33 @@ error => {
 
   spin() {
     //test permission au jeux
-    const token=localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     this.decoded = jwt_decode(token);
-    this.user=this.decoded.result;
+    this.user = this.decoded.result;
     this.id_part = this.route.snapshot.params.id2;
-    this.cadeauService.getPermissionJeux(this.user.id,this.id_part).subscribe(
-      (res)  => {
-        if(res.success==0){
-          alert(res.message + (7-(res.results1[0].a)) + " jour(s)");
-   
-        }else if(res.success==1){
 
-    this.spinAngleStart = Math.random() * this.cadeau.length + this.cadeau.length;
-    this.spinTime = 0;
-    this.spinTimeTotal = Math.random() * 3 + 4 * 1000;
-    this.rotateWheel();
-      }},
+    this.cadeauService.getPermissionJeux(this.user.id, this.id_part).subscribe(
+      (res) => {
+        if (res.success == 0) {
+          alert(res.message + (7 - (res.results1[0].a)) + " jour(s)");
+          this.blocked = false;
+
+        } else if (res.success == 1) {
+          this.blocked = false;
+
+          this.spinAngleStart = Math.random() * this.cadeau.length + this.cadeau.length;
+          this.spinTime = 0;
+          this.spinTimeTotal = Math.random() * 3 + 4 * 1000;
+          this.rotateWheel();
+        }
+      },
       error => {
         console.log(error);
       });
+
+
+
+
   }
 
   rotateWheel() {
@@ -199,51 +222,51 @@ error => {
     this.ctx.save();
     this.ctx.font = 'bold 30px sans-serif';
     var text = this.cadeau[index].description;
-    var id_cad=this.cadeau[index].id_cadeau;
- 
+    var id_cad = this.cadeau[index].id_cadeau;
+
 
     //inserer le cadeau gagner dans la base
-    if(text=="perdu"){
+    if (text == "perdu") {
       alert("vous avez perdu");
-      const token=localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       this.decoded = jwt_decode(token);
-      this.user=this.decoded.result;
+      this.user = this.decoded.result;
       this.id_part = this.route.snapshot.params.id2;
-      this.cad.id_client=this.user.id;
-      this.cad.id_cadeau=id_cad;
-      this.cad.id_part=this.id_part;
-  
+      this.cad.id_client = this.user.id;
+      this.cad.id_cadeau = id_cad;
+      this.cad.id_part = this.id_part;
+
       this.cadeauService.insertRecompense(this.cad).subscribe(
-        (res)  => {
+        (res) => {
         },
         error => {
           console.log(error);
         });
-    }else{
-    const token=localStorage.getItem('token');
-    this.decoded = jwt_decode(token);
-    this.user=this.decoded.result;
-    this.id_part = this.route.snapshot.params.id2;
-    this.cad.id_client=this.user.id;
-    this.cad.id_cadeau=id_cad;
-    this.cad.id_part=this.id_part;
+    } else {
+      const token = localStorage.getItem('token');
+      this.decoded = jwt_decode(token);
+      this.user = this.decoded.result;
+      this.id_part = this.route.snapshot.params.id2;
+      this.cad.id_client = this.user.id;
+      this.cad.id_cadeau = id_cad;
+      this.cad.id_part = this.id_part;
 
-    this.cadeauService.insertRecompense(this.cad).subscribe(
-      (res)  => {
-        alert(res.message);
-        this.cadeauService.getRecompense(this.user.id,this.id_part).subscribe(
-          (res)  => {
-            this.recom = res.results;
-            console.log('hhhhhhhhhhh',this.recom)
-      
-          },
-          error => {
-            console.log(error);
-          });
-      },
-      error => {
-        console.log(error);
-      });
+      this.cadeauService.insertRecompense(this.cad).subscribe(
+        (res) => {
+          alert(res.message);
+          this.cadeauService.getRecompense(this.user.id, this.id_part).subscribe(
+            (res) => {
+              this.recom = res.results;
+              console.log('hhhhhhhhhhh', this.recom)
+
+            },
+            error => {
+              console.log(error);
+            });
+        },
+        error => {
+          console.log(error);
+        });
     }
     console.log(text);
     this.ctx.restore();
@@ -255,12 +278,12 @@ error => {
   // d: duration
 
   easeOut(t, b, c, d) {
-    return c * Math.sin(t/d * (Math.PI/2)) + b;
-}
+    return c * Math.sin(t / d * (Math.PI / 2)) + b;
+  }
 
 
 
-gotoDetail(){
-  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
-}
+  gotoDetail() {
+    this.router.navigate(['main/home/detailcard/' + this.id_carte + '/' + this.id_part]);
+  }
 }

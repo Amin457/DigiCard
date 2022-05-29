@@ -28,6 +28,7 @@ import { PromoPartComponent } from './components/promo-part/promo-part.component
 import { SwiperModule } from 'swiper/angular';
 import { PromoPipe } from './pipes/promo.pipe';
 import { GameComponent } from './components/game/game.component';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations:
@@ -64,7 +65,7 @@ import { GameComponent } from './components/game/game.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+  providers: [BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent],
 })

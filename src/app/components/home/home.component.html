@@ -2,11 +2,11 @@
 <ion-list lines="none">
   <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
     <ion-slide *ngFor="let item of promos"  style="height: 100%; width:100%" >
-      <img style=" height: 100%; width:100%" src="{{imgUrl+item.img_dir}}" />
+      <img style=" height: 100%; width:100%" src="{{imgUrl+item.image}}" />
     </ion-slide>
   </ion-slides>
    <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
-    <ion-badge color="danger" mode="ios" >{{nbr}}</ion-badge>
+    <ion-badge color="danger" mode="ios"  *ngIf="nbr>0">{{nbr}}</ion-badge>
     <ion-fab-button size="small" color="white">
       <ion-icon  name="notifications" color="primary">
       </ion-icon>

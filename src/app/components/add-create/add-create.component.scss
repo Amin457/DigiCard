@@ -1,19 +1,4 @@
-::-webkit-scrollbar, *::-webkit-scrollbar {
-    display: none;
-    overflow: hidden;
-  }
-  
-  
 
-  ion-content {
-    overflow: hidden;
-    --overflow: hidden;
-  }
-  
-  .scroll-content {
-    overflow: hidden;
-  }
-  
   ion-list {
     background: transparent;
     transform: translateY(15vh);
@@ -21,29 +6,12 @@
       border: 1px solid var(--ion-color-medium);
       border-radius: 10px;
     }
-    ion-row {
-      margin-bottom: 5vh;
-    }
+    
     ion-button {
       width: 30vh;
       margin: auto;
     }
-    .alignItems {
-      ion-checkbox, ion-note {
-        display: inline-block;
-        vertical-align: middle;
-      }
-      ion-checkbox {
-        margin-right: 3vw;
-        --size: 1.1rem;
-      }
-    }
-    
-    ion-col {
-      ion-note {
-        font-size: 0.85rem;
-      }
-    }
+  
   }
 
   .backButton {
@@ -58,4 +26,26 @@
 
   ion-button{
     --ion-color-primary: #7a6cfc;  
+  }
+
+
+  .scan-box {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 100vmax rgb(0, 0, 0, 0.5);
+    content: "";
+    display: block;
+    left: 50%;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+  }
+  .scan-button {
+    margin: 0px;
+    position: absolute;
+    bottom: 100px;
+    width: 50vw;
+    height: 50px;
+    z-index: 11;
   }

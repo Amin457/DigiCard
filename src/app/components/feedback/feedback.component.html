@@ -1,10 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-list lines="none">
     <div style="text-align: center; margin-top: 45px;">
-    <ion-label class="text1" style="color: aliceblue ;">
-      Introduire votre Feedback
-        </ion-label>
-        </div>
+      <ion-label class="text1" style="color: aliceblue ;">
+        Introduire votre Feedback
+      </ion-label>
+    </div>
   </ion-list>
 </ion-header>
 <!--
@@ -64,43 +64,40 @@
 
   <ion-slides pager="false" #mySlider>
     <ion-slide *ngFor="let item of Quest;index as i">
-     <ion-list>
-     <ion-radio-group value="Q1" [(ngModel)]="Q1">
-       
-       <ion-list-header>
-         <ion-label class="Q">{{item.description}}</ion-label>
-       </ion-list-header>
-   <div *ngFor="let item1 of Rep" >
-       <ion-item  *ngIf="item1.id_question==item.id_question">
-         <ion-label>{{item1.reponse}}</ion-label>
-         <ion-radio slot="start" value="{{item1.id_rep}}"></ion-radio>
-       </ion-item>
-     </div>
-     </ion-radio-group>
-   
-    
-   <div style="width: 300px;height: 300px;">
-   <h2 style="color:#7a6cfc;">{{i+1}}/{{p}}</h2>
-   <ion-progress-bar style="color:#7a6cfc;width: 100%;" value="{{(i+1)/p}}"></ion-progress-bar>
-   <ion-fab>
-    <ion-fab-button horizontal="center" style="margin-top: 40px"  (click)="onSubmit(item.id_question,i)">
-      <ion-icon name="send-outline"></ion-icon>
+
+      <ion-list>
+        <ion-radio-group value="Q1" [(ngModel)]="Q1">
+
+          <ion-list-header>
+            <ion-label class="Q">{{item.description}}</ion-label>
+          </ion-list-header>
+          <div *ngFor="let item1 of Rep">
+            <ion-item *ngIf="item1.id_question==item.id_question">
+              <ion-label>{{item1.reponse}}</ion-label>
+              <ion-radio slot="start" value="{{item1.id_rep}}"></ion-radio>
+            </ion-item>
+          </div>
+        </ion-radio-group>
+
+
+        <div style=" text-align: center;width: 100%;height: 300px;">
+          <ion-progress-bar style="text-align: center;color:#7a6cfc;width: 100%;" value="{{(i+1)/p}}"></ion-progress-bar>
+          <h2 style="text-align: center;color:#7a6cfc;">{{i+1}}/{{p}}</h2>
+          <ion-fab>
+            <ion-fab-button horizontal="center" style="text-align: center;margin-top: 40px"
+              (click)="onSubmit(item.id_question,i)">
+              <ion-icon name="send-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </div>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="gotoDetail()">
+      <ion-icon name="return-up-back-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  </div>
-  </ion-list>
- </ion-slide>
- <!--<ion-fab style="position:fixed" vertical="center" horizontal="end" slot="fixed" >
-   <ion-fab-button (click)="swipeNext()">
-     <ion-icon name="chevron-forward-outline"></ion-icon>
-   </ion-fab-button>
- </ion-fab>-->
-  </ion-slides>
- 
-  
- <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
-   <ion-fab-button (click)="gotoDetail()">
-     <ion-icon name="return-up-back-outline"></ion-icon>
-   </ion-fab-button>
- </ion-fab>
- </ion-content>
+</ion-content>

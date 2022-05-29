@@ -4,4 +4,6 @@ export class users {
   Prenom: string;
   mail: string;
   mdp: string;
+  img: string;
+  dateNaissance: Date;
 }
