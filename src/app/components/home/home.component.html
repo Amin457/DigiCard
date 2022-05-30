@@ -1,11 +1,11 @@
 <ion-header #header class="ion-no-border">
 <ion-list lines="none">
-  <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
+ <!-- <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
     <ion-slide *ngFor="let item of promos"  style="height: 100%; width:100%" >
       <img style=" height: 100%; width:100%" src="{{imgUrl+item.image}}" />
     </ion-slide>
-  </ion-slides>
-   <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 0%;">
+  </ion-slides>-->
+   <ion-buttons (click)="gotoNotif()"  slot="end" style="position: fixed; right: 0%; top: 4%;">
     <ion-badge color="danger" mode="ios"  *ngIf="nbr>0">{{nbr}}</ion-badge>
     <ion-fab-button size="small" color="white">
       <ion-icon  name="notifications" color="primary">
@@ -13,12 +13,22 @@
     </ion-fab-button>
   </ion-buttons>
 
-  <ion-buttons slot="start" style="position: fixed; left: 0%; top: 0%;" (click)="logOut()" >
+  <ion-buttons slot="start" style="position: fixed; left: 0%; top: 4%;" (click)="logOut()" >
     <ion-fab-button size="small" color="white">
       <ion-icon name="log-out" color="primary" >
       </ion-icon>
     </ion-fab-button>
   </ion-buttons>
+    <ion-item>
+      <ion-icon slot="start" name="reorder-two"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label class="bonjour" style="color: aliceblue;">Bonjour {{userHome.Nom}}</ion-label>
+      <ion-avatar style="height:80px;width:80px;" slot="end">
+        <img *ngIf="!userHome.img" src="../../../assets/profil.png" alt="">
+        <img *ngIf="userHome.img" src="{{imgUrl+userHome.img}}" />
+      </ion-avatar>
+    </ion-item>
 
   </ion-list>
   <div class="popover">

@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
 import { users } from 'src/app/model/user';
 import { getCard } from 'src/app/model/getCard';
 import { CarteService } from 'src/app/services/carte.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { data } from 'src/app/model/data';
 import { UserService } from 'src/app/services/user.service';
 import { createCard } from 'src/app/model/createCard';
@@ -33,12 +33,23 @@ export class AddCreateComponent implements OnInit {
   CustomerId: string;
   scanActive: boolean = false;
   show = true;
-  constructor( private ionLoaderService: IonLoaderService, public toastController: ToastController, private carteService: CarteService, public route: ActivatedRoute, private router: Router, private partenaireService: PartenaireService, private userService: UserService) {
+  constructor(private alertCtrl: AlertController, private ionLoaderService: IonLoaderService, public toastController: ToastController, private carteService: CarteService, public route: ActivatedRoute, private router: Router, private partenaireService: PartenaireService, private userService: UserService) {
     this.initForm();
 
   }
 
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
 
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   ngOnInit() {
     const token = localStorage.getItem('token');
     this.decoded = jwt_decode(token);
@@ -65,17 +76,13 @@ export class AddCreateComponent implements OnInit {
     this.data.BirthDateDay=this.user.dateNaissance.toString().substr(8,2);
     this.data.BirthDateMonth=this.user.dateNaissance.toString().substr(5,2);
     this.data.BirthDateYear=this.user.dateNaissance.toString().substr(0,4);
-    console.log("user",this.user);
-    console.log("data",this.data);
-  
+  console.log(this.data);
   }
 
 
   initForm() {
     this.form = new FormGroup({
       cardId: new FormControl(this.data1,{ validators: [Validators.minLength(8)] }),
-      CustomerId: new FormControl("",{ validators: [Validators.minLength(8)] }),
-
     });
   }
   
@@ -84,7 +91,7 @@ export class AddCreateComponent implements OnInit {
 
   ajouter() {
     if(this.form.value.cardId.length<7||this.form.value.cardId==undefined){
-      alert("verifier votre numéro de carte");
+      this.presentAlert("vérifier votre numéro de carte");
     }else{
     this.ionLoaderService.autoLoader();
     this.getCard.cardId = this.form.value.cardId;
@@ -97,26 +104,25 @@ export class AddCreateComponent implements OnInit {
     this.carteService.GetLoyaltyCard(this.getCard).subscribe(
       (res) => {
         this.ionLoaderService.dismissLoader();
-        alert(res.message);
+        this.presentAlert(res.message);
       },
       (error) => {
-        alert("impossible de trouver la carte " + this.getCard.cardId);
+        this.presentAlert("impossible de trouver la carte " + this.getCard.cardId);
       });
     }
   }
 
 
   creer() {
-    if(this.form.value.CustomerId.length<7){
-      alert("verifier votre CIN");
-    }else{
-    this.ionLoaderService.autoLoader();
+  
     this.data.dbId = this.config.dbId;
     this.data.dbId=this.config.dbId;
-    this.data.CustomerId=this.form.value.CustomerId+this.config.storeID;
+    this.data.CustomerId=this.user.CIN+this.config.storeID;
     this.data.storeId=this.config.storeID;
     console.log(this.data);
+    this.ionLoaderService.autoLoader();
     this.userService.createClient(this.data).subscribe(
+      
       (res) => {
         console.log(res.message)
         console.log(res.data)
@@ -131,15 +137,19 @@ export class AddCreateComponent implements OnInit {
             console.log(res.message);
 
             this.ionLoaderService.dismissLoader();
-            alert(res.message);
+            this.presentAlert(res.message);
 
           },
           (error) => { console.log(error); }
         );
 
+      },
+      (error) => { 
+        console.log(error);
+        this.presentAlert("Vérifier votre numéro de CIN") 
       }
     );
-  }
+  
   }
 
   gotoAddCard() {
@@ -180,10 +190,10 @@ export class AddCreateComponent implements OnInit {
         this.stopScanner();
         this.show = !this.show;
       } else {
-        alert('NO DATA FOUND!');
+        this.presentAlert('NO DATA FOUND!');
       }
     } else {
-      alert('NOT ALLOWED!');
+      this.presentAlert('NOT ALLOWED!');
     }
   }
 

@@ -1,7 +1,7 @@
 <ion-router-outlet></ion-router-outlet>
 <ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
 
-  <ion-tab-bar slot="bottom" color="tertiary">
+  <ion-tab-bar slot="bottom">
 
     <ion-tab-button tab="home">
       <ion-icon [name]="selectedTab === 'home' ? 'home' : 'home-outline'"></ion-icon>

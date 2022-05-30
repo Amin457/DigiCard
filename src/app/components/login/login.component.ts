@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -30,8 +30,20 @@ export class LoginComponent implements OnInit{
   form1: FormGroup;
   decoded: any;
   isTypePassword = true;
-  constructor(public toastController: ToastController,public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
+  constructor(private alertCtrl: AlertController,public toastController: ToastController,public httpClient: HttpClient,public navCtrl: NavController , private router: Router, private userService: UserService) {
     this.initForm();
+  }
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
   ngOnInit() {
   }
@@ -82,7 +94,7 @@ export class LoginComponent implements OnInit{
       // On success, we should be able to receive notifications
       PushNotifications.addListener('registration',
         (token: Token) => {
-          //alert('Push registration success, token: ' + token.value);
+          //this.presentAlert('Push registration success, token: ' + token.value);
           this.notif.token=token.value;
           this.notif.id_client=this.user.id;
           this.userService.registerNotif(this.notif).subscribe(
@@ -98,14 +110,14 @@ export class LoginComponent implements OnInit{
       // Some issue with our setup and push will not work
       PushNotifications.addListener('registrationError',
         (error: any) => {
-          //alert('Error on registration: ' + JSON.stringify(error));
+          //this.presentAlert('Error on registration: ' + JSON.stringify(error));
         }
       );
   
       // Show us the notification payload if the app is open on our device
       PushNotifications.addListener('pushNotificationReceived',
         (notification: PushNotificationSchema) => {
-          //alert('notification: '  + JSON.stringify(notification.title) + JSON.stringify(notification.body));
+          //this.presentAlert('notification: '  + JSON.stringify(notification.title) + JSON.stringify(notification.body));
         }
       );
   
@@ -113,7 +125,7 @@ export class LoginComponent implements OnInit{
       // Method called when tapping on a notification
       PushNotifications.addListener('pushNotificationActionPerformed',
         (notification: ActionPerformed) => {
-          //alert('Push action performed: ' + JSON.stringify(notification));
+          //this.presentAlert('Push action performed: ' + JSON.stringify(notification));
         }
       );    
 
@@ -125,7 +137,7 @@ export class LoginComponent implements OnInit{
       }
       },
       error => {
-        alert('email ou mot de passe non valide !!');
+        this.presentAlert('Vérifiez vos coordonnées !!');
       });
 
 

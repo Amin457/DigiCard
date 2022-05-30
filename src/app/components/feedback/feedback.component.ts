@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonRadioGroup } from '@ionic/angular';
+import { AlertController, IonRadioGroup } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Feedback } from 'src/app/model/feedback';
 import { users } from 'src/app/model/user';
@@ -32,8 +32,19 @@ export class FeedbackComponent implements OnInit {
   decoded: any;
   user: users ;
   Q1: number;
-  constructor(private router: Router,public route: ActivatedRoute, public toastController: ToastController , private feedbackService: FeedbackService) { }
+  constructor(private alertCtrl: AlertController,private router: Router,public route: ActivatedRoute, public toastController: ToastController , private feedbackService: FeedbackService) { }
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
 
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   ngOnInit() {
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
@@ -67,7 +78,7 @@ export class FeedbackComponent implements OnInit {
 
   onSubmit(id_question : number,i : number){
    if(this.Q1===undefined){
-     alert("definr votre reponse");
+    this.presentAlert("Ajouter votre réponse");
     }else{
       console.log(this.Q1.toString(),id_question);
       this.swipeNext();
@@ -84,7 +95,7 @@ export class FeedbackComponent implements OnInit {
         });
     }
     if(((i+1)/this.p==1)){
-      alert("merci pour votre feedback");
+      this.presentAlert("Merci pour votre feedback");
     }
   }
 }

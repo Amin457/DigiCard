@@ -2,17 +2,14 @@
   <ion-button shape="round" *ngIf="show" expand="full" (click)="startScanner()">
     scanner votre carte
   </ion-button>
-  <!--<ion-row class="scan-button" [hidden]="!scanActive">
-    <ion-col class="ion-no-padding">
-        <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
-      </ion-col>
-    </ion-row>-->
-  <div class="scan-box" [hidden]="!scanActive" [style.--background]="scanActive?'#00000000':'#ffffff'"></div>
+ <!-- <img height="300px" width="100%" *ngIf="show" src="../../../assets/undraw_plain_credit_card_re_c07w.svg" alt="">-->
+
+  <div  class="scan-box" [hidden]="!scanActive" [style.--background]="scanActive?'#00000000':'#ffffff'"></div>
 
   <form *ngIf="show" [formGroup]="form">
-  
+
     <ion-list lines="none" class="ion-margin ion-padding ion-text-center">
-      
+
       <h2 style="top:10%;">Ajouter une carte existante</h2>
 
 
@@ -21,20 +18,12 @@
         </ion-icon>
         <ion-input formControlName="cardId" placeholder="Enter le numero de la carte">
         </ion-input>
-      </ion-item>    
+      </ion-item>
 
       <ion-button color="primary" shape="round" (click)="ajouter()">ajouter</ion-button>
 
       <h4 style="top:42%;">ou</h4>
       <h2 style="top:46%;">Créer une nouvelle carte</h2>
-      <ion-item class="ion-margin-vertical">
-        <ion-icon name="card-outline" slot="end" color="medium">
-        </ion-icon>
-        <ion-input formControlName="CustomerId" placeholder="Enter le numero de la carte">
-        </ion-input>
-        <!--<ion-input type="date" formControlName="CustomerId" placeholder="Enter le numero de la carte">
-        </ion-input>-->
-      </ion-item>
       <ion-button color="primary" shape="round" (click)="creer()">créer</ion-button>
     </ion-list>
 

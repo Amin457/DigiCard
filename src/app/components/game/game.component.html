@@ -7,19 +7,17 @@
   </div>
   </ion-list>
 </ion-header>
-
-<div *ngIf="!blocked" style="text-align: center;" class="wheel">
-  <canvas (click)="spin()" #myCanvas width="auto" height="300"></canvas>
-  <!--<div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="spin()" color="primary">
-      <ion-icon class="icon" name="game-controller"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</div>   -->  
-</div>
-<img *ngIf="blocked" src="../../../assets/blocked.png" alt="">
 <ion-content>
-
+  <div *ngIf="!blocked" style="text-align: center;" class="wheel">
+    <canvas (click)="spin()" #myCanvas width="auto" height="300"></canvas>
+    <!--<div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="spin()" color="primary">
+        <ion-icon class="icon" name="game-controller"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>   -->  
+  </div>
+  <img width="100%" *ngIf="blocked" src="../../../assets/blocked.png" alt="">
   <ion-item-group>
     <ion-item class="ion-padding-vertical popItem" 
       *ngFor="let item of recom">

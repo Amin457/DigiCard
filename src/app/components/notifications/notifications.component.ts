@@ -34,7 +34,5 @@ export class NotificationsComponent implements OnInit {
   promopart(){
     this.router.navigate(['/main/promotion']);
   }
-  callFunction(){
-    alert("ok");
-  }
+ 
 }

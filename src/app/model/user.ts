@@ -6,4 +6,5 @@ export class users {
   mdp: string;
   img: string;
   dateNaissance: Date;
+  CIN:string;
 }

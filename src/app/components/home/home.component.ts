@@ -10,12 +10,7 @@ import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
 import { IonSlides } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import {
-  ActionPerformed,
-  PushNotificationSchema,
-  PushNotifications,
-  Token,
-} from '@capacitor/push-notifications';
+
 import { notif } from 'src/app/model/notif';
 import { NotificationService } from 'src/app/services/notification.service';
 @Component({
@@ -31,6 +26,7 @@ export class HomeComponent implements OnInit {
   id: number;
   nbr: number;
   user: users ;
+  userHome:users=new users();
   cartes: Carte[]=[] ;
   promos: Promo[]=[] ;
   message : string;
@@ -49,72 +45,23 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-   /* const token=localStorage.getItem('token');
-    this.decoded = jwt_decode(token);
-    this.user=this.decoded.result;
-
-          
-
-
-       
-      /////////////////////////////////////
-      console.log('Initializing HomePage');
-
-      // Request permission to use push notifications
-      // iOS will prompt user and return if they granted permission or not
-      // Android will just grant without prompting
-      PushNotifications.requestPermissions().then(result => {
-        if (result.receive === 'granted') {
-          // Register with Apple / Google to receive push via APNS/FCM
-          PushNotifications.register();
-        } else {
-          // Show some error
-        }
-      });
   
-      // On success, we should be able to receive notifications
-      PushNotifications.addListener('registration',
-        (token: Token) => {
-          //alert('Push registration success, token: ' + token.value);
-          this.notif.token=token.value;
-          this.notif.id_client=this.user.id;
-          this.userService.registerNotif(this.notif).subscribe(
-            (res)  => {
-             console.log(res);
-            },
-            error => {
-              console.log(error);
-            });
-        }
-      );
-  
-      // Some issue with our setup and push will not work
-      PushNotifications.addListener('registrationError',
-        (error: any) => {
-          //alert('Error on registration: ' + JSON.stringify(error));
-        }
-      );
-  
-      // Show us the notification payload if the app is open on our device
-      PushNotifications.addListener('pushNotificationReceived',
-        (notification: PushNotificationSchema) => {
-          //alert('notification: '  + JSON.stringify(notification.title) + JSON.stringify(notification.body));
-        }
-      );
-  
-      
-      // Method called when tapping on a notification
-      PushNotifications.addListener('pushNotificationActionPerformed',
-        (notification: ActionPerformed) => {
-          //alert('Push action performed: ' + JSON.stringify(notification));
-        }
-      );   */ 
     }
 
-    ionViewWillEnter() {
+  async  ionViewWillEnter() {
       const token1=localStorage.getItem('token');
       this.decoded = jwt_decode(token1);
       this.user=this.decoded.result;
+     await this.userService.getUserById(this.user.id).subscribe(
+        (res)  => {
+          this.userHome=res.data;
+          console.log(this.userHome);
+        }
+        ,
+        error => {
+          console.log(error);
+        });
+
       this.renderer.setStyle(this.header['el'], 'webkitTransition', 'top 700ms');
       this.carteService.getAllCartes(this.user.id).subscribe(
         (res)  => {
@@ -153,6 +100,7 @@ export class HomeComponent implements OnInit {
         console.log(error);
       });
 
+    
   }
 
     logOut(){
@@ -187,7 +135,7 @@ export class HomeComponent implements OnInit {
     onContentScroll(event) {
       if (event.detail.scrollTop >= 50) {
         ////-30
-        this.renderer.setStyle(this.header['el'], 'top', '-30%');
+        this.renderer.setStyle(this.header['el'], 'top', '-20%');
       } else {
         this.renderer.setStyle(this.header['el'], 'top', '0px');
       }

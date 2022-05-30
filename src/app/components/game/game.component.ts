@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 import { CadeauService } from 'src/app/services/cadeau.service';
 import { cadeau } from 'src/app/model/cadeau';
 import { recompense } from 'src/app/model/recompense';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
@@ -33,12 +33,23 @@ export class GameComponent {
   spinArcStart: number;
   cad: recompense = new recompense();
   recom: any[];
-  constructor(public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
+  constructor(private alertCtrl: AlertController,public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
 
   }
 
 
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
 
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   ngAfterViewInit(): void {
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
@@ -179,7 +190,7 @@ export class GameComponent {
     this.cadeauService.getPermissionJeux(this.user.id, this.id_part).subscribe(
       (res) => {
         if (res.success == 0) {
-          alert(res.message + (7 - (res.results1[0].a)) + " jour(s)");
+          this.presentAlert(res.message + (7 - (res.results1[0].a)) + " jour(s)");
           this.blocked = false;
 
         } else if (res.success == 1) {
@@ -227,7 +238,7 @@ export class GameComponent {
 
     //inserer le cadeau gagner dans la base
     if (text == "perdu") {
-      alert("vous avez perdu");
+      this.presentAlert("vous avez perdu");
       const token = localStorage.getItem('token');
       this.decoded = jwt_decode(token);
       this.user = this.decoded.result;
@@ -253,7 +264,7 @@ export class GameComponent {
 
       this.cadeauService.insertRecompense(this.cad).subscribe(
         (res) => {
-          alert(res.message);
+          this.presentAlert(res.message);
           this.cadeauService.getRecompense(this.user.id, this.id_part).subscribe(
             (res) => {
               this.recom = res.results;

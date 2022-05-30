@@ -84,7 +84,6 @@
 
 
             <ion-input formControlName="dateNaissance" type="date">
-              <ion-icon name="mail" slot="start" color="medium"></ion-icon>
             </ion-input>
 
 
@@ -109,6 +108,22 @@
               * Entrer votre mot de passe s'il vous plait !
             </ion-text>
             <ion-text *ngIf="!form.get('mdp').hasError('required') && form.get('mdp').hasError('minlength')">
+              * 8 caractére au minimum
+            </ion-text>
+          </ion-text>
+        </div>
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">CIN</ion-label>
+              <ion-input formControlName="CIN" type="text" placeholder="CIN">
+                <ion-icon name="id-card-outline"></ion-icon>
+              </ion-input>
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('CIN').valid && form.get('CIN').touched">
+            <ion-text *ngIf="form.get('CIN').hasError('required')">
+              * Entrer votre CIN s'il vous plait !
+            </ion-text>
+            <ion-text *ngIf="!form.get('CIN').hasError('required') && form.get('CIN').hasError('minlength')">
               * 8 caractére au minimum
             </ion-text>
           </ion-text>

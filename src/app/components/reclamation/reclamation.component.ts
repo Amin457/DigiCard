@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { ReclamationService } from 'src/app/services/reclamation.service';
 import { Reclamation } from 'src/app/model/reclamation';
 import { users } from 'src/app/model/user';
@@ -26,7 +26,19 @@ export class ReclamationComponent implements OnInit {
  user: users ;
   decoded: any;
   Localisation: Localisation[]=[] ;
-  constructor(private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService , private LocalisationService:LocalisationService) { }
+  constructor(private alertCtrl: AlertController,private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService , private LocalisationService:LocalisationService) { }
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   ngOnInit() {
     this.id_carte = this.route.snapshot.params.id1;
     this.id_part = this.route.snapshot.params.id2;
@@ -55,28 +67,7 @@ onSelectChange(selectedValue: any) {
 }
 sendRec(){
   if(this.choix===undefined || this.Rec===undefined || this.id===undefined ){
-    this.toastController.create({
-      message: 'il faut que vous remplir tous le formuliare !',
-      position: 'bottom',
-      cssClass: 'toast-custom-class',
-      buttons: [
-        {
-          side: 'end',
-          handler: () => {
-            console.log('');
-          }
-        }, {
-          side: 'end',
-          text: 'fermer',
-          role: 'cancel',
-          handler: () => {
-            console.log('');
-          }
-        }
-      ]
-    }).then((toast) => {
-      toast.present();
-    });
+     this.presentAlert('il faut que vous remplir tous le formuliare !');
   }else{
 
   this.rec.id_client=this.user.id;
@@ -86,28 +77,9 @@ sendRec(){
   console.log('hhhhhhhhhhhhh',this.rec)
   this.reclamationService.createRec(this.rec).subscribe(
     (res)  => {
-      this.toastController.create({
-        message: 'reclamation a bien recue',
-        position: 'bottom',
-        cssClass: 'toast-custom-class',
-        buttons: [
-          {
-            side: 'end',
-            handler: () => {
-              console.log('');
-            }
-          }, {
-            side: 'end',
-            text: 'fermer',
-            role: 'cancel',
-            handler: () => {
-              console.log('');
-            }
-          }
-        ]
-      }).then((toast) => {
-        toast.present();
-      });
+  
+      this.presentAlert('Votre réclamation a était envoyée');
+       
     },
     error => {
       console.log(error);

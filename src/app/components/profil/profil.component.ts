@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IonSlides, ToastController } from '@ionic/angular';
+import { IonSlides, ToastController ,AlertController} from '@ionic/angular';
 import jwt_decode from 'jwt-decode';
 import { users } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
@@ -30,9 +30,22 @@ export class ProfilComponent implements OnInit {
     initialSlide: 0,
     speed: 400
   };
-  constructor( public httpClient: HttpClient, private userService: UserService, public toastController: ToastController) {
+  constructor(private alertCtrl: AlertController, public httpClient: HttpClient, private userService: UserService, public toastController: ToastController) {
     this.initForm();
 
+  }
+
+  async presentAlert(msg : string) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
   onFileSelected(event: any) {
     this.file = event.target.files[0];
@@ -41,6 +54,7 @@ export class ProfilComponent implements OnInit {
 
 
   ngOnInit() {
+    
   }
 
 
@@ -49,12 +63,15 @@ export class ProfilComponent implements OnInit {
     this.decoded = jwt_decode(token);
     this.user = this.decoded.result;
     this.id = this.user.id;
+    console.log(this.user)
     this.form = new FormGroup({
       Nom: new FormControl(this.user.Nom, { validators: [Validators.required] }),
       Prenom: new FormControl(this.user.Prenom, { validators: [Validators.required] }),
       mail: new FormControl(this.user.mail, { validators: [Validators.required, Validators.email] }),
       dateNaissance: new FormControl(null, {validators: [Validators.required]}),
       mdp: new FormControl(this.user.mdp, { validators: [Validators.required, Validators.minLength(8)] }),
+      CIN: new FormControl(this.user.CIN, {validators: [Validators.required, Validators.minLength(8)]}),
+
 
     });
   }
@@ -76,8 +93,7 @@ export class ProfilComponent implements OnInit {
      this.userService.updateUser(this.userupdated).subscribe(
         (res) => {
           {
-            console.log(res);
-            alert(res.message);
+            this.presentAlert(res.message);
             this.user = this.userupdated;
 
           }
@@ -99,7 +115,7 @@ export class ProfilComponent implements OnInit {
           (res) => {
             {
               console.log(res);
-              alert(res.message);
+              this.presentAlert(res.message);
               this.user = this.userupdated;
 
             }

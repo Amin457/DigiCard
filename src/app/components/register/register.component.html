@@ -8,7 +8,7 @@
 
 <ion-footer>
   <ion-list lines="full">
-       <ion-item-group class="ion-margin-horizontal">
+    <ion-item-group class="ion-margin-horizontal">
       <form [formGroup]="form">
         <div class="ion-margin-vertical">
           <ion-item>
@@ -21,8 +21,7 @@
 
 
           </ion-item>
-          <ion-text class="error" color="danger"
-            *ngIf="!form.get('Nom').valid && form.get('Nom').touched">
+          <ion-text class="error" color="danger" *ngIf="!form.get('Nom').valid && form.get('Nom').touched">
             <ion-text *ngIf="form.get('Nom').hasError('required')">
               * Entrer votre Nom s'il vous plait !
             </ion-text>
@@ -40,8 +39,7 @@
 
 
           </ion-item>
-          <ion-text class="error" color="danger"
-            *ngIf="!form.get('Prenom').valid && form.get('Prenom').touched">
+          <ion-text class="error" color="danger" *ngIf="!form.get('Prenom').valid && form.get('Prenom').touched">
             <ion-text *ngIf="form.get('Prenom').hasError('required')">
               * Entrer votre Prenom s'il vous plait !
             </ion-text>
@@ -59,13 +57,11 @@
 
 
           </ion-item>
-          <ion-text class="error" color="danger"
-            *ngIf="!form.get('mail').valid && form.get('mail').touched">
+          <ion-text class="error" color="danger" *ngIf="!form.get('mail').valid && form.get('mail').touched">
             <ion-text *ngIf="form.get('mail').hasError('required')">
               * Entrer votre email s'il vous plait !
             </ion-text>
-            <ion-text
-              *ngIf="!form.get('mail').hasError('required') && form.get('mail').hasError('email')">
+            <ion-text *ngIf="!form.get('mail').hasError('required') && form.get('mail').hasError('email')">
               * Entrer valide email !
             </ion-text>
           </ion-text>
@@ -80,7 +76,6 @@
 
 
             <ion-input formControlName="dateNaissance" type="date">
-              <ion-icon name="mail" slot="start" color="medium"></ion-icon>
             </ion-input>
 
 
@@ -92,14 +87,14 @@
             </ion-text>
           </ion-text>
         </div>
-        
+
 
         <div class="ion-margin-vertical">
           <ion-item>
             <ion-label position="stacked">Mot de passe</ion-label>
-              <ion-input formControlName="mdp" type="password" placeholder="Mot de passe">
-                <ion-icon name="key" slot="start" color="medium"></ion-icon>
-              </ion-input>
+            <ion-input formControlName="mdp" type="password" placeholder="Mot de passe">
+              <ion-icon name="key" slot="start" color="medium"></ion-icon>
+            </ion-input>
           </ion-item>
           <ion-text class="error" color="danger" *ngIf="!form.get('mdp').valid && form.get('mdp').touched">
             <ion-text *ngIf="form.get('mdp').hasError('required')">
@@ -111,19 +106,32 @@
           </ion-text>
         </div>
 
+        <div class="ion-margin-vertical">
+          <ion-item>
+            <ion-label position="stacked">CIN</ion-label>
+            <ion-input formControlName="CIN" type="text" placeholder="CIN">
+              <ion-icon name="id-card-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text class="error" color="danger" *ngIf="!form.get('CIN').valid && form.get('CIN').touched">
+            <ion-text *ngIf="form.get('CIN').hasError('required')">
+              * Entrer votre mot de passe s'il vous plait !
+            </ion-text>
+            <ion-text *ngIf="!form.get('CIN').hasError('required') && form.get('CIN').hasError('minlength')">
+              * 8 caractére au minimum
+            </ion-text>
+          </ion-text>
+        </div>
 
-        <ion-button
-          size="large"
-          expand="block"
-          shape="round"
-          color="primary"
-          (click)="onSubmit()">
+
+        <ion-button size="large" expand="block" shape="round" color="primary" (click)="onSubmit()">
           <ion-text color="white">S'inscrire</ion-text>
 
         </ion-button>
         <p class="signup">
           <ion-note>
-            avez-Vous un compte? <ion-text style="font-size: 1.2rem;" (click)="goto()" color="primary">se connecter</ion-text>
+            avez-Vous un compte? <ion-text style="font-size: 1.2rem;" (click)="goto()" color="primary">se connecter
+            </ion-text>
           </ion-note>
         </p>
       </form>

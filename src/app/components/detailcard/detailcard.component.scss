@@ -11,18 +11,18 @@ ion-header {
           }
   }
 .icon{
-  color: rgb(136, 52, 247) !important;
+  color: #1F2F98 !important;
 
 }
 
 
 ion-fab-button[data-desc] {
-  --ion-color-primary: #7a6cfc;
+  --ion-color-primary: #1F2F98;
   position: relative;
 }
 
 ion-fab-button[data-desc]::after {
-  --ion-color-primary: #7a6cfc;
+  --ion-color-primary: #1F2F98;
   position: absolute;
   content: attr(data-desc);
   z-index: 1;
@@ -36,5 +36,5 @@ ion-fab-button[data-desc]::after {
 }
 
 .class-fab {
-  --ion-color-primary: #7a6cfc;
+  --ion-color-primary: #1F2F98;
 }
