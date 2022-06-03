@@ -35,11 +35,11 @@ export class PromoPartComponent implements OnInit {
  }
 
  ionViewWillEnter() {
+   this.nom="promotions"
   this.promoService.getPromoByPart(this.id_part).subscribe(
     (res)  => {
       if(res.success===1){
-      this.promos=res.data;
-      this.nom=this.promos[0].nom;
+      this.promos=res.data;      
       console.log(this.promos);
       return false;
     }else{
@@ -52,5 +52,12 @@ export class PromoPartComponent implements OnInit {
     });
 
  }
+ openPromo(url:string){
+  window.open(url);
+}
 
+gotoDetail(){
+  this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
+
+}
 }

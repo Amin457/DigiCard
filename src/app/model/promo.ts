@@ -3,5 +3,5 @@ export class Promo {
   image: string;
   nom: string;
   id_part: number;
-  description: string;
+  url: string;
 }

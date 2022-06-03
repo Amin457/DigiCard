@@ -37,4 +37,8 @@ export class PromotionComponent implements OnInit {
         console.log(error);
       });
   }
+
+  openPromo(url:string){
+    window.open(url);
+  }
 }

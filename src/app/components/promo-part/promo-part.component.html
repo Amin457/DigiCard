@@ -9,9 +9,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div *ngIf="promos.length==0" >
+    <img src="../../../assets/undraw_no_data_re_kwbl.svg" alt="">
+    <h3 style="text-align: center;">Aucune promotion</h3>
+  </div>
 <ion-card *ngFor="let item of promos">
-  <ion-card-content style="height: 180px;">
+  <ion-card-content style="height: 180px;" (click)="openPromo(item.description)">
     <img style="height: 100%; width: 100%;" src="{{imgUrl+item.image}}" alt="">
   </ion-card-content>
 </ion-card>
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+  <ion-fab-button (click)="gotoDetail()">
+    <ion-icon name="return-up-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>

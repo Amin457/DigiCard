@@ -1,10 +1,9 @@
 export class Config {
-    idConfig: number;
+    id_part: number;
     adresseIP: string;
     env: string;
     storeID : string ;
     dbId : string;
-    id_part: number;
     
   }
   

@@ -6,4 +6,5 @@ export class Carte {
   id_part: number;
   id_client: number;
   img: string;
+  etat:number;
 }

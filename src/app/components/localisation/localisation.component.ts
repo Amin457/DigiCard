@@ -90,28 +90,6 @@ export class LocalisationComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ////////////
- 
- /* onClick1(url: string){
-    window.open(url,'_system');
-  }*/
-
   gotoDetail(){
     this.router.navigate(['main/home/detailcard/'+this.id_carte+'/'+this.id_part]);
 

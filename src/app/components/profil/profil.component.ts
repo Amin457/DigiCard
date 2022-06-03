@@ -68,7 +68,7 @@ export class ProfilComponent implements OnInit {
       Nom: new FormControl(this.user.Nom, { validators: [Validators.required] }),
       Prenom: new FormControl(this.user.Prenom, { validators: [Validators.required] }),
       mail: new FormControl(this.user.mail, { validators: [Validators.required, Validators.email] }),
-      dateNaissance: new FormControl(null, {validators: [Validators.required]}),
+      dateNaissance: new FormControl(this.user.dateNaissance, {validators: [Validators.required]}),
       mdp: new FormControl(this.user.mdp, { validators: [Validators.required, Validators.minLength(8)] }),
       CIN: new FormControl(this.user.CIN, {validators: [Validators.required, Validators.minLength(8)]}),
 
@@ -88,8 +88,8 @@ export class ProfilComponent implements OnInit {
       this.userupdated.mail = this.form.value.mail;
       this.userupdated.mdp = this.form.value.mdp;
       this.userupdated.img = this.user.img;
+      this.userupdated.CIN=this.form.value.CIN;
       this.userupdated.dateNaissance=this.form.value.dateNaissance;
-      console.log(this.userupdated);
      this.userService.updateUser(this.userupdated).subscribe(
         (res) => {
           {
@@ -109,8 +109,11 @@ export class ProfilComponent implements OnInit {
         this.userupdated.Prenom = this.form.value.Prenom;
         this.userupdated.mail = this.form.value.mail;
         this.userupdated.mdp = this.form.value.mdp;
+        this.userupdated.CIN=this.form.value.CIN;
         this.userupdated.img = res.data;
-        console.log(this.userupdated);
+        this.userupdated.dateNaissance=this.form.value.dateNaissance;
+
+        console.log("hhhhhhhhhhhh",this.userupdated);
         this.userService.updateUser(this.userupdated).subscribe(
           (res) => {
             {

@@ -76,6 +76,7 @@ export class AddCreateComponent implements OnInit {
     this.data.BirthDateDay=this.user.dateNaissance.toString().substr(8,2);
     this.data.BirthDateMonth=this.user.dateNaissance.toString().substr(5,2);
     this.data.BirthDateYear=this.user.dateNaissance.toString().substr(0,4);
+    console.log(this.user);
   console.log(this.data);
   }
 

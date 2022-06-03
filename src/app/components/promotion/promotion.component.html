@@ -12,8 +12,12 @@
 </ion-header>
 
 <ion-content  style="width:100% ;">
+  <div *ngIf="promos.length==0" >
+    <img src="../../../assets/undraw_no_data_re_kwbl.svg" alt="">
+    <h3 style="text-align: center;">Aucune promotion</h3>
+  </div>
  <ion-card *ngFor="let item of promos| promo:Search">
-    <ion-card-content style="height: 180px;">
+    <ion-card-content style="height: 180px;" (click)="openPromo(item.url)">
       <img style="height: 100%; width: 100%;" src="{{imgUrl+item.image}}" alt="">
     </ion-card-content>
   </ion-card>

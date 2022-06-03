@@ -54,25 +54,25 @@
    </ion-item>
    
  </div>
-   <ion-button
-   size="large"
-   width="50%"
-   expand="block"
-   shape="round"
-   color="primary"
-   width="50%"
-   (click)="sendRec()">
-   <ion-text color="white">envoyer</ion-text>
+  
 
- </ion-button>
+ 
 </form>
+
+
+
+
+</ion-content>
+
+
+<ion-fab  vertical="bottom" horizontal="center">
+  <ion-fab-button (click)="sendRec()">
+    <ion-icon name="send-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
 
 <ion-fab  vertical="bottom" horizontal="start" >
   <ion-fab-button (click)="gotoDetail()">
     <ion-icon name="return-up-back-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
-
-</ion-content>
-
-

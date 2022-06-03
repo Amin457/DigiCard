@@ -9,38 +9,81 @@
 </ion-header>
 <ion-content>
   <div *ngIf="!blocked" style="text-align: center;" class="wheel">
-    <canvas (click)="spin()" #myCanvas width="auto" height="300"></canvas>
-    <!--<div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
-      <ion-fab-button (click)="spin()" color="primary">
+    <canvas #myCanvas width="auto" height="300"></canvas>
+    <div class="icon-center"><ion-fab vertical="55%" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="spin()">
         <ion-icon class="icon" name="game-controller"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-  </div>   -->  
+  </div>
   </div>
   <img width="100%" *ngIf="blocked" src="../../../assets/blocked.png" alt="">
-  <ion-item-group>
-    <ion-item class="ion-padding-vertical popItem" 
-      *ngFor="let item of recom">
-      <ion-thumbnail slot="start">
-        <div class="ion-text-center">
-          <ion-text color="white">date</ion-text>
-        </div>
-        <p class="ion-text-center" [style.margin]="'20px 0'">
-          <ion-text color="white">{{item.date.substr(5,5)}}</ion-text>
-        </p>
-      </ion-thumbnail>
-      <ion-label>
-        <ion-note color="dark"><b>{{item.description}}</b></ion-note>
-        <p class="ion-text-wrap">{{item.societe}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-item-group>
 
 
-<br><br><br>
 <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
   <ion-fab-button (click)="gotoDetail()">
     <ion-icon name="return-up-back"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+
+  <ion-fab-button color="Secondary" (click)="closeModel()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box2-heart" viewBox="0 0 16 16">
+      <path d="M8 7.982C9.664 6.309 13.825 9.236 8 13 2.175 9.236 6.336 6.31 8 7.982Z"/>
+      <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4h-8.5Zm0 1H7.5v3h-6l2.25-3ZM8.5 4V1h3.75l2.25 3h-6ZM15 5v10H1V5h14Z"/>
+    </svg>
+  </ion-fab-button>
+</ion-fab>
+
+
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-list lines="none">
+        <ion-row>
+          <ion-col>
+            <ion-label class="big-heading">
+              <p
+                style=" font-size: 1.4rem;font-weight: bold;letter-spacing: 0.5px;text-align: center; margin-top: 50px;color: aliceblue;">
+                vos cadeaux</p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </ion-header>
+    <ion-content [fullscreen]="true">
+      
+      <ion-item-group>
+
+        <div *ngIf="!recom" >
+          <img src="../../../assets/undraw_no_data_re_kwbl.svg" alt="">
+          <h3 style="text-align: center;">Aucune carte désactivée</h3>
+        </div>
+        <ion-item class="ion-padding-vertical popItem" 
+        
+          *ngFor="let item of recom">
+          <ion-thumbnail slot="start">
+            <div class="ion-text-center">
+              <ion-text color="white">date</ion-text>
+            </div>
+            <p class="ion-text-center" [style.margin]="'20px 0'">
+              <ion-text color="white">{{item.date.substr(5,5)}}</ion-text>
+            </p>
+          </ion-thumbnail>
+          <ion-label>
+            <ion-note color="dark"><b>{{item.description}}</b></ion-note>
+            <p class="ion-text-wrap">{{item.societe}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+      
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+
+        <ion-fab-button color="Secondary" (click)="closeModel()">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-content>
+  </ng-template>
+</ion-modal>
 </ion-content>

@@ -26,5 +26,8 @@ export class CarteService {
           return  this.httpClient.post<getCard>(`${this.url}`+`createCard`,createCard);}
       getPoints(getPoint : getPoint): Observable<any>{
           return  this.httpClient.post<getPoint>(`${this.url}`+`getPoints`,getPoint);}
-  }
-
+      deleteCarte(id : number , etat : number): Observable<any>{
+        return  this.httpClient.put<getPoint>(`${this.baseURL}`+'deleteCarte/'+id+'/'+etat,getPoint,{});}
+      carteDesactivé(id: number): Observable<any>{
+       return  this.httpClient.get<any>(`${this.baseURL}`+'getInactive/cartes/'+id);}
+}

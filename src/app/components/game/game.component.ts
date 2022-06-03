@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { users } from 'src/app/model/user';
 import jwt_decode from 'jwt-decode';
 import { CadeauService } from 'src/app/services/cadeau.service';
 import { cadeau } from 'src/app/model/cadeau';
 import { recompense } from 'src/app/model/recompense';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
@@ -17,6 +17,8 @@ export class GameComponent {
   @ViewChild('myCanvas', { static: false }) myCanvas: ElementRef;
   blocked: boolean;
   cadeau: any[] = [];
+  isOpen = false;
+
   user: users;
   id_part: number;
   id_carte: number;
@@ -33,7 +35,9 @@ export class GameComponent {
   spinArcStart: number;
   cad: recompense = new recompense();
   recom: any[];
-  constructor(private alertCtrl: AlertController,public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
+  constructor(private actionSheetCtrl: ActionSheetController,
+    public element: ElementRef,
+    public renderer: Renderer2,private alertCtrl: AlertController,public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
 
   }
 
@@ -264,7 +268,7 @@ export class GameComponent {
 
       this.cadeauService.insertRecompense(this.cad).subscribe(
         (res) => {
-          this.presentAlert(res.message);
+          this.presentAlert(res.message+" "+text);
           this.cadeauService.getRecompense(this.user.id, this.id_part).subscribe(
             (res) => {
               this.recom = res.results;
@@ -296,5 +300,9 @@ export class GameComponent {
 
   gotoDetail() {
     this.router.navigate(['main/home/detailcard/' + this.id_carte + '/' + this.id_part]);
+  }
+
+  closeModel() {
+    this.isOpen = !this.isOpen;
   }
 }

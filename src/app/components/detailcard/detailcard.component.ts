@@ -4,7 +4,7 @@ import { Carte } from 'src/app/model/carte';
 import { users } from 'src/app/model/user';
 import { CarteService } from 'src/app/services/carte.service';
 import jwt_decode from 'jwt-decode';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { PromotionService } from 'src/app/services/promotion.service';
 import { Promo } from 'src/app/model/promo';
@@ -31,7 +31,7 @@ export class DetailcardComponent implements OnInit {
   type = true;
   points: number;
   getPoint: getPoint = new getPoint;
-  constructor(private cadeauService: CadeauService, private promoService: PromotionService, private router: Router, public route: ActivatedRoute, private carteService: CarteService, private partenaireService: PartenaireService, private toastCtrl: ToastController) { }
+  constructor(private alertCtrl: AlertController,private cadeauService: CadeauService, private promoService: PromotionService, private router: Router, public route: ActivatedRoute, private carteService: CarteService, private partenaireService: PartenaireService, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     const token = localStorage.getItem('token');
@@ -44,7 +44,7 @@ export class DetailcardComponent implements OnInit {
     this.carteService.getCarteById(this.user.id, this.id_carte).subscribe(
       (res) => {
         this.carte1 = res.data;
-        console.log("caaaartee", this.carte1[0].num_carte);
+        console.log("caaaartee", this.carte1[0]);
         this.getPoint.cardId = this.carte1[0].num_carte;
 
 
@@ -111,4 +111,43 @@ export class DetailcardComponent implements OnInit {
   game() {
     this.router.navigate(['main/home/detailcard/' + this.id_carte + '/' + this.id_part + '/game']);
   }
+  closeCard(){
+      console.log("closeCard");
+      this.presentConfirm();
+  }
+
+  async presentConfirm() {
+    let alert = await this.alertCtrl.create({
+      message: 'voulez-vous désactiver cette carte ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => {
+            console.log('this.carte1[0]');
+          }
+        },
+        {
+          text: 'Oui',
+          handler: () => {
+            console.log('Oui clicked');
+
+            this.carteService.deleteCarte(this.carte1[0].id_carte,this.carte1[0].etat).subscribe(
+              (res) => {
+                console.log(res);
+                this.router.navigate(['main/home']);
+              },
+              error => {
+                console.log(error);
+              });
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
+
+
+
+

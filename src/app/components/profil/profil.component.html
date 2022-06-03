@@ -1,4 +1,4 @@
-<ion-content [scrollEvents]="true" [fullscreen]="true">
+<ion-content [fullscreen]="true">
   <ion-slides #mySlider pager="true" [options]="slideOpts">
     <ion-slide>
       <ion-card style="width:100%;">
@@ -8,7 +8,8 @@
           <ion-card-title>{{user.Nom}} {{user.Prenom}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          {{user.mail}}
+         {{user.mail}}
+      
         </ion-card-content>
         <ion-footer>
           <ion-button expand="block" shape="round" width="50%" (click)="swipeNext()">

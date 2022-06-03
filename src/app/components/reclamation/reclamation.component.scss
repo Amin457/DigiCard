@@ -7,7 +7,7 @@
 
 ion-header {
   ion-list{
-      height: 100px;
+      height: 80px;
       background-color: rgb(31, 47, 152);
       border-radius: 0 0 20px 20px;
       padding-bottom: 7vh;
@@ -37,9 +37,4 @@ ion-fab-button {
   --ion-color-primary: #1F2F98;
 
 }
-ion-button {
-  --ion-color-primary: #1F2F98;
-  position: fixed;
 
-}
-//  --ion-color-primary: #428cff;
