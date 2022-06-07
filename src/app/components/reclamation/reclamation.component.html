@@ -40,7 +40,7 @@
   <ion-item>
     <ion-label>boutique</ion-label>
     <ion-select class="myCustomSelect" [(ngModel)]='id' name="id" placeholder="Selectionner un boutique" (ionChange)="onSelectChange($event)">
-      <ion-select-option *ngFor="let Localisation of Localisation" [value]="Localisation['id']">{{Localisation.boutique}}</ion-select-option>
+      <ion-select-option *ngFor="let Boutiques of Boutiques" [value]="Boutiques['id']">{{Boutiques.boutique}}</ion-select-option>
     </ion-select>
   </ion-item>
 

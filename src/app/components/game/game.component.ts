@@ -4,8 +4,9 @@ import { users } from 'src/app/model/user';
 import jwt_decode from 'jwt-decode';
 import { CadeauService } from 'src/app/services/cadeau.service';
 import { cadeau } from 'src/app/model/cadeau';
-import { recompense } from 'src/app/model/recompense';
+import { Recompense, recompense } from 'src/app/model/recompense';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-game',
@@ -34,7 +35,7 @@ export class GameComponent {
   arc: number;
   spinArcStart: number;
   cad: recompense = new recompense();
-  recom: any[];
+  recom: Recompense[]=[];
   constructor(private actionSheetCtrl: ActionSheetController,
     public element: ElementRef,
     public renderer: Renderer2,private alertCtrl: AlertController,public toastController: ToastController, private cadeauService: CadeauService, private router: Router, public route: ActivatedRoute) {
@@ -83,7 +84,6 @@ export class GameComponent {
     this.cadeauService.getRecompense(this.user.id, this.id_part).subscribe(
       (res) => {
         this.recom = res.results;
-
       },
       error => {
         console.log(error);
@@ -304,5 +304,11 @@ export class GameComponent {
 
   closeModel() {
     this.isOpen = !this.isOpen;
+  }
+
+  date(date1 : Date) {
+
+    let datePipe: DatePipe = new DatePipe('en-US');
+    return datePipe.transform(new Date(date1),'yyyy-MM-dd');
   }
 }

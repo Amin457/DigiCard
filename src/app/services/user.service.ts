@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { users } from '../model/user';
-import { data } from '../model/data';
 import { environment } from 'src/environments/environment';
 import { notif } from 'src/app/model/notif';
 
@@ -11,7 +10,6 @@ import { notif } from 'src/app/model/notif';
 })
 export class UserService {
   private baseURL = environment.Api + 'api/users/';
-  private soapurl = environment.Api + 'api/soap/createClient';
   __url = environment.Api+'api/files/upload';
 
   constructor(private httpClient: HttpClient) { }
@@ -26,10 +24,6 @@ export class UserService {
 
   register(user: users): Observable<any> {
     return this.httpClient.post<users>(`${this.baseURL}`, user);
-  }
-
-  createClient(data: data): Observable<any> {
-    return this.httpClient.post<data>(`${this.soapurl}`, data);
   }
 
   updateUser(user: users): Observable<any> {

@@ -6,6 +6,7 @@ import { users } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import { Component, OnInit ,ElementRef, Renderer2, ViewChild} from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profil',
@@ -68,7 +69,7 @@ export class ProfilComponent implements OnInit {
       Nom: new FormControl(this.user.Nom, { validators: [Validators.required] }),
       Prenom: new FormControl(this.user.Prenom, { validators: [Validators.required] }),
       mail: new FormControl(this.user.mail, { validators: [Validators.required, Validators.email] }),
-      dateNaissance: new FormControl(this.user.dateNaissance, {validators: [Validators.required]}),
+      dateNaissance: new FormControl(this.date(this.user.dateNaissance), {validators: [Validators.required]}),
       mdp: new FormControl(this.user.mdp, { validators: [Validators.required, Validators.minLength(8)] }),
       CIN: new FormControl(this.user.CIN, {validators: [Validators.required, Validators.minLength(8)]}),
 
@@ -132,8 +133,12 @@ export class ProfilComponent implements OnInit {
   }
 
 
-  
+  date(date1 : Date) {
 
+    let datePipe: DatePipe = new DatePipe('en-US');
+    return datePipe.transform(new Date(date1),'yyyy-MM-dd');
+  }
+ 
 }
 
 

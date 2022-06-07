@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Localisation } from 'src/app/model/localisation';
-import { LocalisationService } from 'src/app/services/localisation.service';
 import tt  from '@tomtom-international/web-sdk-maps';
 import { Geolocation, Position } from '@capacitor/geolocation'; 
 import { HttpClient } from '@angular/common/http'; 

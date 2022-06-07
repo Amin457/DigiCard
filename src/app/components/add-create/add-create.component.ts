@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { createCard } from 'src/app/model/createCard';
 import { IonLoaderService } from 'src/app/ion-loader.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-create',
@@ -73,9 +74,9 @@ export class AddCreateComponent implements OnInit {
     this.data.id_client = this.user.id;
     this.data.id_part = this.id_part;
     this.data.mail=this.user.mail;
-    this.data.BirthDateDay=this.user.dateNaissance.toString().substr(8,2);
-    this.data.BirthDateMonth=this.user.dateNaissance.toString().substr(5,2);
-    this.data.BirthDateYear=this.user.dateNaissance.toString().substr(0,4);
+    this.data.BirthDateDay=this.date(this.user.dateNaissance).toString().substr(8,2);
+    this.data.BirthDateMonth=this.date(this.user.dateNaissance).toString().substr(5,2);
+    this.data.BirthDateYear=this.date(this.user.dateNaissance).toString().substr(0,4);
     console.log(this.user);
   console.log(this.data);
   }
@@ -118,16 +119,16 @@ export class AddCreateComponent implements OnInit {
   
     this.data.dbId = this.config.dbId;
     this.data.dbId=this.config.dbId;
-    this.data.CustomerId=this.user.CIN+this.config.storeID;
+    this.data.CustomerId="SC"+this.user.CIN+this.config.storeID;
     this.data.storeId=this.config.storeID;
     console.log(this.data);
     this.ionLoaderService.autoLoader();
-    this.userService.createClient(this.data).subscribe(
+    this.carteService.createClient(this.data).subscribe(
       
       (res) => {
-        console.log(res.message)
-        console.log(res.data)
-        this.createCard.storeId = this.config.storeID;
+        this.ionLoaderService.dismissLoader();
+        this.presentAlert(res.message);
+        /*this.createCard.storeId = this.config.storeID;
         this.createCard.clientId = this.user.id;
         this.createCard.id_part = this.id_part;
         this.createCard.dbId = this.config.dbId;
@@ -142,7 +143,7 @@ export class AddCreateComponent implements OnInit {
 
           },
           (error) => { console.log(error); }
-        );
+        );*/
 
       },
       (error) => { 
@@ -209,5 +210,9 @@ export class AddCreateComponent implements OnInit {
   }
 
 
+  date(date1 : Date) {
 
+    let datePipe: DatePipe = new DatePipe('en-US');
+    return datePipe.transform(new Date(date1),'yyyy-MM-dd');
+  }
 }

@@ -6,9 +6,8 @@ import { ReclamationService } from 'src/app/services/reclamation.service';
 import { Reclamation } from 'src/app/model/reclamation';
 import { users } from 'src/app/model/user';
 import jwt_decode from 'jwt-decode';
-import { LocalisationService } from 'src/app/services/localisation.service';
-import { Localisation } from 'src/app/model/localisation';
-import { posix } from 'path';
+import { Boutiques } from 'src/app/model/boutique';
+import { BoutiqueService } from 'src/app/services/Boutiques.service';
 
 @Component({
   selector: 'app-reclamation',
@@ -25,8 +24,8 @@ export class ReclamationComponent implements OnInit {
  rec: Reclamation=new Reclamation();
  user: users ;
   decoded: any;
-  Localisation: Localisation[]=[] ;
-  constructor(private alertCtrl: AlertController,private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService , private LocalisationService:LocalisationService) { }
+  Boutiques: Boutiques[]=[] ;
+  constructor(private alertCtrl: AlertController,private router: Router,public route: ActivatedRoute ,  public toastController: ToastController ,private reclamationService: ReclamationService , private boutiqueService:BoutiqueService) { }
   async presentAlert(msg : string) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
@@ -46,10 +45,10 @@ export class ReclamationComponent implements OnInit {
     this.decoded = jwt_decode(token);
     this.user=this.decoded.result;
 
-    this.LocalisationService.getLocalisations(this.id_part).subscribe(
+    this.boutiqueService.getBoutiques(this.id_part).subscribe(
       (res)  => {
-        this.Localisation=res.data;
-        console.log(this.Localisation);
+        this.Boutiques=res.data;
+        console.log(this.Boutiques);
 
       },
       error => {
@@ -62,8 +61,8 @@ export class ReclamationComponent implements OnInit {
 }
 
 onSelectChange(selectedValue: any) {
-  var item = this.Localisation.find(item => item['id'] === selectedValue);
-  var postion = this.Localisation.findIndex(item => item['id'] === selectedValue);
+  var item = this.Boutiques.find(item => item['id'] === selectedValue);
+  var postion = this.Boutiques.findIndex(item => item['id'] === selectedValue);
 }
 sendRec(){
   if(this.choix===undefined || this.Rec===undefined || this.id===undefined ){
