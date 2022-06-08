@@ -81,7 +81,7 @@ export class ProfilComponent implements OnInit {
 
 
   onSubmit() {
-
+    if(this.form.valid){
     if (this.file == undefined) {
       this.userupdated.id = this.id;
       this.userupdated.Nom = this.form.value.Nom;
@@ -130,6 +130,7 @@ export class ProfilComponent implements OnInit {
 
       })
     }
+  }
   }
 
 

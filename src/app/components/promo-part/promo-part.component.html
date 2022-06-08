@@ -14,7 +14,7 @@
     <h3 style="text-align: center;">Aucune promotion</h3>
   </div>
 <ion-card *ngFor="let item of promos">
-  <ion-card-content style="height: 180px;" (click)="openPromo(item.description)">
+  <ion-card-content style="height: 180px;" (click)="openPromo(item.url)">
     <img style="height: 100%; width: 100%;" src="{{imgUrl+item.image}}" alt="">
   </ion-card-content>
 </ion-card>

@@ -13,7 +13,6 @@ import { data } from '../model/data';
   providedIn: 'root'
 })
 export class CarteService {
-      private url =environment.Api + 'api/soap/';
       private baseURL = environment.Api + 'api/cartes/';
 
      constructor(private httpClient: HttpClient) { }

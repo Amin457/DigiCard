@@ -128,24 +128,7 @@ export class AddCreateComponent implements OnInit {
       (res) => {
         this.ionLoaderService.dismissLoader();
         this.presentAlert(res.message);
-        /*this.createCard.storeId = this.config.storeID;
-        this.createCard.clientId = this.user.id;
-        this.createCard.id_part = this.id_part;
-        this.createCard.dbId = this.config.dbId;
-        this.createCard.client_ref = res.data;
-        console.log(this.createCard);
-        this.carteService.createLoyaltyCard(this.createCard).subscribe(
-          (res) => {
-            console.log(res.message);
-
-            this.ionLoaderService.dismissLoader();
-            this.presentAlert(res.message);
-
-          },
-          (error) => { console.log(error); }
-        );*/
-
-      },
+         },
       (error) => { 
         console.log(error);
         this.presentAlert("Vérifier votre numéro de CIN") 
