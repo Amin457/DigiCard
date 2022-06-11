@@ -119,7 +119,8 @@ export class AddCreateComponent implements OnInit {
   
     this.data.dbId = this.config.dbId;
     this.data.dbId=this.config.dbId;
-    this.data.CustomerId="SC"+this.user.CIN+this.config.storeID;
+    //this.data.CustomerId="SC"+this.user.CIN+this.config.storeID;
+    this.data.CustomerId="SC"+this.user.id+this.config.storeID;
     this.data.storeId=this.config.storeID;
     console.log(this.data);
     this.ionLoaderService.autoLoader();
@@ -131,7 +132,7 @@ export class AddCreateComponent implements OnInit {
          },
       (error) => { 
         console.log(error);
-        this.presentAlert("Vérifier votre numéro de CIN") 
+        this.presentAlert("Erreur de création de carte") 
       }
     );
   
