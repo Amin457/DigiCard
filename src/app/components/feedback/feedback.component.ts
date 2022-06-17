@@ -89,14 +89,16 @@ export class FeedbackComponent implements OnInit {
 
       this.feedbackService.createFeed(this.feed).subscribe(
         (res)  => {
+          this.Q1=undefined;
+          if(((i+1)/this.p==1)){
+            this.presentAlert("Merci pour votre feedback");
+          }
         },
         error => {
           console.log(error);
         });
     }
-    if(((i+1)/this.p==1)){
-      this.presentAlert("Merci pour votre feedback");
-    }
+  
   }
 }
 

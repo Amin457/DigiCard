@@ -7,59 +7,6 @@
     </div>
   </ion-list>
 </ion-header>
-<!--
-<ion-content [fullscreen]="true">
-
- <ion-slides style="height:100% ; top: 0 px" pager="true"  pager="false" #mySlider>
-   <ion-slide *ngFor="let item of Quest;index as i" style="top :10px;height:100%" >
-
-
-    <ion-list style="height:max-content">
-    <ion-radio-group style="height:max-content" value="Q1" [(ngModel)]="Q1">
-      
-      <ion-list-header>
-        <ion-label class="Q">{{item.description}}</ion-label>
-      </ion-list-header>
-  <div style="height:max-content" *ngFor="let item1 of Rep" >
-      <ion-item  *ngIf="item1.id_question==item.id_question">
-        <ion-label>{{item1.reponse}}</ion-label>
-        <ion-radio slot="start" value="{{item1.id_rep}}"></ion-radio>
-      </ion-item>
-    </div>
-    </ion-radio-group>
-  </ion-list>
-
-
-
-  <ion-fab style="position:fixed ; top :10%" vertical="center" slot="fixed" >
-    <ion-fab-button  (click)="onSubmit(item.id_question)">
-      <ion-icon name="send-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <h2 style="position:fixed ; top :90%;color:#7a6cfc;">{{i+1}}/{{p}}</h2>
-  <ion-progress-bar style="position:fixed ; top :85%;color:#7a6cfc;" value="{{(i+1)/p}}"></ion-progress-bar>
-</ion-slide>
-
-
-<ion-fab style="position:fixed" vertical="center" horizontal="end" slot="fixed" >
-  <ion-fab-button (click)="swipeNext()">
-    <ion-icon name="chevron-forward-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
-
- </ion-slides>
-
- 
-<ion-fab vertical="bottom" horizontal="start" slot="fixed" >
-  <ion-fab-button (click)="gotoDetail()">
-    <ion-icon name="return-up-back-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-</ion-content>
--->
-
-
 <ion-content [fullscreen]="true">
 
   <ion-slides pager="false" #mySlider>
