@@ -53,7 +53,7 @@ export class PromoPartComponent implements OnInit {
 
  }
  openPromo(url:string){
-  window.open(url);
+  //window.open(url);
 }
 
 gotoDetail(){

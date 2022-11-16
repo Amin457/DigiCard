@@ -16,6 +16,7 @@ import { PromoPartComponent } from './components/promo-part/promo-part.component
 import { PromotionComponent } from './components/promotion/promotion.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VenteComponent } from './components/vente/vente.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -40,7 +41,9 @@ const routes: Routes = [
       {path: 'newcard',component: NewCardComponent},
       {path: 'notifications',component: NotificationsComponent},
       {path: 'promotion',component: PromotionComponent},
-      {path: 'newcard/:id_part/add-create',component: AddCreateComponent}
+      {path: 'newcard/:id_part/add-create',component: AddCreateComponent},
+      {path: 'vente',component: VenteComponent}
+
     ],canActivate:[AuthGuard]
   }
 ];

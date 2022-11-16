@@ -18,6 +18,7 @@ export class ProfilComponent implements OnInit {
   swipeNext(){
     this.slides.slideNext();
   }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   decoded: any;
   user: users;
   userupdated: users = new users();
@@ -31,6 +32,7 @@ export class ProfilComponent implements OnInit {
     initialSlide: 0,
     speed: 400
   };
+  // eslint-disable-next-line max-len
   constructor(private alertCtrl: AlertController, public httpClient: HttpClient, private userService: UserService, public toastController: ToastController) {
     this.initForm();
 
@@ -136,7 +138,7 @@ export class ProfilComponent implements OnInit {
 
   date(date1 : Date) {
 
-    let datePipe: DatePipe = new DatePipe('en-US');
+    const datePipe: DatePipe = new DatePipe('en-US');
     return datePipe.transform(new Date(date1),'yyyy-MM-dd');
   }
  

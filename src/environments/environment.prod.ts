@@ -1,4 +1,5 @@
 export const environment = {
-  Api: 'http://192.168.168.200:8080/',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  Api: 'http://localhost:3000/',
   production: true
 };
