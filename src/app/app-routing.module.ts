@@ -16,6 +16,7 @@ import { PromoPartComponent } from './components/promo-part/promo-part.component
 import { PromotionComponent } from './components/promotion/promotion.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VenteComponent } from './components/vente/vente.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
+      {path: 'vente', component: VenteComponent},
       {path: 'profil', component: ProfilComponent},
       {path: 'home/detailcard/:id1/:id2', component: DetailcardComponent },
       {path: 'home/detailcard/:id1/:id2/reclamation', component: ReclamationComponent },

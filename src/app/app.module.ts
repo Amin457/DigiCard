@@ -29,6 +29,8 @@ import { SwiperModule } from 'swiper/angular';
 import { PromoPipe } from './pipes/promo.pipe';
 import { GameComponent } from './components/game/game.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { VenteComponent } from './components/vente/vente.component';
+import { SharedModule } from './components/shared/shared.module';
 
 @NgModule({
   declarations:
@@ -36,7 +38,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
       GameComponent,
     PromoPartComponent,
     LocalisationComponent,
-    ListCartePipe,
+    VenteComponent,
+    ListCartePipe,    
     ReclamationComponent,
     NotificationsComponent,
     FeedbackComponent,
@@ -56,7 +59,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
   entryComponents: [],
   imports: [
     SwiperModule,
-    NgxQRCodeModule,
+    NgxQRCodeModule,SharedModule,
     NgxBarcodeModule,
     BrowserModule,
     IonicModule.forRoot(),
