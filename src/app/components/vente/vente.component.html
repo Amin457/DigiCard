@@ -1,121 +1,77 @@
-<ion-header [translucent]="true" home-header>
-  <ion-item lines="none" class="search-content">
-    <ion-icon name="search-outline" slot="start" class="search-content_icon-search"></ion-icon>
-    <ion-input placeholder="Rechercher"></ion-input>
-  </ion-item>
-  <ion-icon name="notifications-outline" size="large" class="notification-icon" color="primary"></ion-icon>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../../assets/menu_bar.svg" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+      <ion-button class="filter">
+        <ion-icon name="funnel-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-grid class="new">
-    <div class="top-container">
-      <h4>Nouveautés</h4>
-      <img src="../../../assets/images/new.png" alt="Nouveautés" class="top-container_img">
-    </div>
-  </ion-grid>
-  <ion-grid class="categories">
-    <swiper class="category-swiper" [config]="config">
-      <ng-template swiperSlide>
-        <ion-item fill="outline" lines="none" class="ion-no-padding">
-          <ion-icon name="man-outline" slot="start" class="man"></ion-icon>
-          <ion-label class="ion-no-margin">
-            <h4>Hommes</h4>
-            <p>235 articles</p>
-          </ion-label>
-        </ion-item>
-      </ng-template>
+<ion-content>
+  <div class="search ion-padding">
+    <ion-item lines="none">
+      <ion-input placeholder="Search Your Product"></ion-input>
+      <ion-icon name="search-outline" slot="start"></ion-icon>
+    </ion-item>
+  </div>
 
-      <ng-template swiperSlide>
-        <ion-item fill="outline" lines="none" class="ion-no-padding">
-          <ion-icon name="woman-outline" slot="start" class="woman"></ion-icon>
-          <ion-label class="ion-no-margin">
-            <h4>Femmes</h4>
-            <p>235 articles</p>
-          </ion-label>
-        </ion-item>
-      </ng-template>
+  <div class="title ion-padding">
+    <h2>Categories</h2>
+    <p>See all</p>
+  </div>
 
-      <ng-template swiperSlide>
-        <ion-item fill="outline" lines="none" class="ion-no-padding">
-          <ion-icon name="walk-outline" slot="start" class="child"></ion-icon>
-          <ion-label class="ion-no-margin">
-            <h4>Enfants</h4>
-            <p>235 articles</p>
-          </ion-label>
-        </ion-item>
-      </ng-template>
+  <div class="category-slider ion-padding-start">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let category of categories">
+        <ion-col>
+          <h4>{{ category.name }}</h4>
+          <img src="{{ category.image }}" />
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
 
-    </swiper>
-    
-  </ion-grid>
+  <div class="title ion-padding">
+    <h2 class="font-bold">Featured</h2>
+    <p>See all</p>
+  </div>
 
-  <!-- grid populaires-->
-  <ion-grid>
-    <div class="title-popular">
-        <h4>Les plus populaires</h4>
-        <a href="#"> Tout voir </a>
-    </div>
-    
-    <swiper class="popular-swiper" [config]="configPopular">
-      <ng-template swiperSlide>
-        <ion-card class="one-card">
-          <ion-card-header>
-           <img src="../../../assets/images/1.png" alt="">
-          </ion-card-header>
-          <ion-card-content>
-           <div class="content">
-              <ion-label>
-                <h4>Lunette en cercle</h4>
-                <p>14 000 FCFA</p>
-              </ion-label>
-              <ion-button>
-                <ion-icon name="cart"></ion-icon>
-              </ion-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ng-template>
+  <div class="product-slider ion-padding-start">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let product of featuredProducts">
+        <ion-col class="ion-text-left" routerLink="/item-details" routerDirection="forward">
+          <img src="{{ product.image }}" />
+          <p>${{ product.price }}</p>
+          <h6>{{ product.name }}</h6>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
 
-      <ng-template swiperSlide>
-        <ion-card class="two-card">
-          <ion-card-header>
-           <img src="../../../assets/images/2.png" alt="">
-          </ion-card-header>
-          <ion-card-content>
-            <div class="content">
-              <ion-label>
-                <h4>Lunette en cercle</h4>
-                <p>14 000 FCFA</p>
-              </ion-label>
-              <ion-button>
-                <ion-icon name="cart"></ion-icon>
-              </ion-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ng-template>
+  <div class="title ion-padding">
+    <h2 class="font-bold">Best Sell</h2>
+    <p>See all</p>
+  </div>
 
-      <ng-template swiperSlide>
-        <ion-card class="three-card">
-          <ion-card-header>
-           <img src="../../../assets/images/3.png" alt="">
-          </ion-card-header>
-          <ion-card-content>
-            <div class="content">
-              <ion-label>
-                <h4>Lunette en cercle</h4>
-                <p>14 000 FCFA</p>
-              </ion-label>
-              <ion-button>
-                <ion-icon name="cart"></ion-icon>
-              </ion-button>
-            </div>
-            
-          </ion-card-content>
-        </ion-card>
-      </ng-template>
-
-    </swiper>
-
-  </ion-grid>
+  <div class="product-slider ion-padding-start">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let product of bestSellProducts">
+        <ion-col class="ion-text-left" routerLink="/item-details" routerDirection="forward">
+          <img src="{{ product.image }}" />
+          <p>${{ product.price }}</p>
+          <h6>{{ product.name }}</h6>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>

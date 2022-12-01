@@ -17,6 +17,7 @@ import { PromotionComponent } from './components/promotion/promotion.component';
 import { ReclamationComponent } from './components/reclamation/reclamation.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VenteComponent } from './components/vente/vente.component';
+
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
