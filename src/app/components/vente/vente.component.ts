@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
-import { DataService } from '../data.service';
+import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-vente',
   templateUrl: './vente.component.html',

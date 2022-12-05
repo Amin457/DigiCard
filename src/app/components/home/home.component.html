@@ -5,7 +5,7 @@
       <img style=" height: 100%; width:100%" src="{{imgUrl+item.image}}" />
     </ion-slide>
   </ion-slides>-->
-    <ion-buttons (click)="gotoNotif()" slot="end" style="position: fixed; right: 0%; top: 4%;">
+    <ion-buttons  slot="end" style="position: fixed; right: 0%; top: 4%;">
       <ion-badge color="danger" mode="ios" *ngIf="nbr>0">{{nbr}}</ion-badge>
       <ion-fab-button size="small" color="white">
         <ion-icon name="notifications" color="primary">
