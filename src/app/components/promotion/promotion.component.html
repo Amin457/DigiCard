@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-list lines="none">
     <div style="text-align: center; margin-top: 30px;">
     <ion-label class="text1" style="color: aliceblue;">
@@ -9,9 +9,43 @@
   <div class="popover">
     <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une promotion "></ion-searchbar>
   </div>
+</ion-header> -->
+
+
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+   
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../../assets/menu_bar.svg" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title> Tous les promotions</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+      <ion-button class="filter">
+        <ion-icon name="funnel-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
+
+
+
+
+
+
+
 <ion-content  style="width:100% ;">
+  <div class="popover">
+    <ion-searchbar [(ngModel)] = "Search" name="Search" placeholder="rechercher une promotion "></ion-searchbar>
+  </div>
   <div *ngIf="promos.length==0" >
     <img src="../../../assets/undraw_no_data_re_kwbl.svg" alt="">
     <h3 style="text-align: center;">Aucune promotion</h3>

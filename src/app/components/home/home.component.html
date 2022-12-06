@@ -1,11 +1,11 @@
-<ion-header #header class="ion-no-border">
-  <ion-list lines="none">
+<!-- <ion-header #header class="ion-no-border">
+  <ion-list lines="none"> -->
     <!-- <ion-slides pager="true" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)"  [options]="slideOpts">
     <ion-slide *ngFor="let item of promos"  style="height: 100%; width:100%" >
       <img style=" height: 100%; width:100%" src="{{imgUrl+item.image}}" />
     </ion-slide>
   </ion-slides>-->
-    <ion-buttons  slot="end" style="position: fixed; right: 0%; top: 4%;">
+    <!-- <ion-buttons  slot="end" style="position: fixed; right: 0%; top: 4%;">
       <ion-badge color="danger" mode="ios" *ngIf="nbr>0">{{nbr}}</ion-badge>
       <ion-fab-button size="small" color="white">
         <ion-icon name="notifications" color="primary">
@@ -31,14 +31,41 @@
     </ion-item>
 
   </ion-list>
-  <div class="popover">
-    <ion-searchbar [(ngModel)]="Search" name="Search" placeholder="rechercher une carte fidélité "></ion-searchbar>
-  </div>
+ 
+</ion-header> -->
+
+
+
+
+
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+   
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../../assets/menu_bar.svg" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bienvenue {{userHome.Nom}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="notification" >
+        <ion-badge color="danger" mode="ios"style="position: fixed; right: 0%; top: 4%;" >4</ion-badge>
+        <ion-icon name="notifications-outline" color="dark" ></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content scrollEvents="true" (ionScroll)='onContentScroll($event)' [fullscreen]="true" class="content">
 
+
+<ion-content scrollEvents="true"  [fullscreen]="true" class="content"><br>
+  <div class="popover">
+    <ion-searchbar [(ngModel)]="Search" name="Search" placeholder="rechercher une carte fidélité "></ion-searchbar>
+  </div>
   <ion-card *ngFor="let item of cartes | listCarte:Search; ">
     <ion-card-content style="height: 180px;" (click)="goto(item.id_carte,item.id_part)">
       <img style="height: 100%; width: 100%;" src="{{imgUrl+item.img}}" alt="">

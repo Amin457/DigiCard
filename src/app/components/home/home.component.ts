@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     private alertCtrl: AlertController, public routerOutlet: IonRouterOutlet,
     private actionSheetCtrl: ActionSheetController,
     public element: ElementRef,
-    public renderer: Renderer2,
+   // public renderer: Renderer2,
     private notificationService: NotificationService,
     private promoService: PromotionService, private userService: UserService, private router: Router, public route: ActivatedRoute, private carteService: CarteService, public navCtrl: NavController) { }
   slidesDidLoad(slides: IonSlides): void {
@@ -66,12 +66,12 @@ export class HomeComponent implements OnInit {
         console.log(error);
       });
 
-    this.renderer.setStyle(this.header['el'], 'webkitTransition', 'top 700ms');
+   // this.renderer.setStyle(this.header['el'], 'webkitTransition', 'top 700ms');
     this.carteService.getAllCartes(this.user.id).subscribe(
       (res) => {
         this.message = res.message;
         this.cartes = res.data;
-        console.log(this.cartes);
+        console.log(this.cartes,'cartessss');
       },
       error => {
         console.log(error);
@@ -145,14 +145,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['main/notifications']);
   }
 
-  onContentScroll(event) {
-    if (event.detail.scrollTop >= 50) {
-      ////-30
-      this.renderer.setStyle(this.header['el'], 'top', '-23%');
-    } else {
-      this.renderer.setStyle(this.header['el'], 'top', '0px');
-    }
-  }
+  // onContentScroll(event) {
+  //   if (event.detail.scrollTop >= 50) {
+  //     ////-30
+  //     this.renderer.setStyle(this.header['el'], 'top', '-23%');
+  //   } else {
+  //     this.renderer.setStyle(this.header['el'], 'top', '0px');
+  //   }
+  // }    (ionScroll)='onContentScroll($event)'
+
 
   closeModel() {
     this.isOpen = !this.isOpen;

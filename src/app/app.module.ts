@@ -32,6 +32,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { VenteComponent } from './components/vente/vente.component'
 import { SplashScreen } from '@ionic-native/splash-screen/ngx'
 import { StatusBar } from '@ionic-native/status-bar/ngx'
+import { ItemsDetailsComponent } from './components/items-details/items-details.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx'
     PromotionComponent,
     RegisterComponent,
     PromoPipe,
+    ItemsDetailsComponent
   ],
   entryComponents: [],
   imports: [

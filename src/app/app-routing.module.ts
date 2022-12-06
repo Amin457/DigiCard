@@ -6,6 +6,7 @@ import { DetailcardComponent } from './components/detailcard/detailcard.componen
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/home/home.component';
+import { ItemsDetailsComponent } from './components/items-details/items-details.component';
 import { LocalisationComponent } from './components/localisation/localisation.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
       {path: 'vente', component: VenteComponent},
+      {path: 'vente/items-details', component: ItemsDetailsComponent},
       {path: 'profil', component: ProfilComponent},
       {path: 'home/detailcard/:id1/:id2', component: DetailcardComponent },
       {path: 'home/detailcard/:id1/:id2/reclamation', component: ReclamationComponent },
